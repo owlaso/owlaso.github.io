@@ -28,3 +28,28 @@ if ('IntersectionObserver' in window && !reduceMotion) {
 } else {
   reveals.forEach((el) => el.classList.add('visible'));
 }
+
+// ─── Screen tabs (roving tabindex, automatic activation) ───
+document.querySelectorAll('[data-tabs]').forEach((container) => {
+  const tabs = [...container.querySelectorAll('[role="tab"]')];
+
+  const select = (tab, focus) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls'))?.classList.toggle('active', on);
+    });
+    if (focus) tab.focus();
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab, false));
+    tab.addEventListener('keydown', (e) => {
+      const target = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (target === undefined) return;
+      e.preventDefault();
+      select(tabs[(target + tabs.length) % tabs.length], true);
+    });
+  });
+});

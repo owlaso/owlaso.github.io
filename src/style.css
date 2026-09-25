@@ -688,6 +688,60 @@ html[data-theme="dark"] .shot-light { display: none; }
   color: var(--text);
 }
 
+/* ═══ PRODUCT TOUR (screen tabs) ═══ */
+.shots { max-width: 1072px; margin: 0 auto; }
+
+/* Without JS every screen is shown, stacked, and the tab bar is hidden. */
+.shot-tabs { display: none; }
+
+.js .shot-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.shot-tab {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.shot-tab:hover { color: var(--text); border-color: var(--border-strong); }
+
+.shot-tab[aria-selected="true"] {
+  background: var(--btn-gradient);
+  border-color: transparent;
+  color: #fff;
+}
+
+.shot-panel + .shot-panel { margin-top: 48px; }
+.js .shot-panel + .shot-panel { margin-top: 0; }
+.js .shot-panel:not(.active) { display: none; }
+
+.shot-caption {
+  max-width: 640px;
+  min-height: 3.2em;
+  margin: 0 auto 22px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.shot-caption strong { color: var(--text); }
+
+.shot-window .app-title { margin-right: 40px; }
+
 /* ═══ SCORES ═══ */
 .metrics-grid {
   display: grid;
