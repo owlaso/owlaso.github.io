@@ -58,6 +58,7 @@
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="../#features">Features</a>
+        <a href="../#tour">Screens</a>
         <a href="../#scores">Scores</a>
         <a href="#install">Install</a>
         <a href="../docs/" aria-current="page">Docs</a>
@@ -101,10 +102,12 @@
           <ul>
             <li><a href="#apps">Tracking apps</a></li>
             <li><a href="#keywords">Keywords</a></li>
+            <li><a href="#all-countries">All countries</a></li>
             <li><a href="#rank-tracking">Rank tracking</a></li>
             <li><a href="#reviews">Reviews</a></li>
             <li><a href="#full-data">Full data</a></li>
             <li><a href="#export">Export</a></li>
+            <li><a href="#guidance">Guided tour &amp; tips</a></li>
             <li><a href="#shortcuts">Keyboard shortcuts</a></li>
             <li><a href="#settings">Settings &amp; data</a></li>
           </ul>
@@ -162,14 +165,20 @@
         <p>OwlASO is a free, open-source desktop app for <strong>ASO keyword research</strong> and <strong>app store review monitoring</strong> across Google Play and the App Store. It can also run as a local web app in your browser.</p>
         <ul>
           <li><strong>Keywords</strong> &mdash; popularity, difficulty and opportunity scores, the apps ranking for a keyword, similar keywords, and the keywords competitors also rank for.</li>
+          <li><strong>All countries</strong> &mdash; one keyword in all 20 storefronts at once, best markets first.</li>
           <li><strong>Rank tracking</strong> &mdash; the position of your app for every keyword on each store, with a daily history.</li>
           <li><strong>Reviews</strong> &mdash; both stores in one table, instant filtering, and comparison of up to 5 apps.</li>
-          <li><strong>Full data</strong> &mdash; every reachable review across stores and languages, with rating distribution and top terms.</li>
+          <li><strong>Full data</strong> &mdash; every reachable review across stores and languages in an explorer: facets, search, sorting, and what users complain about.</li>
           <li><strong>Export</strong> &mdash; CSV for everything, JSON for full-data results.</li>
+          <li><strong>Guidance</strong> &mdash; a one-minute guided tour, help tooltips and one-time tips.</li>
         </ul>
         <div class="callout callout-note">
           <strong>Good to know</strong>
           <p>Scores are estimates built from public store data &mdash; not Apple Search Ads&rsquo; first-party popularity. They&rsquo;re most useful for comparing keywords with each other. See <a href="#metrics">Metrics</a>.</p>
+        </div>
+        <div class="callout callout-tip">
+          <strong>Newer than the installer</strong>
+          <p>All countries, the Full data explorer and the guided tour arrived after the 1.6.0-beta.1 Windows installer. <a href="#install-source">Run from source</a> to use them now.</p>
         </div>
       </section>
 
@@ -217,6 +226,7 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
       <!-- ═══ QUICK START ═══ -->
       <section id="quick-start" aria-labelledby="h-quick-start">
         <h2 id="h-quick-start">Quick start</h2>
+        <p>Prefer a walkthrough? Press <kbd>?</kbd> in the app for a one-minute <a href="#guidance">guided tour</a>. Or follow these four steps:</p>
         <ol class="docs-steps">
           <li><strong>Add an app.</strong> Click <strong>+</strong> in the sidebar (or press <kbd>A</kbd>) and search by name, Google Play package (<code>com.spotify.music</code>) or App Store id (<code>324684580</code>). Apps found on both stores are merged into one entry.</li>
           <li><strong>Analyze a keyword.</strong> On the <strong>Keywords</strong> tab, type a keyword and press <kbd>Enter</kbd>. OwlASO scores it plus 5 similar keywords, and the <strong>Position</strong> column shows where your selected app ranks on each store.</li>
@@ -247,6 +257,11 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
       <section id="keywords" aria-labelledby="h-keywords">
         <h2 id="h-keywords">Keywords</h2>
         <p>Type a keyword (2&ndash;100 characters) on the <strong>Keywords</strong> tab and press <kbd>Enter</kbd>. Use the toolbar to pick the store (<em>All stores</em>, <em>Google Play</em> or <em>App Store</em>) and the country.</p>
+        <figure class="docs-figure">
+          <img class="shot-dark" src="/screenshots/keywords-dark.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, per-store position and ranking apps (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+          <img class="shot-light" src="/screenshots/keywords-light.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, per-store position and ranking apps" width="1920" height="1200" loading="lazy" decoding="async">
+          <figcaption>The analyzed keyword and 5 similar ones. Position shows your app&rsquo;s rank on Google Play (&#9654;) and the App Store (A).</figcaption>
+        </figure>
         <div class="table-wrap">
           <table>
             <thead><tr><th scope="col">Column</th><th scope="col">What it shows</th></tr></thead>
@@ -262,9 +277,38 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
         </div>
         <ul>
           <li><strong>Similar keywords</strong> appear as chips above the table; click one to analyze it. When the table is empty, your recent keywords are one click away.</li>
-          <li><strong>Details</strong> &mdash; click a row to open its metrics, the trend chart, the ranking apps on each store (rating, ratings count, installs or price, ad flags) and the keywords those apps also rank for.</li>
+          <li><strong>Details</strong> &mdash; click a row to open its numbers, trend charts (popularity, difficulty and your app&rsquo;s best rank), the ranking apps on each store (rating, ratings count, installs or price, ad flags) and the keywords those apps also rank for.</li>
           <li><strong>Quick vs full analysis</strong> &mdash; similar-keyword rows get a quick analysis. Choose <em>Run full analysis</em> in their details to record history and find competitor keywords.</li>
-          <li><strong>Language</strong> &mdash; keyword searches need one language. With <em>All languages</em> selected, OwlASO uses the storefront&rsquo;s main language (for example <code>de</code> in Germany).</li>
+          <li><strong>Language</strong> &mdash; keyword searches need one language. With <em>All langs</em> selected, OwlASO uses the storefront&rsquo;s main language (for example <code>de</code> in Germany).</li>
+        </ul>
+        <figure class="docs-figure">
+          <img class="shot-dark" src="/screenshots/keyword-detail-dark.webp" alt="Keyword details for “habit tracker”: popularity 78, difficulty 64, opportunity 28, store ranks, trend charts and competitor keywords (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+          <img class="shot-light" src="/screenshots/keyword-detail-light.webp" alt="Keyword details for “habit tracker”: popularity 78, difficulty 64, opportunity 28, store ranks, trend charts and competitor keywords" width="1920" height="1200" loading="lazy" decoding="async">
+          <figcaption>Keyword details: every number, 30 days of trends, and the keywords the top apps also rank for.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ═══ ALL COUNTRIES ═══ -->
+      <section id="all-countries" aria-labelledby="h-all-countries">
+        <h2 id="h-all-countries">All countries</h2>
+        <p>Pick <strong>All countries</strong> in the country picker to compare markets instead of checking them one by one.</p>
+        <h3 id="all-countries-keywords">Keywords</h3>
+        <ul>
+          <li>The keyword is analyzed in all 20 storefronts (3 at a time), one row per country.</li>
+          <li>When every country is in, rows are sorted by opportunity. The best 3 get a <strong>top market</strong> badge.</li>
+          <li>Each country&rsquo;s result is saved to that country&rsquo;s daily history.</li>
+          <li>Click a row, then <strong>Open in &lt;country&gt;</strong>, for the full analysis there: trend, similar-keyword scores and competitor keywords.</li>
+        </ul>
+        <figure class="docs-figure">
+          <img class="shot-dark" src="/screenshots/all-countries-dark.webp" alt="All countries view: “habit tracker” analyzed per country with Brazil, Turkey and Indonesia marked as top markets (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+          <img class="shot-light" src="/screenshots/all-countries-light.webp" alt="All countries view: “habit tracker” analyzed per country with Brazil, Turkey and Indonesia marked as top markets" width="1920" height="1200" loading="lazy" decoding="async">
+          <figcaption>One keyword, 20 storefronts, sorted by opportunity.</figcaption>
+        </figure>
+        <h3 id="all-countries-reviews">Reviews and Full data</h3>
+        <ul>
+          <li><strong>App Store</strong> &mdash; every storefront is read, because Apple keeps reviews per country.</li>
+          <li><strong>Google Play</strong> &mdash; one fetch per language, because Google keeps reviews per language, not per country.</li>
+          <li>Duplicates are removed and every review is tagged with its storefront or language. CSV exports get a <code>country</code> column.</li>
         </ul>
       </section>
 
@@ -278,6 +322,7 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
           <li>There is one snapshot per day for each keyword &times; store &times; country &times; language. Analyzing again on the same day replaces that day&rsquo;s snapshot.</li>
           <li>Up to 180 daily snapshots are kept per keyword.</li>
           <li>Because the whole ranking order is stored, an app you add later still gets its past positions.</li>
+          <li>Keyword details chart popularity, difficulty and your app&rsquo;s best rank over time (lower is better).</li>
         </ul>
         <div class="callout callout-note">
           <strong>No background jobs</strong>
@@ -295,6 +340,11 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
       <section id="reviews" aria-labelledby="h-reviews">
         <h2 id="h-reviews">Reviews</h2>
         <p>Open the <strong>Reviews</strong> tab and select an app in the sidebar. Reviews from both stores land in one table &mdash; <em>Date</em>, <em>Rating</em>, <em>Review</em> and <em>Store</em>, plus <em>App</em> when you compare apps.</p>
+        <figure class="docs-figure">
+          <img class="shot-dark" src="/screenshots/reviews-filter-dark.webp" alt="Reviews filtered by the word “sync”: 26 matches from Google Play and the App Store with the word highlighted (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+          <img class="shot-light" src="/screenshots/reviews-filter-light.webp" alt="Reviews filtered by the word “sync”: 26 matches from Google Play and the App Store with the word highlighted" width="1920" height="1200" loading="lazy" decoding="async">
+          <figcaption>Type a word and the list filters instantly, with matches highlighted.</figcaption>
+        </figure>
         <h3 id="reviews-filter">Instant filters</h3>
         <p>These run locally on the reviews already loaded, so results update as you type:</p>
         <ul>
@@ -305,8 +355,8 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
         <p>Changing any of these loads new data from the stores:</p>
         <ul>
           <li><strong>Store</strong> &mdash; All stores, Google Play or App Store.</li>
-          <li><strong>Country</strong> &mdash; one of 20 storefronts.</li>
-          <li><strong>Language</strong> &mdash; one of 16 languages, or <em>All</em> to merge several. Apple&rsquo;s review feed is per storefront, not per language.</li>
+          <li><strong>Country</strong> &mdash; one of 20 storefronts, or <a href="#all-countries">All countries</a>.</li>
+          <li><strong>Language</strong> &mdash; one of 16 languages, or <em>All langs</em> to merge several. Apple&rsquo;s review feed is per storefront, not per language.</li>
           <li><strong>Fetch</strong> &mdash; 250, 500, 1K, 2K or 5K reviews per store. <strong>Load more</strong> raises it one step.</li>
         </ul>
         <p>The summary bar shows how many reviews each store returned, store-side limits, and any warnings. Duplicate reviews are removed by their store review id.</p>
@@ -319,22 +369,41 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
       <!-- ═══ FULL DATA ═══ -->
       <section id="full-data" aria-labelledby="h-full-data">
         <h2 id="h-full-data">Full data</h2>
-        <p><strong>Full data</strong> (in the Reviews filter bar) fetches every reachable review for the selected app &mdash; both stores, every supported language for the storefront. Results stream in group by group (store &times; language) as they load.</p>
+        <p><strong>Full data</strong> (in the Reviews filter bar) reads every reachable review for the selected app &mdash; both stores and every supported language for the storefront, or every storefront with <a href="#all-countries">All countries</a> &mdash; and opens it in an explorer.</p>
+        <figure class="docs-figure">
+          <img class="shot-dark" src="/screenshots/full-data-dark.webp" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+          <img class="shot-light" src="/screenshots/full-data-light.webp" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list" width="1920" height="1200" loading="lazy" decoding="async">
+          <figcaption>Insights on the left, reviews on the right. Click any bar to filter.</figcaption>
+        </figure>
+        <h3 id="full-data-loading">While it loads</h3>
         <ul>
-          <li>Each group shows its review count and rating distribution.</li>
-          <li><strong>Top terms</strong> across all reviews appear as chips; click one to show only the reviews that mention it.</li>
-          <li><strong>Export CSV</strong> or <strong>Export JSON</strong> from the panel.</li>
+          <li>A progress bar tracks each source (a store &times; language, or an App Store country). Reviews appear as sources finish.</li>
+          <li><strong>Stop</strong> ends the fetch early and keeps what has loaded.</li>
+          <li>The <strong>Sources</strong> list shows which sources worked, failed, or have more reviews available.</li>
         </ul>
+        <h3 id="full-data-explore">Explore</h3>
+        <ul>
+          <li><strong>Summary cards</strong> &mdash; review count, average rating, share of 1&ndash;2&#9733; reviews, date range, and a count per store.</li>
+          <li><strong>Facets</strong> &mdash; click a star bar, a store or a language (App Store country with All countries) to filter. Active filters show as removable chips.</li>
+          <li><strong>What users complain about / love</strong> &mdash; words that appear far more often in 1&ndash;2&#9733; reviews than in 4&ndash;5&#9733; ones, and the other way round. Generic praise words and the app&rsquo;s own name are left out.</li>
+          <li><strong>Search &amp; sort</strong> &mdash; instant search with highlighting; sort by newest, oldest, lowest or highest rating, most helpful, or longest.</li>
+          <li><strong>Hide very short</strong> reviews (under 20 characters), or show only reviews <strong>with a developer reply</strong>.</li>
+          <li>Click a review to read it in full.</li>
+        </ul>
+        <h3 id="full-data-deeper">Go deeper</h3>
+        <p>When Google Play has more reviews than were read, <strong>Go deeper</strong> fetches again with a higher per-language limit and keeps your filters.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th scope="col">Limit</th><th scope="col">Value</th></tr></thead>
+            <thead><tr><th scope="col">Level</th><th scope="col">Google Play per language</th><th scope="col">Total per run</th></tr></thead>
             <tbody>
-              <tr><td>Google Play</td><td>Up to 1,000 reviews per language</td></tr>
-              <tr><td>App Store</td><td>About 500 reviews per storefront (Apple&rsquo;s cap)</td></tr>
-              <tr><td>Total</td><td>20,000 reviews per run</td></tr>
+              <tr><td>Default</td><td>1,000</td><td>20,000</td></tr>
+              <tr><td>Go deeper</td><td>2,500</td><td>30,000</td></tr>
+              <tr><td>Go deeper again</td><td>5,000</td><td>40,000</td></tr>
             </tbody>
           </table>
         </div>
+        <p>The App Store stops at about 500 reviews per storefront. That&rsquo;s Apple&rsquo;s limit, and OwlASO tells you when a storefront hits it.</p>
+        <p><strong>Export CSV</strong> downloads exactly the filtered list; <strong>Export JSON</strong> downloads the complete structured result.</p>
       </section>
 
       <!-- ═══ EXPORT ═══ -->
@@ -346,14 +415,29 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
             <thead><tr><th scope="col">View</th><th scope="col">File</th><th scope="col">Columns</th></tr></thead>
             <tbody>
               <tr><td>Keywords</td><td><code>keywords-&lt;keyword&gt;.csv</code></td><td>keyword, type (analyzed / similar), popularity, difficulty, opportunity, ratings, avgRating, adsPercent, app, googleRank, appleRank, topApps, store, country, analyzedAt</td></tr>
-              <tr><td>Reviews</td><td><code>reviews-&lt;app&gt;.csv</code></td><td>app, platform, appId, lang, rating, title, text, author, date, version, helpful, replyText, url</td></tr>
-              <tr><td>Full data</td><td><code>full-data-&lt;app&gt;-reviews.csv</code><br><code>full-data-&lt;app&gt;.json</code></td><td>Same review columns (CSV), or the complete structured result (JSON)</td></tr>
+              <tr><td>Reviews</td><td><code>reviews-&lt;app&gt;.csv</code></td><td>app, platform, appId, country, lang, rating, title, text, author, date, version, helpful, replyText, url</td></tr>
+              <tr><td>Full data</td><td><code>full-data-&lt;app&gt;-reviews.csv</code><br><code>full-data-&lt;app&gt;.json</code></td><td>The filtered reviews with the same columns (CSV), or the complete structured result (JSON)</td></tr>
             </tbody>
           </table>
         </div>
         <ul>
           <li><strong>Excel-friendly</strong> &mdash; CSV files are UTF-8 with a byte-order mark, so non-Latin text opens correctly.</li>
           <li><strong>Formula-injection safe</strong> &mdash; cells that start with <code>=</code>, <code>+</code>, <code>-</code>, <code>@</code>, a tab or a carriage return are prefixed with <code>'</code>, so review text can never run as a spreadsheet formula.</li>
+        </ul>
+      </section>
+
+      <!-- ═══ GUIDANCE ═══ -->
+      <section id="guidance" aria-labelledby="h-guidance">
+        <h2 id="h-guidance">Guided tour &amp; tips</h2>
+        <figure class="docs-figure">
+          <img class="shot-dark" src="/screenshots/guided-tour-dark.webp" alt="Guided tour step 6 of 11, “Read the scores”, highlighting the keyword table columns (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+          <img class="shot-light" src="/screenshots/guided-tour-light.webp" alt="Guided tour step 6 of 11, “Read the scores”, highlighting the keyword table columns" width="1920" height="1200" loading="lazy" decoding="async">
+          <figcaption>The guided tour spotlights one part of the app at a time.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Guided tour</strong> &mdash; an 11-step walkthrough of every part of the app. It&rsquo;s offered on first launch; replay it with <kbd>?</kbd>, the <strong>?</strong> button in the sidebar, or Settings. Use <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to move and <kbd>Esc</kbd> to leave.</li>
+          <li><strong>Help tooltips</strong> &mdash; hover or keyboard-focus any control or column title to see what it does, how to read it, and its shortcut.</li>
+          <li><strong>Tips</strong> &mdash; the first time you reach a feature, a small tip points at the next useful step. Each shows once; turn tips off or bring them back in Settings.</li>
         </ul>
       </section>
 
@@ -364,6 +448,7 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
           <table class="shortcut-table">
             <thead><tr><th scope="col">Keys</th><th scope="col">Action</th></tr></thead>
             <tbody>
+              <tr><td><kbd>?</kbd></td><td>Start the guided tour</td></tr>
               <tr><td><kbd>/</kbd></td><td>Focus search</td></tr>
               <tr><td><kbd>A</kbd></td><td>Add app</td></tr>
               <tr><td><kbd>Enter</kbd></td><td>Analyze keyword / apply review filter</td></tr>
@@ -383,6 +468,7 @@ npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
         <p>Open <strong>Settings</strong> from the gear icon at the bottom of the sidebar.</p>
         <ul>
           <li><strong>Appearance</strong> &mdash; Light, Dark or System (follows your OS).</li>
+          <li><strong>Help &amp; tips</strong> &mdash; start the guided tour, turn tips on or off, or show all tips again.</li>
           <li><strong>Reset app data</strong> &mdash; removes tracked apps, folders and preferences from this device. Keyword rank history is kept.</li>
           <li><strong>Meta Ads Library</strong> &mdash; marked &ldquo;coming soon&rdquo; in the UI. Advanced users can already enable ad signals with the <code>FB_ADLIB_ACCESS_TOKEN</code> environment variable.</li>
         </ul>
@@ -453,7 +539,7 @@ opportunity = popularity &times; (100 &minus; difficulty) / 100</code></pre>
               <tr><td>Search &amp; details</td><td>iTunes Search &amp; Lookup API</td><td><code>google-play-scraper</code>, HTML fallback</td></tr>
               <tr><td>Reviews</td><td>Customer-reviews RSS feed</td><td><code>google-play-scraper</code></td></tr>
               <tr><td>Reviews per page</td><td>50</td><td>150</td></tr>
-              <tr><td>Maximum</td><td>&asymp;&nbsp;500 per storefront (10 pages); one feed per storefront</td><td>5,000 per fetch; 1,000 per language in Full data</td></tr>
+              <tr><td>Maximum</td><td>&asymp;&nbsp;500 per storefront (10 pages); one feed per storefront</td><td>5,000 per fetch; 1,000 per language in Full data (up to 5,000 with Go deeper)</td></tr>
               <tr><td>Sort orders</td><td>Newest, most helpful</td><td>Newest, rating, helpfulness</td></tr>
             </tbody>
           </table>
@@ -570,12 +656,12 @@ HOST=0.0.0.0 ALLOWED_HOSTS=owlaso.lan npm start  <span class="c"># trusted LAN o
             <tbody>
               <tr><td><code>/api/health</code></td><td>&mdash; returns <code>ok</code>, <code>version</code>, <code>mock</code>, <code>time</code></td></tr>
               <tr><td><code>/api/search</code></td><td><code>q</code>, <code>platform=all|google|apple</code>, <code>country</code>, <code>lang</code>, <code>limit</code></td></tr>
-              <tr><td><code>/api/asosearch</code></td><td><code>q</code> (2&ndash;100 chars), <code>store=both|google|apple</code>, <code>country</code>, <code>lang</code>, <code>lite=1</code> (skip competitor probes and history)</td></tr>
+              <tr><td><code>/api/asosearch</code></td><td><code>q</code> (2&ndash;100 chars), <code>store=both|google|apple</code>, <code>country</code> (one storefront; <code>all</code> returns <code>400</code>), <code>lang</code>, <code>lite=1</code> (skip competitor probes and history), <code>track=1</code> (keep history for a lite run)</td></tr>
               <tr><td><code>/api/asosearch/history</code></td><td><code>q</code>, <code>store</code>, <code>country</code>, <code>lang</code> &rarr; daily snapshots with per-store rankings</td></tr>
               <tr><td><code>/api/app-details</code></td><td><code>appId</code>, <code>platform</code>, <code>appId2</code>, <code>store=both</code>, <code>country</code>, <code>lang</code></td></tr>
-              <tr><td><code>/api/reviews</code></td><td><code>appId</code>, <code>platform=google|apple|both</code>, <code>appPlatform</code>, <code>appId2</code>, <code>title</code>, <code>developer</code>, <code>country</code>, <code>lang</code>, <code>max</code>, <code>sort</code>, plus <a href="#api-filters">filters</a></td></tr>
+              <tr><td><code>/api/reviews</code></td><td><code>appId</code>, <code>platform=google|apple|both</code>, <code>appPlatform</code>, <code>appId2</code>, <code>title</code>, <code>developer</code>, <code>country</code> (<code>all</code> = every storefront), <code>lang</code>, <code>max</code>, <code>sort</code>, plus <a href="#api-filters">filters</a></td></tr>
               <tr><td><code>/api/reviews.csv</code></td><td>Same as <code>/api/reviews</code>; CSV download</td></tr>
-              <tr><td><code>/api/reviews.full.stream</code></td><td><code>appId</code>, <code>platform</code>, <code>appPlatform</code>, <code>appId2</code>, <code>title</code>, <code>country</code> &rarr; NDJSON stream</td></tr>
+              <tr><td><code>/api/reviews.full.stream</code></td><td><code>appId</code>, <code>platform</code>, <code>appPlatform</code>, <code>appId2</code>, <code>title</code>, <code>country</code> (<code>all</code> = every storefront), <code>depth=1|2|3</code> (Go deeper) &rarr; NDJSON stream</td></tr>
               <tr><td><code>/api/reviews.full</code></td><td>Same, as one JSON document</td></tr>
             </tbody>
           </table>
@@ -645,12 +731,14 @@ curl -sN 'http://localhost:3000/api/reviews.full.stream?appId=324684580&amp;appI
 }</code></pre>
         </div>
         <p><code>/api/asosearch</code> returns the <code>keyword</code>, <code>similar</code> keywords, <code>competitorKeywords</code>, the ranking <code>apps</code> (with per-store listings), <code>rankings</code> (app ids in search order per store), <code>metrics</code> (<code>popularity</code>, <code>difficulty</code>, <code>opportunity</code> and their inputs), plus <code>errors</code> and <code>warnings</code>.</p>
-        <p>The stream sends one JSON object per line: a <code>group</code> line for each completed store &times; language group (with <code>count</code>, <code>stars</code>, <code>avgRating</code>, <code>topTerms</code> and its <code>reviews</code>), then a final <code>done</code> line with the totals &mdash; or an <code>error</code> line.</p>
+        <p>The stream sends one JSON object per line: a <code>plan</code> line listing the sources it will read, then a <code>group</code> line (reviews, <code>count</code>, <code>stars</code>, <code>avgRating</code>, <code>topTerms</code>) and a <code>progress</code> line as each source finishes, and finally a <code>done</code> line with the totals &mdash; or an <code>error</code> line.</p>
         <div class="code-block">
           <div class="code-block-head"><span>NDJSON</span></div>
-<pre><code>{"type":"group","group":{"platform":"google","lang":"en","count":1000,…}}
-{"type":"group","group":{"platform":"apple","lang":"all","count":500,…}}
-{"type":"done","totalGroups":2,"totalReviews":1500,"perStore":{…},…}</code></pre>
+<pre><code>{"type":"plan","total":8,"depth":1,"sources":[…]}
+{"type":"group","group":{"platform":"google","lang":"en","count":1000,…}}
+{"type":"progress","done":1,"total":8,"source":{"status":"ok","count":1000,…}}
+…
+{"type":"done","totalGroups":8,"totalReviews":2968,"perStore":{…},…}</code></pre>
         </div>
       </section>
 
@@ -700,7 +788,10 @@ npm run smoke:live    <span class="c"># real Apple/Google calls: needs internet,
           <dd>Google may be throttling you, or its page layout changed. Wait a few minutes and retry. <code>npm run smoke:live</code> checks both stores; a newer OwlASO release may include a fix.</dd>
 
           <dt>Only about 500 App Store reviews</dt>
-          <dd>That&rsquo;s Apple&rsquo;s cap per storefront. Switch the country to read another storefront.</dd>
+          <dd>That&rsquo;s Apple&rsquo;s cap per storefront. Switch the country, or pick <a href="#all-countries">All countries</a> to read every storefront at once.</dd>
+
+          <dt>&ldquo;Keyword analysis runs per country&rdquo; (API)</dt>
+          <dd><code>/api/asosearch</code> takes one storefront. To compare countries, call it once per country, as the app does.</dd>
 
           <dt>No trend arrows or chart</dt>
           <dd>History needs analyses on at least two different days for the same keyword, store, country and language.</dd>
@@ -720,6 +811,13 @@ npm run smoke:live    <span class="c"># real Apple/Google calls: needs internet,
       <!-- ═══ CHANGELOG ═══ -->
       <section id="changelog" aria-labelledby="h-changelog">
         <h2 id="h-changelog">Changelog</h2>
+        <h3 id="unreleased">Unreleased <span class="docs-date">on main &middot; run from source</span></h3>
+        <ul>
+          <li><strong>All countries</strong> &mdash; analyze a keyword in all 20 storefronts, sorted by opportunity with &ldquo;top market&rdquo; badges; reviews and Full data read every App Store storefront plus every Google Play language, and CSV exports gain a <code>country</code> column.</li>
+          <li><strong>Full data explorer</strong> &mdash; live progress per source with Stop, click-to-filter facets, search, six sort orders, complaint and praise terms, summary cards, and Go deeper (up to 5,000 Google Play reviews per language).</li>
+          <li><strong>Guidance</strong> &mdash; 11-step guided tour (<kbd>?</kbd>), rich help tooltips on every control and column, and one-time contextual tips.</li>
+          <li><strong>Keyword table</strong> &mdash; the top ranking app keeps its name, the rest are icon chips, so long titles no longer squeeze the column.</li>
+        </ul>
         <h3 id="v1-6-0">1.6.0-beta.1 <span class="docs-date">September 2026</span></h3>
         <ul>
           <li><strong>Security</strong> &mdash; fixed a path traversal in rank-history writes, a crash on malformed <code>Host</code> headers, CSRF / DNS-rebinding exposure of the local API, CSV formula injection and a broken CSV quote in full-data exports. Added a CSP and security headers, Electron sandboxing, navigation and permission lockdown, and an <code>http(s)</code>-only external-link allowlist. Upgraded Electron 31 &rarr; 44 and electron-builder 24 &rarr; 26.</li>

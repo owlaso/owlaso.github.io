@@ -72,14 +72,16 @@
       "name": "OwlASO",
       "url": "https://github.com/owlaso"
     },
-    "screenshot": "https://owlaso.github.io/aso.png",
+    "screenshot": "https://owlaso.github.io/screenshots/keywords-dark.webp",
     "featureList": [
       "Keyword popularity, difficulty and opportunity scores",
       "Daily keyword rank tracking for Google Play and the App Store",
       "Similar and competitor keyword discovery",
+      "Keyword comparison across 20 countries",
       "Google Play and App Store reviews in one table",
       "Compare reviews of up to 5 apps",
-      "Full review export across stores and languages",
+      "Full-data review explorer across stores and languages",
+      "Guided tour and help tooltips",
       "CSV and JSON export",
       "Light, dark and system themes"
     ]
@@ -103,6 +105,7 @@
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="#features">Features</a>
+        <a href="#tour">Screens</a>
         <a href="#scores">Scores</a>
         <a href="#install">Install</a>
         <a href="./docs/">Docs</a>
@@ -163,16 +166,16 @@
               <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
               <span class="app-title">OwlASO — Reviews</span>
             </div>
-            <img class="app-shot shot-dark" src="/reviews.png" alt="OwlASO review monitor listing Google Play reviews with star ratings (dark theme)" width="1918" height="1012" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/reviews-light.png" alt="OwlASO review monitor listing Google Play reviews with star ratings" width="1462" height="884" loading="lazy" decoding="async">
+            <img class="app-shot shot-dark" src="/screenshots/reviews-dark.webp" alt="Reviews tab: Google Play and App Store reviews in one table with rating, text, store and app version (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/reviews-light.webp" alt="Reviews tab: Google Play and App Store reviews in one table with rating, text, store and app version" width="1920" height="1200" loading="lazy" decoding="async">
           </figure>
           <figure class="app-window app-window-front">
             <div class="app-titlebar" aria-hidden="true">
               <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
               <span class="app-title">OwlASO — Keywords</span>
             </div>
-            <img class="app-shot shot-dark" src="/aso.png" alt="OwlASO keyword table with popularity, difficulty, position and ranking apps (dark theme)" width="1917" height="1015" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/aso-light.png" alt="OwlASO keyword table with popularity, difficulty, position and ranking apps" width="1503" height="884" loading="lazy" decoding="async">
+            <img class="app-shot shot-dark" src="/screenshots/keywords-dark.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, position on each store and ranking apps (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/keywords-light.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, position on each store and ranking apps" width="1920" height="1200" loading="lazy" decoding="async">
           </figure>
         </div>
       </div>
@@ -204,7 +207,7 @@
           <ul class="feature-points">
             <li>Popularity, difficulty &amp; opportunity <span class="nowrap">(0&ndash;100)</span></li>
             <li>5 similar keywords scored side by side</li>
-            <li>Top apps with ratings, installs and ad flags</li>
+            <li>Keywords your competitors also rank for</li>
           </ul>
         </article>
         <article class="feature-card reveal" style="--icon-bg:var(--green-soft);--icon-color:var(--green)">
@@ -221,14 +224,14 @@
         </article>
         <article class="feature-card reveal" style="--icon-bg:var(--amber-soft);--icon-color:var(--amber)">
           <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
-          <h3>Competitor keywords</h3>
-          <p>See which related searches your competitors actually show up for.</p>
+          <h3>All countries at once</h3>
+          <p>Run one keyword in all 20 storefronts and find your best markets.</p>
           <ul class="feature-points">
-            <li>Related searches probed on real store results</li>
-            <li>Keywords per top-ranking app</li>
-            <li>One click to analyze any of them</li>
+            <li>One row per country, best opportunity first</li>
+            <li>&ldquo;Top market&rdquo; badges on the winners</li>
+            <li>Reviews from every App Store storefront</li>
           </ul>
         </article>
         <article class="feature-card reveal" style="--icon-bg:var(--blue-soft);--icon-color:var(--blue)">
@@ -247,12 +250,12 @@
           <div class="feature-icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </div>
-          <h3>Full data</h3>
-          <p>Pull every reachable review across stores and languages in one go.</p>
+          <h3>Full-data explorer</h3>
+          <p>Every reachable review across stores and languages, in one place.</p>
           <ul class="feature-points">
-            <li>Streamed in as each store &amp; language loads</li>
-            <li>Rating distribution per store &amp; language</li>
-            <li>Top terms &mdash; click one to filter</li>
+            <li>Live progress for each store &amp; language</li>
+            <li>Filter by rating, store or language; search &amp; sort</li>
+            <li>What users complain about vs. love</li>
           </ul>
         </article>
         <article class="feature-card reveal" style="--icon-bg:var(--red-soft);--icon-color:var(--red)">
@@ -271,12 +274,97 @@
 
       <ul class="also-row reveal" aria-label="Also included">
         <li class="also-label">Also:</li>
+        <li class="chip">Guided tour &amp; help tooltips</li>
         <li class="chip">Folders &amp; drag-and-drop</li>
         <li class="chip">Light / dark / system theme</li>
         <li class="chip">Keyboard shortcuts</li>
         <li class="chip">Undo for deletes</li>
         <li class="chip">Screen-reader labels</li>
       </ul>
+    </section>
+
+    <!-- PRODUCT TOUR -->
+    <section class="section" id="tour" aria-labelledby="tourTitle">
+      <div class="section-label">See it in action</div>
+      <h2 class="section-title" id="tourTitle">A quick look inside</h2>
+      <p class="section-desc">Real screens from OwlASO, filled with demo data.</p>
+
+      <div class="shots" data-tabs>
+        <div class="shot-tabs" role="tablist" aria-label="App screens">
+          <button type="button" class="shot-tab" role="tab" id="tab-keywords" aria-controls="panel-keywords" aria-selected="true" tabindex="0">Keywords</button>
+          <button type="button" class="shot-tab" role="tab" id="tab-keyword-detail" aria-controls="panel-keyword-detail" aria-selected="false" tabindex="-1">Keyword details</button>
+          <button type="button" class="shot-tab" role="tab" id="tab-all-countries" aria-controls="panel-all-countries" aria-selected="false" tabindex="-1">All countries</button>
+          <button type="button" class="shot-tab" role="tab" id="tab-reviews-filter" aria-controls="panel-reviews-filter" aria-selected="false" tabindex="-1">Reviews</button>
+          <button type="button" class="shot-tab" role="tab" id="tab-full-data" aria-controls="panel-full-data" aria-selected="false" tabindex="-1">Full data</button>
+          <button type="button" class="shot-tab" role="tab" id="tab-guided-tour" aria-controls="panel-guided-tour" aria-selected="false" tabindex="-1">Guided tour</button>
+        </div>
+        <div class="shot-panel active" role="tabpanel" id="panel-keywords" aria-labelledby="tab-keywords">
+          <p class="shot-caption">Score a keyword and 5 similar ones at once. <strong>Position</strong> shows where your app ranks on each store, with the daily change.</p>
+          <figure class="app-window shot-window">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Keywords</span>
+            </div>
+            <img class="app-shot shot-dark" src="/screenshots/keywords-dark.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, per-store position and ranking apps (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/keywords-light.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, per-store position and ranking apps" width="1920" height="1200" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <div class="shot-panel" role="tabpanel" id="panel-keyword-detail" aria-labelledby="tab-keyword-detail">
+          <p class="shot-caption">Open any keyword for all its numbers, trend charts, your app&rsquo;s best rank over time and the keywords the top apps also rank for.</p>
+          <figure class="app-window shot-window">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Keyword details</span>
+            </div>
+            <img class="app-shot shot-dark" src="/screenshots/keyword-detail-dark.webp" alt="Keyword details for “habit tracker”: popularity 78, difficulty 64, opportunity 28, store ranks, 30-day trend charts and competitor keywords (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/keyword-detail-light.webp" alt="Keyword details for “habit tracker”: popularity 78, difficulty 64, opportunity 28, store ranks, 30-day trend charts and competitor keywords" width="1920" height="1200" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <div class="shot-panel" role="tabpanel" id="panel-all-countries" aria-labelledby="tab-all-countries">
+          <p class="shot-caption">Run one keyword in all 20 storefronts. Rows are sorted by opportunity, so your best markets come first.</p>
+          <figure class="app-window shot-window">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — All countries</span>
+            </div>
+            <img class="app-shot shot-dark" src="/screenshots/all-countries-dark.webp" alt="All countries view: “habit tracker” analyzed per country with Brazil, Turkey and Indonesia marked as top markets (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/all-countries-light.webp" alt="All countries view: “habit tracker” analyzed per country with Brazil, Turkey and Indonesia marked as top markets" width="1920" height="1200" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <div class="shot-panel" role="tabpanel" id="panel-reviews-filter" aria-labelledby="tab-reviews-filter">
+          <p class="shot-caption">Both stores in one table. Type a word to filter instantly &mdash; matches are highlighted and the store is on every row.</p>
+          <figure class="app-window shot-window">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Reviews</span>
+            </div>
+            <img class="app-shot shot-dark" src="/screenshots/reviews-filter-dark.webp" alt="Reviews filtered by the word “sync”: 26 matches from Google Play and the App Store with the word highlighted (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/reviews-filter-light.webp" alt="Reviews filtered by the word “sync”: 26 matches from Google Play and the App Store with the word highlighted" width="1920" height="1200" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <div class="shot-panel" role="tabpanel" id="panel-full-data" aria-labelledby="tab-full-data">
+          <p class="shot-caption">Every reachable review in one explorer: rating, store and language facets, search, sorting, and what users complain about.</p>
+          <figure class="app-window shot-window">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Full data</span>
+            </div>
+            <img class="app-shot shot-dark" src="/screenshots/full-data-dark.webp" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/full-data-light.webp" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list" width="1920" height="1200" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <div class="shot-panel" role="tabpanel" id="panel-guided-tour" aria-labelledby="tab-guided-tour">
+          <p class="shot-caption">New here? A one-minute guided tour walks you through every part of the app. Press <kbd>?</kbd> any time to replay it.</p>
+          <figure class="app-window shot-window">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Guided tour</span>
+            </div>
+            <img class="app-shot shot-dark" src="/screenshots/guided-tour-dark.webp" alt="Guided tour step 6 of 11, “Read the scores”, highlighting the keyword table columns (dark theme)" width="1920" height="1200" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/screenshots/guided-tour-light.webp" alt="Guided tour step 6 of 11, “Read the scores”, highlighting the keyword table columns" width="1920" height="1200" loading="lazy" decoding="async">
+          </figure>
+        </div>
+      </div>
     </section>
 
     <!-- SCORES -->
@@ -385,6 +473,7 @@
               Download from GitHub
             </a>
             <p>Rather not install? The release also ships a portable <code>.zip</code> you can unpack and run.</p>
+            <p>All countries, the full-data explorer and the guided tour arrived after this beta. To use them now, run OwlASO from source.</p>
             <p class="install-note"><strong>SmartScreen warning?</strong> If Windows shows &ldquo;Windows protected your PC&rdquo;, choose <em>More info &rarr; Run anyway</em> &mdash; or build it yourself from source.</p>
           </article>
 
@@ -483,7 +572,7 @@
           </details>
           <details class="faq-item">
             <summary>Why do I only get about 500 App Store reviews?</summary>
-            <div class="faq-answer"><p>Apple&rsquo;s public review feed stops at 10 pages of 50 reviews per storefront. Switch the country to read another storefront. Google Play allows far more: up to 5,000 per fetch, or up to 1,000 per language with <strong>Full data</strong>.</p></div>
+            <div class="faq-answer"><p>Apple&rsquo;s public review feed stops at 10 pages of 50 reviews per storefront (country). Pick <strong>All countries</strong> to read every storefront at once. Google Play allows far more: up to 5,000 per fetch, and <strong>Full data</strong> reads 1,000 per language &mdash; <strong>Go deeper</strong> raises that to 5,000.</p></div>
           </details>
           <details class="faq-item">
             <summary>Is there a Mac or Linux version?</summary>
@@ -531,6 +620,7 @@
         <h2>Product</h2>
         <ul>
           <li><a href="#features">Features</a></li>
+          <li><a href="#tour">Screens</a></li>
           <li><a href="#scores">Scores</a></li>
           <li><a href="#install">Install</a></li>
           <li><a href="#faq">FAQ</a></li>
