@@ -1,41 +1,51 @@
-?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Apply the theme before first paint (no light flash for dark-mode users).
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Primary SEO -->
-  <title>OwlASO — ASO Keyword Tracking &amp; App Store Review Analytics</title>
-  <meta name="description" content="Track ASO keywords, analyze app store rankings, and monitor user reviews from Google Play and the App Store — all in one desktop app.">
-  <meta name="keywords" content="ASO, app store optimization, keyword tracking, google play reviews, app store reviews, review analytics, keyword difficulty, keyword popularity">
+  <title>OwlASO — Free ASO Keyword Research &amp; App Review Analytics</title>
+  <meta name="description" content="Free, open-source desktop app for ASO keyword research, daily rank tracking and review analytics across Google Play and the App Store. Runs on your machine — no account needed.">
   <meta name="author" content="OwlASO">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-  <link rel="canonical" href="https://owlaso.app">
+  <link rel="canonical" href="https://owlaso.github.io/">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./icon.png">
+  <!-- Icons -->
+  <link rel="icon" href="/icon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="theme-color" content="#6366f1">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://owlaso.app">
-  <meta property="og:title" content="OwlASO — ASO Keyword Tracking & App Store Review Analytics">
-  <meta property="og:description" content="Track ASO keywords, analyze app store rankings, and monitor user reviews from Google Play and the App Store — all in one desktop app.">
-  <meta property="og:image" content="https://owlaso.github.io/owlaso.github.com/aso.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="750">
-  <meta property="og:image:alt" content="OwlASO — ASO & Review Analytics Dashboard">
+  <meta property="og:url" content="https://owlaso.github.io/">
   <meta property="og:site_name" content="OwlASO">
+  <meta property="og:title" content="OwlASO — Free ASO Keyword Research & App Review Analytics">
+  <meta property="og:description" content="Score keywords, track daily rankings and read every review from Google Play and the App Store — in one free, open-source desktop app.">
+  <meta property="og:image" content="https://owlaso.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OwlASO — ASO keyword research and review analytics for Google Play and the App Store">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://owlaso.app">
-  <meta name="twitter:title" content="OwlASO — ASO Keyword Tracking & App Store Review Analytics">
-  <meta name="twitter:description" content="Track ASO keywords, analyze app store rankings, and monitor user reviews from Google Play and the App Store.">
-  <meta name="twitter:image" content="https://owlaso.github.io/owlaso.github.com/aso.png">
+  <meta name="twitter:title" content="OwlASO — Free ASO Keyword Research & App Review Analytics">
+  <meta name="twitter:description" content="Score keywords, track daily rankings and read every review from Google Play and the App Store — free and open source.">
+  <meta name="twitter:image" content="https://owlaso.github.io/og-image.png">
   <meta name="twitter:creator" content="@alpernae">
 
   <!-- Structured Data -->
@@ -44,10 +54,14 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "OwlASO",
-    "description": "Desktop app for ASO keyword tracking, app store ranking analysis, and monitoring user reviews from Google Play and the App Store.",
-    "url": "https://owlaso.github.io",
+    "description": "Free, open-source desktop app for ASO keyword research, daily rank tracking and review analytics across Google Play and the App Store.",
+    "url": "https://owlaso.github.io/",
+    "downloadUrl": "https://github.com/owlaso/owlaso/releases/latest",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Windows, macOS, Linux",
+    "softwareVersion": "1.6.0-beta.1",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -58,17 +72,16 @@
       "name": "OwlASO",
       "url": "https://github.com/owlaso"
     },
-    "softwareVersion": "1.5.0",
-    "screenshot": "https://owlaso.github.io/owlaso.github.com/aso.png",
+    "screenshot": "https://owlaso.github.io/aso.png",
     "featureList": [
-      "Google Play review fetching",
-      "App Store review fetching",
-      "Dual-store comparison",
-      "ASO keyword tracking",
-      "Advanced review filtering",
+      "Keyword popularity, difficulty and opportunity scores",
+      "Daily keyword rank tracking for Google Play and the App Store",
+      "Similar and competitor keyword discovery",
+      "Google Play and App Store reviews in one table",
+      "Compare reviews of up to 5 apps",
+      "Full review export across stores and languages",
       "CSV and JSON export",
-      "Dark mode support",
-      "Multi-country support"
+      "Light, dark and system themes"
     ]
   }
   </script>
@@ -79,251 +92,472 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- NAV -->
-  <nav id="navbar">
+  <header class="site-nav" id="navbar">
     <div class="nav-inner">
-      <a href="#" class="nav-brand" aria-label="OwlASO Home">
-        <div class="nav-logo" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="border-radius:7px;background:linear-gradient(135deg,#818cf8,#4338ca);display:block">
-            <polygon points="13,15 10,6 18,13" fill="white"/>
-            <polygon points="27,15 30,6 22,13" fill="white"/>
-            <circle cx="20" cy="23" r="13" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="14.5" cy="21" r="3.5" fill="white"/>
-            <circle cx="25.5" cy="21" r="3.5" fill="white"/>
-          </svg>
-        </div>
+      <a href="./" class="nav-brand" aria-label="OwlASO home">
+        <img class="nav-logo" src="/favicon.svg" alt="" width="28" height="28">
         <span class="nav-title">OwlASO</span>
       </a>
-      <div class="nav-links">
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="#features">Features</a>
-        <a href="#how">How It Works</a>
-        <a href="#platforms">Platforms</a>
-        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
-          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <a href="#scores">Scores</a>
+        <a href="#install">Install</a>
+        <a href="./docs/">Docs</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         </button>
-        <a href="https://github.com/owlaso/owlaso" class="nav-cta" target="_blank" rel="noopener noreferrer">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          Install
+        <a href="https://github.com/owlaso/owlaso" class="icon-btn" target="_blank" rel="noopener noreferrer" aria-label="OwlASO on GitHub" title="Source on GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         </a>
+        <a href="#install" class="nav-cta">Download</a>
+        <button type="button" class="icon-btn nav-menu-btn" data-nav-toggle aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <div class="animate-in">
-        <div class="hero-badge">
-          <span class="badge-dot"></span> Open Source &middot; Free Forever
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="animate-in">
+          <a class="hero-badge" href="https://github.com/owlaso/owlaso/releases/latest" target="_blank" rel="noopener noreferrer">
+            <span class="hero-badge-tag">NEW</span><span>v1.6 beta<span class="hide-sm">: rank history, app comparison &amp; full data</span><span class="show-sm"> is out</span></span><span aria-hidden="true">&rarr;</span>
+          </a>
         </div>
+        <h1 class="animate-in delay-1" id="heroTitle">
+          ASO keywords &amp; reviews<br>
+          <span class="gradient-text">for both app stores</span>
+        </h1>
+        <p class="hero-sub animate-in delay-2">
+          Score keywords, track where your app ranks every day, and read every review from Google Play and the App Store &mdash; in one free desktop app that runs on your machine.
+        </p>
+        <div class="hero-buttons animate-in delay-3">
+          <a href="https://github.com/owlaso/owlaso/releases/latest" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            Download for Windows
+          </a>
+          <a href="./docs/" class="btn btn-secondary">Read the docs</a>
+        </div>
+        <p class="hero-meta animate-in delay-3">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Free &amp; MIT licensed</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>No account or API key</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>macOS &amp; Linux:&nbsp;<a href="#install">run from source</a></span>
+        </p>
       </div>
-      <h1 class="animate-in delay-1">
-        ASO Keywords &amp;<br>
-        <span class="gradient-text">Review Analytics</span>
-      </h1>
-      <p class="hero-sub animate-in delay-2">
-        Track ASO keyword rankings, analyze difficulty and popularity scores, and monitor user reviews from Google Play and the App Store &mdash; all in one desktop app.
-      </p>
-      <div class="hero-buttons animate-in delay-3">
-        <a href="https://github.com/owlaso/owlaso" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          Install from GitHub
-        </a>
-        <a href="#features" class="btn btn-secondary">Learn More <span aria-hidden="true">&darr;</span></a>
-      </div>
-    </div>
 
-    <!-- PRODUCT SHOT — DESKTOP APP WINDOWS -->
-    <div class="hero-mockup animate-in delay-3">
-      <div class="desktop-showcase">
-        <figure class="app-window app-window-back">
-          <div class="app-titlebar">
-            <div class="app-dots" aria-hidden="true">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
+      <!-- PRODUCT SHOT — DESKTOP APP WINDOWS -->
+      <div class="hero-mockup animate-in delay-3">
+        <div class="desktop-showcase">
+          <figure class="app-window app-window-back">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Reviews</span>
             </div>
-            <span class="app-title">OwlASO — Review Monitor</span>
-          </div>
-          <img class="app-shot shot-dark" src="./reviews.png" alt="OwlASO app store review monitoring dashboard (dark)" width="1918" height="1012" loading="eager">
-          <img class="app-shot shot-light" src="./reviews-light.png" alt="OwlASO app store review monitoring dashboard" width="1462" height="884" loading="eager">
-        </figure>
-        <figure class="app-window app-window-front">
-          <div class="app-titlebar">
-            <div class="app-dots" aria-hidden="true">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
+            <img class="app-shot shot-dark" src="/reviews.png" alt="OwlASO review monitor listing Google Play reviews with star ratings (dark theme)" width="1918" height="1012" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/reviews-light.png" alt="OwlASO review monitor listing Google Play reviews with star ratings" width="1462" height="884" loading="lazy" decoding="async">
+          </figure>
+          <figure class="app-window app-window-front">
+            <div class="app-titlebar" aria-hidden="true">
+              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+              <span class="app-title">OwlASO — Keywords</span>
             </div>
-            <span class="app-title">OwlASO — ASO Tracker</span>
+            <img class="app-shot shot-dark" src="/aso.png" alt="OwlASO keyword table with popularity, difficulty, position and ranking apps (dark theme)" width="1917" height="1015" loading="lazy" decoding="async">
+            <img class="app-shot shot-light" src="/aso-light.png" alt="OwlASO keyword table with popularity, difficulty, position and ranking apps" width="1503" height="884" loading="lazy" decoding="async">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACTS -->
+    <section class="facts" aria-label="OwlASO at a glance">
+      <ul class="facts-grid">
+        <li class="reveal"><span class="fact-value">2</span><span class="fact-label">App stores, one table</span></li>
+        <li class="reveal"><span class="fact-value">20</span><span class="fact-label">Storefronts</span></li>
+        <li class="reveal"><span class="fact-value">16</span><span class="fact-label">Review languages</span></li>
+        <li class="reveal"><span class="fact-value">180</span><span class="fact-label">Days of rank history</span></li>
+      </ul>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features" aria-labelledby="featuresTitle">
+      <div class="section-label">Features</div>
+      <h2 class="section-title" id="featuresTitle">From keyword idea to user complaint</h2>
+      <p class="section-desc">Research keywords, watch your rankings move and hear what users say &mdash; without switching tools or paying per seat.</p>
+
+      <div class="features-grid">
+        <article class="feature-card reveal" style="--icon-bg:var(--accent-soft);--icon-color:var(--accent)">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <img class="app-shot shot-dark" src="./aso.png" alt="OwlASO ASO keyword tracking dashboard (dark)" width="1917" height="1015" loading="eager">
-          <img class="app-shot shot-light" src="./aso-light.png" alt="OwlASO ASO keyword tracking dashboard" width="1503" height="884" loading="eager">
-        </figure>
+          <h3>Keyword research</h3>
+          <p>Analyze any keyword on one or both stores and see who ranks for it.</p>
+          <ul class="feature-points">
+            <li>Popularity, difficulty &amp; opportunity <span class="nowrap">(0&ndash;100)</span></li>
+            <li>5 similar keywords scored side by side</li>
+            <li>Top apps with ratings, installs and ad flags</li>
+          </ul>
+        </article>
+        <article class="feature-card reveal" style="--icon-bg:var(--green-soft);--icon-color:var(--green)">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3>Rank tracking</h3>
+          <p>Know exactly where your app sits for every keyword, on each store.</p>
+          <ul class="feature-points">
+            <li>Position in the top 50 per store</li>
+            <li>Daily snapshots with trend arrows &amp; charts</li>
+            <li>History kept locally for 180 days</li>
+          </ul>
+        </article>
+        <article class="feature-card reveal" style="--icon-bg:var(--amber-soft);--icon-color:var(--amber)">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h3>Competitor keywords</h3>
+          <p>See which related searches your competitors actually show up for.</p>
+          <ul class="feature-points">
+            <li>Related searches probed on real store results</li>
+            <li>Keywords per top-ranking app</li>
+            <li>One click to analyze any of them</li>
+          </ul>
+        </article>
+        <article class="feature-card reveal" style="--icon-bg:var(--blue-soft);--icon-color:var(--blue)">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Reviews from both stores</h3>
+          <p>Google Play and App Store reviews in one table, with a store column.</p>
+          <ul class="feature-points">
+            <li>Instant word &amp; star filters, highlighted matches</li>
+            <li>Compare up to 5 apps with Ctrl/&#8984;-click</li>
+            <li>Step through reviews with &larr; / &rarr;</li>
+          </ul>
+        </article>
+        <article class="feature-card reveal" style="--icon-bg:var(--purple-soft);--icon-color:var(--purple)">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Full data</h3>
+          <p>Pull every reachable review across stores and languages in one go.</p>
+          <ul class="feature-points">
+            <li>Streamed in as each store &amp; language loads</li>
+            <li>Rating distribution per store &amp; language</li>
+            <li>Top terms &mdash; click one to filter</li>
+          </ul>
+        </article>
+        <article class="feature-card reveal" style="--icon-bg:var(--red-soft);--icon-color:var(--red)">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <h3>Export anything</h3>
+          <p>Press Ctrl/&#8984;+E to export exactly what you are looking at.</p>
+          <ul class="feature-points">
+            <li>CSV for keywords, reviews &amp; full data</li>
+            <li>JSON for full-data results</li>
+            <li>Excel-ready UTF-8, formula-injection safe</li>
+          </ul>
+        </article>
       </div>
-    </div>
-  </section>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="section-label">Features</div>
-    <h2 class="section-title">Everything you need for review analysis</h2>
-    <p class="section-desc">Powerful filtering, dual-store comparison, and export tools &mdash; built for app developers and ASO professionals.</p>
+      <ul class="also-row reveal" aria-label="Also included">
+        <li class="also-label">Also:</li>
+        <li class="chip">Folders &amp; drag-and-drop</li>
+        <li class="chip">Light / dark / system theme</li>
+        <li class="chip">Keyboard shortcuts</li>
+        <li class="chip">Undo for deletes</li>
+        <li class="chip">Screen-reader labels</li>
+      </ul>
+    </section>
 
-    <div class="features-grid">
-      <article class="feature-card reveal">
-        <div class="feature-icon" style="--icon-bg:rgba(99,102,241,.1);--icon-color:#6366f1">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <!-- SCORES -->
+    <div class="section-alt">
+      <section class="section" id="scores" aria-labelledby="scoresTitle">
+        <div class="section-label">Transparent scores</div>
+        <h2 class="section-title" id="scoresTitle">No black-box numbers</h2>
+        <p class="section-desc">Every score is computed from public store data with a formula you can read &mdash; and check in the source.</p>
+
+        <div class="metrics-grid">
+          <article class="metric-card reveal">
+            <div class="metric-head"><h3>Popularity</h3><span class="metric-range">0&ndash;100</span></div>
+            <p>How much demand a keyword shows, judged by the apps that rank for it.</p>
+            <div class="metric-bar" aria-hidden="true">
+              <span style="width:40%;background:#6366f1"></span><span style="width:22%;background:#818cf8"></span><span style="width:20%;background:#a78bfa"></span><span style="width:18%;background:#c4b5fd"></span>
+            </div>
+            <ul class="weights">
+              <li><b>40</b><span><i class="swatch" style="background:#6366f1"></i>Rating volume of ranking apps (log scale)</span></li>
+              <li><b>22</b><span><i class="swatch" style="background:#818cf8"></i>Breadth of results</span></li>
+              <li><b>20</b><span><i class="swatch" style="background:#a78bfa"></i>Average star rating</span></li>
+              <li><b>18</b><span><i class="swatch" style="background:#c4b5fd"></i>Share of apps running ads</span></li>
+            </ul>
+          </article>
+          <article class="metric-card reveal">
+            <div class="metric-head"><h3>Difficulty</h3><span class="metric-range">0&ndash;100</span></div>
+            <p>How hard it is to break into the results for this keyword.</p>
+            <div class="metric-bar" aria-hidden="true">
+              <span style="width:40%;background:#f59e0b"></span><span style="width:25%;background:#fbbf24"></span><span style="width:20%;background:#fcd34d"></span><span style="width:15%;background:#fde68a"></span>
+            </div>
+            <ul class="weights">
+              <li><b>40</b><span><i class="swatch" style="background:#f59e0b"></i>Share of &ldquo;authority&rdquo; apps (&ge;&nbsp;50K ratings)</span></li>
+              <li><b>25</b><span><i class="swatch" style="background:#fbbf24"></i>Share of apps running ads</span></li>
+              <li><b>20</b><span><i class="swatch" style="background:#fcd34d"></i>Breadth of results</span></li>
+              <li><b>15</b><span><i class="swatch" style="background:#fde68a"></i>Share of apps rated &ge;&nbsp;4&#9733;</span></li>
+            </ul>
+          </article>
+          <article class="metric-card reveal">
+            <div class="metric-head"><h3>Opportunity</h3><span class="metric-range">0&ndash;100</span></div>
+            <p>High demand you can realistically compete for. Sort by this first.</p>
+            <div class="formula">opportunity = popularity<br>&nbsp;&nbsp;&times; (100 &minus; difficulty) / 100</div>
+            <ul class="weights">
+              <li><b>56</b><span>popularity 80, difficulty 30 &mdash; go for it</span></li>
+              <li><b>18</b><span>popularity 20, difficulty 10 &mdash; small niche</span></li>
+              <li><b>8</b><span>popularity 80, difficulty 90 &mdash; crowded</span></li>
+            </ul>
+          </article>
         </div>
-        <h3>Dual-Store Reviews</h3>
-        <p>Fetch and compare reviews from Google Play and the App Store side by side. Auto-detect matching apps across stores.</p>
-      </article>
-      <article class="feature-card reveal">
-        <div class="feature-icon" style="--icon-bg:rgba(52,199,89,.1);--icon-color:#34c759">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-        </div>
-        <h3>Advanced Filtering</h3>
-        <p>Filter by platform, country, language, star rating, date range, app version, keyword, minimum text length, and developer replies.</p>
-      </article>
-      <article class="feature-card reveal">
-        <div class="feature-icon" style="--icon-bg:rgba(245,158,11,.1);--icon-color:#f59e0b">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        </div>
-        <h3>ASO Keyword Tracking</h3>
-        <p>Search and analyze keyword rankings with popularity and difficulty scores. Track which apps rank for each keyword.</p>
-      </article>
-      <article class="feature-card reveal">
-        <div class="feature-icon" style="--icon-bg:rgba(59,130,246,.1);--icon-color:#3b82f6">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        </div>
-        <h3>CSV &amp; JSON Export</h3>
-        <p>Export your filtered review data as CSV or JSON with one click. Ready for spreadsheets, dashboards, or further analysis.</p>
-      </article>
-      <article class="feature-card reveal">
-        <div class="feature-icon" style="--icon-bg:rgba(139,92,246,.1);--icon-color:#8b5cf6">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
-        <h3>Multi-Country Support</h3>
-        <p>Browse reviews across dozens of countries and storefronts. See how your app performs in different markets worldwide.</p>
-      </article>
-      <article class="feature-card reveal">
-        <div class="feature-icon" style="--icon-bg:rgba(255,59,48,.1);--icon-color:#ff3b30">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </div>
-        <h3>Dark Mode</h3>
-        <p>Beautiful dark theme with manual toggle and OS preference detection. Easy on the eyes for long analysis sessions.</p>
-      </article>
+
+        <p class="metrics-note reveal">
+          These are free, public-data estimates &mdash; not Apple Search Ads&rsquo; first-party popularity. Use them to compare keywords with each other.
+          <a href="./docs/#metrics">Full methodology &rarr;</a>
+        </p>
+      </section>
     </div>
-  </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works" id="how">
-    <div class="section-label">How It Works</div>
-    <h2 class="section-title">Up and running in 3 steps</h2>
-    <p class="section-desc">From install to insights in under a minute.</p>
+    <!-- HOW IT WORKS -->
+    <section class="section section-narrow" id="how" aria-labelledby="howTitle">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title" id="howTitle">Up and running in 3 steps</h2>
+      <p class="section-desc">From install to your first insight in about a minute.</p>
 
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-number">1</div>
-        <h3>Download &amp; Run</h3>
-        <p>Download the installer for Windows, macOS, or Linux and launch OwlASO in seconds &mdash; no browser setup required.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-number">2</div>
-        <h3>Search &amp; Select</h3>
-        <p>Search for any app on Google Play or the App Store. Click <em>Use</em> to load its reviews and metadata.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-number">3</div>
-        <h3>Filter &amp; Export</h3>
-        <p>Apply filters, compare stores, track keywords, then export your data as CSV or JSON.</p>
-      </div>
+      <ol class="steps">
+        <li class="step reveal">
+          <div class="step-number" aria-hidden="true">1</div>
+          <h3>Add your apps</h3>
+          <p>Click <strong>+</strong> (or press <kbd>A</kbd>) and search by name, package (<code>com.spotify.music</code>) or App Store id. Apps on both stores merge into one entry.</p>
+        </li>
+        <li class="step reveal">
+          <div class="step-number" aria-hidden="true">2</div>
+          <h3>Analyze keywords</h3>
+          <p>Type a keyword and press <kbd>Enter</kbd>. You get scores for it and 5 similar keywords, plus your app&rsquo;s position on each store.</p>
+        </li>
+        <li class="step reveal">
+          <div class="step-number" aria-hidden="true">3</div>
+          <h3>Read &amp; export reviews</h3>
+          <p>Switch to <strong>Reviews</strong>, filter by words and stars, compare apps, then press <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>+<kbd>E</kbd> to export.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- INSTALL -->
+    <div class="section-alt">
+      <section class="section" id="install" aria-labelledby="installTitle">
+        <div class="section-label">Install</div>
+        <h2 class="section-title" id="installTitle">Get OwlASO</h2>
+        <p class="section-desc">A Windows installer is ready to go. On macOS and Linux, run it from source in four commands.</p>
+
+        <div class="install-grid">
+          <article class="install-card reveal">
+            <div class="install-card-head">
+              <span class="install-os-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+              </span>
+              <div>
+                <h3>Windows</h3>
+                <div class="sub">Installer &middot; x64 &middot; latest: v1.6.0-beta.1</div>
+              </div>
+            </div>
+            <ol class="install-steps">
+              <li>Open the latest release on GitHub.</li>
+              <li>Download <code>OwlASO.Setup.&lt;version&gt;.exe</code>.</li>
+              <li>Run it &mdash; you get desktop &amp; Start-menu shortcuts.</li>
+            </ol>
+            <a href="https://github.com/owlaso/owlaso/releases/latest" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download from GitHub
+            </a>
+            <p>Rather not install? The release also ships a portable <code>.zip</code> you can unpack and run.</p>
+            <p class="install-note"><strong>SmartScreen warning?</strong> If Windows shows &ldquo;Windows protected your PC&rdquo;, choose <em>More info &rarr; Run anyway</em> &mdash; or build it yourself from source.</p>
+          </article>
+
+          <article class="install-card reveal">
+            <div class="install-card-head">
+              <span class="install-os-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              </span>
+              <div>
+                <h3>macOS, Linux &amp; from source</h3>
+                <div class="sub">Any OS &middot; needs Node.js 22.12+ and git</div>
+              </div>
+            </div>
+            <div class="code-block">
+              <div class="code-block-head"><span>Terminal</span></div>
+<pre><code><span class="p">$ </span>git clone https://github.com/owlaso/owlaso.git
+<span class="p">$ </span>cd owlaso
+<span class="p">$ </span>npm install
+<span class="p">$ </span>npm run electron   <span class="c"># desktop app</span></code></pre>
+            </div>
+            <p>Prefer the browser? Run <code>npm start</code> and open <code>http://localhost:3000</code>. Want an installer? <code>npm run dist:mac</code> builds a DMG, <code>npm run dist:linux</code> an AppImage.</p>
+            <p class="install-note"><a href="./docs/#install">Full install guide &rarr;</a> &nbsp;Covers requirements, web mode and building installers.</p>
+          </article>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- PLATFORMS -->
-  <section class="platforms" id="platforms">
-    <div class="section-label">Cross-Platform</div>
-    <h2 class="section-title">Works on your OS</h2>
-    <p class="section-desc">Native desktop app for Windows, macOS, and Linux &mdash; lightweight, private, and free.</p>
+    <!-- PRIVACY -->
+    <section class="section section-narrow" id="privacy" aria-labelledby="privacyTitle">
+      <div class="section-label">Private by design</div>
+      <h2 class="section-title" id="privacyTitle">Your research stays on your machine</h2>
+      <p class="section-desc">No cloud, no sign-up, no OwlASO server in the middle. The app talks straight to the public store endpoints.</p>
 
-    <div class="platform-badges">
-      <div class="platform-badge reveal">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-        Windows
-      </div>
-      <div class="platform-badge reveal">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        macOS
-      </div>
-      <div class="platform-badge reveal">
-        <svg width="24" height="24" viewBox="0 0 304.998 304.998" fill="currentColor"><path d="M274.659,244.888c-8.944-3.663-12.77-8.524-12.4-15.777c0.381-8.466-4.422-14.667-6.703-17.117 c1.378-5.264,5.405-23.474,0.004-39.291c-5.804-16.93-23.524-42.787-41.808-68.204c-7.485-10.438-7.839-21.784-8.248-34.922 c-0.392-12.531-0.834-26.735-7.822-42.525C190.084,9.859,174.838,0,155.851,0c-11.295,0-22.889,3.53-31.811,9.684 c-18.27,12.609-15.855,40.1-14.257,58.291c0.219,2.491,0.425,4.844,0.545,6.853c1.064,17.816,0.096,27.206-1.17,30.06 c-0.819,1.865-4.851,7.173-9.118,12.793c-4.413,5.812-9.416,12.4-13.517,18.539c-4.893,7.387-8.843,18.678-12.663,29.597 c-2.795,7.99-5.435,15.537-8.005,20.047c-4.871,8.676-3.659,16.766-2.647,20.505c-1.844,1.281-4.508,3.803-6.757,8.557 c-2.718,5.8-8.233,8.917-19.701,11.122c-5.27,1.078-8.904,3.294-10.804,6.586c-2.765,4.791-1.259,10.811,0.115,14.925 c2.03,6.048,0.765,9.876-1.535,16.826c-0.53,1.604-1.131,3.42-1.74,5.423c-0.959,3.161-0.613,6.035,1.026,8.542 c4.331,6.621,16.969,8.956,29.979,10.492c7.768,0.922,16.27,4.029,24.493,7.035c8.057,2.944,16.388,5.989,23.961,6.913 c1.151,0.145,2.291,0.218,3.39,0.218c11.434,0,16.6-7.587,18.238-10.704c4.107-0.838,18.272-3.522,32.871-3.882 c14.576-0.416,28.679,2.462,32.674,3.357c1.256,2.404,4.567,7.895,9.845,10.724c2.901,1.586,6.938,2.495,11.073,2.495 c0.001,0,0,0,0.001,0c4.416,0,12.817-1.044,19.466-8.039c6.632-7.028,23.202-16,35.302-22.551c2.7-1.462,5.226-2.83,7.441-4.065 c6.797-3.768,10.506-9.152,10.175-14.771C282.445,250.905,279.356,246.811,274.659,244.888z M124.189,243.535 c-0.846-5.96-8.513-11.871-17.392-18.715c-7.26-5.597-15.489-11.94-17.756-17.312c-4.685-11.082-0.992-30.568,5.447-40.602 c3.182-5.024,5.781-12.643,8.295-20.011c2.714-7.956,5.521-16.182,8.66-19.783c4.971-5.622,9.565-16.561,10.379-25.182 c4.655,4.444,11.876,10.083,18.547,10.083c1.027,0,2.024-0.134,2.977-0.403c4.564-1.318,11.277-5.197,17.769-8.947 c5.597-3.234,12.499-7.222,15.096-7.585c4.453,6.394,30.328,63.655,32.972,82.044c2.092,14.55-0.118,26.578-1.229,31.289 c-0.894-0.122-1.96-0.221-3.08-0.221c-7.207,0-9.115,3.934-9.612,6.283c-1.278,6.103-1.413,25.618-1.427,30.003 c-2.606,3.311-15.785,18.903-34.706,21.706c-7.707,1.12-14.904,1.688-21.39,1.688c-5.544,0-9.082-0.428-10.551-0.651l-9.508-10.879 C121.429,254.489,125.177,250.583,124.189,243.535z M136.254,64.149c-0.297,0.128-0.589,0.265-0.876,0.411 c-0.029-0.644-0.096-1.297-0.199-1.952c-1.038-5.975-5-10.312-9.419-10.312c-0.327,0-0.656,0.025-1.017,0.08 c-2.629,0.438-4.691,2.413-5.821,5.213c0.991-6.144,4.472-10.693,8.602-10.693c4.85,0,8.947,6.536,8.947,14.272 C136.471,62.143,136.4,63.113,136.254,64.149z M173.94,68.756c0.444-1.414,0.684-2.944,0.684-4.532 c0-7.014-4.45-12.509-10.131-12.509c-5.552,0-10.069,5.611-10.069,12.509c0,0.47,0.023,0.941,0.067,1.411 c-0.294-0.113-0.581-0.223-0.861-0.329c-0.639-1.935-0.962-3.954-0.962-6.015c0-8.387,5.36-15.211,11.95-15.211 c6.589,0,11.95,6.824,11.95,15.211C176.568,62.78,175.605,66.11,173.94,68.756z M169.081,85.08 c-0.095,0.424-0.297,0.612-2.531,1.774c-1.128,0.587-2.532,1.318-4.289,2.388l-1.174,0.711c-4.718,2.86-15.765,9.559-18.764,9.952 c-2.037,0.274-3.297-0.516-6.13-2.441c-0.639-0.435-1.319-0.897-2.044-1.362c-5.107-3.351-8.392-7.042-8.763-8.485 c1.665-1.287,5.792-4.508,7.905-6.415c4.289-3.988,8.605-6.668,10.741-6.668c0.113,0,0.215,0.008,0.321,0.028 c2.51,0.443,8.701,2.914,13.223,4.718c2.09,0.834,3.895,1.554,5.165,2.01C166.742,82.664,168.828,84.422,169.081,85.08z M205.028,271.45c2.257-10.181,4.857-24.031,4.436-32.196c-0.097-1.855-0.261-3.874-0.42-5.826 c-0.297-3.65-0.738-9.075-0.283-10.684c0.09-0.042,0.19-0.078,0.301-0.109c0.019,4.668,1.033,13.979,8.479,17.226 c2.219,0.968,4.755,1.458,7.537,1.458c7.459,0,15.735-3.659,19.125-7.049c1.996-1.996,3.675-4.438,4.851-6.372 c0.257,0.753,0.415,1.737,0.332,3.005c-0.443,6.885,2.903,16.019,9.271,19.385l0.927,0.487c2.268,1.19,8.292,4.353,8.389,5.853 c-0.001,0.001-0.051,0.177-0.387,0.489c-1.509,1.379-6.82,4.091-11.956,6.714c-9.111,4.652-19.438,9.925-24.076,14.803 c-6.53,6.872-13.916,11.488-18.376,11.488c-0.537,0-1.026-0.068-1.461-0.206C206.873,288.406,202.886,281.417,205.028,271.45z M39.917,245.477c-0.494-2.312-0.884-4.137-0.465-5.905c0.304-1.31,6.771-2.714,9.533-3.313c3.883-0.843,7.899-1.714,10.525-3.308 c3.551-2.151,5.474-6.118,7.17-9.618c1.228-2.531,2.496-5.148,4.005-6.007c0.085-0.05,0.215-0.108,0.463-0.108 c2.827,0,8.759,5.943,12.177,11.262c0.867,1.341,2.473,4.028,4.331,7.139c5.557,9.298,13.166,22.033,17.14,26.301 c3.581,3.837,9.378,11.214,7.952,17.541c-1.044,4.909-6.602,8.901-7.913,9.784c-0.476,0.108-1.065,0.163-1.758,0.163 c-7.606,0-22.662-6.328-30.751-9.728l-1.197-0.503c-4.517-1.894-11.891-3.087-19.022-4.241c-5.674-0.919-13.444-2.176-14.732-3.312 c-1.044-1.171,0.167-4.978,1.235-8.337c0.769-2.414,1.563-4.91,1.998-7.523C41.225,251.596,40.499,248.203,39.917,245.477z"/></svg>
-        Linux
-      </div>
+      <ul class="privacy-grid">
+        <li class="privacy-item reveal">
+          <div class="feature-icon" style="--icon-bg:var(--green-soft);--icon-color:var(--green)" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="22" y2="13"/><line x1="22" y1="8" x2="17" y2="13"/></svg>
+          </div>
+          <div>
+            <h3>No account, no telemetry</h3>
+            <p>Tracked apps, folders and keyword history are stored on your device. There&rsquo;s no analytics and no OwlASO server.</p>
+          </div>
+        </li>
+        <li class="privacy-item reveal">
+          <div class="feature-icon" style="--icon-bg:var(--blue-soft);--icon-color:var(--blue)" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h3>Local-only API</h3>
+            <p>Web mode binds to <code>127.0.0.1</code> and rejects foreign <code>Host</code> headers and cross-site requests (DNS-rebinding &amp; CSRF protection).</p>
+          </div>
+        </li>
+        <li class="privacy-item reveal">
+          <div class="feature-icon" style="--icon-bg:var(--purple-soft);--icon-color:var(--purple)" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <h3>Hardened desktop app</h3>
+            <p>Sandboxed renderer with context isolation, a strict CSP, <code>http(s)</code>-only external links, and every permission request denied.</p>
+          </div>
+        </li>
+        <li class="privacy-item reveal">
+          <div class="feature-icon" style="--icon-bg:var(--amber-soft);--icon-color:var(--amber)" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+          </div>
+          <div>
+            <h3>Safe exports</h3>
+            <p>Review text that starts with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code> is neutralised, so a review can&rsquo;t run as a spreadsheet formula.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <div class="section-alt">
+      <section class="section" id="faq" aria-labelledby="faqTitle">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" id="faqTitle">Questions, answered</h2>
+        <p class="section-desc">Short answers here &mdash; the <a href="./docs/">docs</a> go deeper.</p>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is OwlASO really free?</summary>
+            <div class="faq-answer"><p>Yes. It&rsquo;s open source under the MIT license &mdash; no paid tier, no seats, no sign-up.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Where does the data come from?</summary>
+            <div class="faq-answer">
+              <p><strong>App Store:</strong> Apple&rsquo;s public iTunes Search API and customer-review feed. <strong>Google Play:</strong> there is no official public reviews API, so OwlASO uses the open-source <code>google-play-scraper</code>, with an HTML fallback.</p>
+              <p>Requests go straight from your computer to the stores. Results are cached for 5&ndash;15 minutes to keep traffic low.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>How accurate are popularity and difficulty?</summary>
+            <div class="faq-answer"><p>They&rsquo;re estimates built from public signals (rating volume, star ratings, ads, result breadth), not Apple Search Ads&rsquo; first-party data. They work best for comparing keywords against each other. <a href="./docs/#metrics">See the formulas</a>.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Why do I only get about 500 App Store reviews?</summary>
+            <div class="faq-answer"><p>Apple&rsquo;s public review feed stops at 10 pages of 50 reviews per storefront. Switch the country to read another storefront. Google Play allows far more: up to 5,000 per fetch, or up to 1,000 per language with <strong>Full data</strong>.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Is there a Mac or Linux version?</summary>
+            <div class="faq-answer"><p>OwlASO runs on macOS and Linux from source today (Node.js 22.12+). The prebuilt installer is Windows-only for now; <code>npm run dist:mac</code> and <code>npm run dist:linux</code> build your own DMG or AppImage. <a href="./docs/#install">Install guide</a>.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Does rank history update by itself?</summary>
+            <div class="faq-answer"><p>History is recorded whenever you analyze a keyword &mdash; one snapshot per day per keyword, store, country and language. Re-analyze your keywords on different days and the trend arrows and charts fill in.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Will the stores block me?</summary>
+            <div class="faq-answer"><p>Normal use is fine. OwlASO caches results, merges duplicate requests and backs off when a store says &ldquo;slow down&rdquo; (it honours <code>Retry-After</code>). Hammering the stores with huge batches can still get you throttled for a while.</p></div>
+          </details>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- STATS -->
-  <section class="stats-section">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <div class="stat-value">2</div>
-        <div class="stat-label">App Stores</div>
+    <!-- CTA -->
+    <section class="cta-section" aria-labelledby="ctaTitle">
+      <div class="cta-box">
+        <h2 id="ctaTitle">Find your next keyword today</h2>
+        <p>Free, open source and private by design.</p>
+        <div class="cta-buttons">
+          <a href="#install" class="btn btn-white">Get OwlASO</a>
+          <a href="https://github.com/owlaso/owlaso" class="btn btn-ghost-white" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
+            Star on GitHub
+          </a>
+        </div>
       </div>
-      <div class="stat-item reveal">
-        <div class="stat-value">50+</div>
-        <div class="stat-label">Countries</div>
-      </div>
-      <div class="stat-item reveal">
-        <div class="stat-value">12+</div>
-        <div class="stat-label">Filters</div>
-      </div>
-      <div class="stat-item reveal">
-        <div class="stat-value">0</div>
-        <div class="stat-label">Cost</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box">
-      <h2>Start analyzing reviews today</h2>
-      <p>Free, open source, and ready to run on your machine.</p>
-      <a href="https://github.com/owlaso/owlaso" class="btn btn-cta-github" target="_blank" rel="noopener noreferrer">
-        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        View on GitHub
-      </a>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-left">
-        <a href="#" class="nav-brand" aria-label="OwlASO Home">
-          <div class="nav-logo" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="border-radius:7px;background:linear-gradient(135deg,#818cf8,#4338ca);display:block">
-              <polygon points="13,15 10,6 18,13" fill="white"/>
-              <polygon points="27,15 30,6 22,13" fill="white"/>
-              <circle cx="20" cy="23" r="13" fill="none" stroke="white" stroke-width="2"/>
-              <circle cx="14.5" cy="21" r="3.5" fill="white"/>
-              <circle cx="25.5" cy="21" r="3.5" fill="white"/>
-            </svg>
-          </div>
-          <span style="font-size:14px;font-weight:600">OwlASO</span>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="./" class="nav-brand" aria-label="OwlASO home">
+          <img class="nav-logo" src="/favicon.svg" alt="" width="28" height="28">
+          <span class="nav-title">OwlASO</span>
         </a>
+        <p>Free, open-source ASO keyword research and review analytics for Google Play and the App Store.</p>
       </div>
-      <div class="footer-center">
-        <p>&copy; 2026 OwlASO. MIT License.</p>
-      </div>
-      <div class="footer-right">
-        <a href="https://github.com/owlaso" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://github.com/owlaso/owlaso" target="_blank" rel="noopener noreferrer">Source</a>
-      </div>
+      <nav class="footer-col" aria-label="Product">
+        <h2>Product</h2>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#scores">Scores</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Documentation">
+        <h2>Docs</h2>
+        <ul>
+          <li><a href="./docs/#quick-start">Quick start</a></li>
+          <li><a href="./docs/#keywords">Keywords</a></li>
+          <li><a href="./docs/#reviews">Reviews</a></li>
+          <li><a href="./docs/#api">HTTP API</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Project">
+        <h2>Project</h2>
+        <ul>
+          <li><a href="https://github.com/owlaso/owlaso" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://github.com/owlaso/owlaso/releases" target="_blank" rel="noopener noreferrer">Releases</a></li>
+          <li><a href="https://github.com/owlaso/owlaso/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+          <li><a href="https://github.com/owlaso/owlaso/security/policy" target="_blank" rel="noopener noreferrer">Security policy</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 OwlASO &middot; <a href="https://github.com/owlaso/owlaso/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></span>
+      <span>Not affiliated with Apple or Google.</span>
     </div>
   </footer>
 
