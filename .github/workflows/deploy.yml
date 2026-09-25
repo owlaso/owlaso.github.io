@@ -19,6 +19,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # With Pages set to "Deploy from a branch", GitHub also publishes the raw repo on
+      # every push. Whichever deploy finishes last wins, and the raw repo has no built
+      # assets (public/ is not the web root), so images and icons 404. Fail loudly.
+      - name: Check Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          build_type=$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq .build_type 2>/dev/null || echo unknown)
+          echo "Pages build_type: ${build_type}"
+          if [ "${build_type}" = "legacy" ]; then
+            echo "::error title=Wrong GitHub Pages source::Pages is set to 'Deploy from a branch', so the unbuilt repo gets published and images/icons break. Set Settings > Pages > Build and deployment > Source to 'GitHub Actions', then re-run this workflow."
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
