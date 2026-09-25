@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Apply the theme before first paint (no light flash for dark-mode users).
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <title>Documentation — OwlASO</title>
+  <meta name="description" content="How to install and use OwlASO: keyword research, rank tracking, review analytics, exports, scoring formulas, configuration and the local HTTP API.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://owlaso.github.io/docs/">
+
+  <link rel="icon" href="/icon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#6366f1">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://owlaso.github.io/docs/">
+  <meta property="og:site_name" content="OwlASO">
+  <meta property="og:title" content="OwlASO Documentation">
+  <meta property="og:description" content="Install OwlASO, research keywords, track rankings, analyze reviews — and see exactly how every score is computed.">
+  <meta property="og:image" content="https://owlaso.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OwlASO Documentation">
+  <meta name="twitter:description" content="Install OwlASO, research keywords, track rankings, analyze reviews — and see exactly how every score is computed.">
+  <meta name="twitter:image" content="https://owlaso.github.io/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/docs.css">
+</head>
+<body class="docs-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- NAV -->
+  <header class="site-nav" id="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand" aria-label="OwlASO home">
+        <img class="nav-logo" src="/favicon.svg" alt="" width="28" height="28">
+        <span class="nav-title">OwlASO</span>
+        <span class="nav-badge">Docs</span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="../#features">Features</a>
+        <a href="../#scores">Scores</a>
+        <a href="#install">Install</a>
+        <a href="../docs/" aria-current="page">Docs</a>
+        <a href="../#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <a href="https://github.com/owlaso/owlaso" class="icon-btn" target="_blank" rel="noopener noreferrer" aria-label="OwlASO on GitHub" title="Source on GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://github.com/owlaso/owlaso/releases/latest" class="nav-cta" target="_blank" rel="noopener noreferrer">Download</a>
+        <button type="button" class="icon-btn nav-menu-btn" data-nav-toggle aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <!-- SIDEBAR -->
+    <aside class="docs-sidebar" aria-label="Documentation contents">
+      <button type="button" class="docs-toc-toggle" data-toc-toggle aria-controls="docsNav" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span>Contents</span>
+        <span class="docs-toc-current" data-toc-current></span>
+      </button>
+      <nav class="docs-nav" id="docsNav" aria-label="Documentation sections">
+        <div class="docs-nav-group">
+          <h2>Getting started</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#install">Install</a></li>
+            <li><a href="#quick-start">Quick start</a></li>
+          </ul>
+        </div>
+        <div class="docs-nav-group">
+          <h2>Using OwlASO</h2>
+          <ul>
+            <li><a href="#apps">Tracking apps</a></li>
+            <li><a href="#keywords">Keywords</a></li>
+            <li><a href="#rank-tracking">Rank tracking</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#full-data">Full data</a></li>
+            <li><a href="#export">Export</a></li>
+            <li><a href="#shortcuts">Keyboard shortcuts</a></li>
+            <li><a href="#settings">Settings &amp; data</a></li>
+          </ul>
+        </div>
+        <div class="docs-nav-group">
+          <h2>How it works</h2>
+          <ul>
+            <li><a href="#metrics">Metrics</a></li>
+            <li><a href="#data-sources">Data sources &amp; limits</a></li>
+            <li><a href="#security">Privacy &amp; security</a></li>
+          </ul>
+        </div>
+        <div class="docs-nav-group">
+          <h2>Reference</h2>
+          <ul>
+            <li><a href="#configuration">Configuration</a></li>
+            <li><a href="#api">HTTP API</a></li>
+            <li><a href="#development">Development</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="docs-content" id="main">
+      <header class="docs-header">
+        <p class="docs-eyebrow">Documentation &middot; v1.6.0-beta.1</p>
+        <h1>OwlASO docs</h1>
+        <p class="lead">Install OwlASO, research keywords, track your rankings and dig through reviews &mdash; plus exactly how every number is computed.</p>
+        <div class="docs-cards">
+          <a class="docs-card" href="#install">
+            <strong>Install</strong>
+            <span>Windows installer or run from source on any OS.</span>
+          </a>
+          <a class="docs-card" href="#quick-start">
+            <strong>Quick start</strong>
+            <span>Your first keyword and reviews in four steps.</span>
+          </a>
+          <a class="docs-card" href="#metrics">
+            <strong>Metrics</strong>
+            <span>The formulas behind popularity, difficulty &amp; opportunity.</span>
+          </a>
+          <a class="docs-card" href="#api">
+            <strong>HTTP API</strong>
+            <span>Script OwlASO from curl, Python or anything else.</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- ═══ OVERVIEW ═══ -->
+      <section id="overview" aria-labelledby="h-overview">
+        <h2 id="h-overview">Overview</h2>
+        <p>OwlASO is a free, open-source desktop app for <strong>ASO keyword research</strong> and <strong>app store review monitoring</strong> across Google Play and the App Store. It can also run as a local web app in your browser.</p>
+        <ul>
+          <li><strong>Keywords</strong> &mdash; popularity, difficulty and opportunity scores, the apps ranking for a keyword, similar keywords, and the keywords competitors also rank for.</li>
+          <li><strong>Rank tracking</strong> &mdash; the position of your app for every keyword on each store, with a daily history.</li>
+          <li><strong>Reviews</strong> &mdash; both stores in one table, instant filtering, and comparison of up to 5 apps.</li>
+          <li><strong>Full data</strong> &mdash; every reachable review across stores and languages, with rating distribution and top terms.</li>
+          <li><strong>Export</strong> &mdash; CSV for everything, JSON for full-data results.</li>
+        </ul>
+        <div class="callout callout-note">
+          <strong>Good to know</strong>
+          <p>Scores are estimates built from public store data &mdash; not Apple Search Ads&rsquo; first-party popularity. They&rsquo;re most useful for comparing keywords with each other. See <a href="#metrics">Metrics</a>.</p>
+        </div>
+      </section>
+
+      <!-- ═══ INSTALL ═══ -->
+      <section id="install" aria-labelledby="h-install">
+        <h2 id="h-install">Install</h2>
+
+        <h3 id="install-windows">Windows installer</h3>
+        <ol>
+          <li>Open the <a href="https://github.com/owlaso/owlaso/releases/latest" target="_blank" rel="noopener noreferrer">latest release</a> on GitHub.</li>
+          <li>Download <code>OwlASO.Setup.&lt;version&gt;.exe</code> (x64). A portable <code>owlaso-unpacked-windows.zip</code> is attached too if you&rsquo;d rather not install.</li>
+          <li>Run the installer. You can choose the install folder; it adds desktop and Start-menu shortcuts.</li>
+        </ol>
+        <div class="callout callout-tip">
+          <strong>SmartScreen warning?</strong>
+          <p>If Windows shows &ldquo;Windows protected your PC&rdquo;, choose <em>More info &rarr; Run anyway</em> &mdash; or build the installer yourself from source (below).</p>
+        </div>
+
+        <h3 id="install-source">From source (macOS, Linux, Windows)</h3>
+        <p>You need <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">Node.js</a> <strong>22.12 or newer</strong>, git, and internet access from the machine running the app.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>Desktop app</span></div>
+<pre><code>git clone https://github.com/owlaso/owlaso.git
+cd owlaso
+npm install
+npm run electron</code></pre>
+        </div>
+        <p>Prefer your browser? Run the same app as a local web server instead:</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>Web mode</span></div>
+<pre><code>npm start      <span class="c"># http://localhost:3000</span>
+npm run dev    <span class="c"># same, restarts when files change</span></code></pre>
+        </div>
+
+        <h3 id="install-build">Build your own installer</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>Installers</span></div>
+<pre><code>npm run dist:win     <span class="c"># Windows NSIS installer (x64)</span>
+npm run dist:mac     <span class="c"># macOS DMG (arm64 + x64)</span>
+npm run dist:linux   <span class="c"># Linux AppImage</span></code></pre>
+        </div>
+        <p>Installers land in <code>dist/</code>. Build the macOS DMG on a Mac.</p>
+      </section>
+
+      <!-- ═══ QUICK START ═══ -->
+      <section id="quick-start" aria-labelledby="h-quick-start">
+        <h2 id="h-quick-start">Quick start</h2>
+        <ol class="docs-steps">
+          <li><strong>Add an app.</strong> Click <strong>+</strong> in the sidebar (or press <kbd>A</kbd>) and search by name, Google Play package (<code>com.spotify.music</code>) or App Store id (<code>324684580</code>). Apps found on both stores are merged into one entry.</li>
+          <li><strong>Analyze a keyword.</strong> On the <strong>Keywords</strong> tab, type a keyword and press <kbd>Enter</kbd>. OwlASO scores it plus 5 similar keywords, and the <strong>Position</strong> column shows where your selected app ranks on each store.</li>
+          <li><strong>Read reviews.</strong> Switch to the <strong>Reviews</strong> tab with an app selected. Type words to filter (all of them must match) and pick a star range &mdash; filtering is instant.</li>
+          <li><strong>Export.</strong> Press <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>+<kbd>E</kbd> to export what you&rsquo;re looking at as CSV.</li>
+        </ol>
+        <div class="callout callout-tip">
+          <strong>Build your history</strong>
+          <p>Re-analyze your important keywords every few days. Each analysis adds that day&rsquo;s snapshot, and trend arrows and charts appear from the second day on.</p>
+        </div>
+      </section>
+
+      <!-- ═══ APPS ═══ -->
+      <section id="apps" aria-labelledby="h-apps">
+        <h2 id="h-apps">Tracking apps</h2>
+        <p>The sidebar holds the apps you care about &mdash; yours and your competitors&rsquo;.</p>
+        <ul>
+          <li><strong>Add</strong> &mdash; click <strong>+</strong> or press <kbd>A</kbd>. The dialog searches both stores by default; you can limit it to one. Search by name, package name or App Store id.</li>
+          <li><strong>Merged entries</strong> &mdash; an app published on both stores becomes one entry. OwlASO pairs listings by title and developer and only accepts a confident match, so unrelated apps are never merged.</li>
+          <li><strong>Select</strong> &mdash; click an app to make it the active one. It drives the <strong>Position</strong> column and the <strong>Reviews</strong> tab.</li>
+          <li><strong>Compare</strong> &mdash; <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>-click to select up to 5 apps; their reviews are merged into one table.</li>
+          <li><strong>Folders</strong> &mdash; create one with the folder button, drag apps in and out, rename it, or delete it (its apps move back to the main list).</li>
+          <li><strong>Remove</strong> &mdash; focus an app and press <kbd>Delete</kbd> or <kbd>Backspace</kbd>. Removals and folder deletes can be undone from the notification.</li>
+        </ul>
+      </section>
+
+      <!-- ═══ KEYWORDS ═══ -->
+      <section id="keywords" aria-labelledby="h-keywords">
+        <h2 id="h-keywords">Keywords</h2>
+        <p>Type a keyword (2&ndash;100 characters) on the <strong>Keywords</strong> tab and press <kbd>Enter</kbd>. Use the toolbar to pick the store (<em>All stores</em>, <em>Google Play</em> or <em>App Store</em>) and the country.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Column</th><th scope="col">What it shows</th></tr></thead>
+            <tbody>
+              <tr><td>Keyword / Topic</td><td>The analyzed keyword, followed by 5 similar keywords.</td></tr>
+              <tr><td>Last Updated</td><td>When the row was analyzed (hover for the exact time).</td></tr>
+              <tr><td>Popularity</td><td>Demand estimate, 0&ndash;100.</td></tr>
+              <tr><td>Difficulty</td><td>Competition estimate, 0&ndash;100.</td></tr>
+              <tr><td>Position</td><td>Rank of the app selected in the sidebar on each store: <code>#1</code>&ndash;<code>#50</code>, or <code>50+</code> when it isn&rsquo;t in the top 50. Arrows (&#9650;/&#9660;) show the change since the previous snapshot.</td></tr>
+              <tr><td>Apps in Ranking</td><td>The top apps for the keyword. Click to see them all.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Similar keywords</strong> appear as chips above the table; click one to analyze it. When the table is empty, your recent keywords are one click away.</li>
+          <li><strong>Details</strong> &mdash; click a row to open its metrics, the trend chart, the ranking apps on each store (rating, ratings count, installs or price, ad flags) and the keywords those apps also rank for.</li>
+          <li><strong>Quick vs full analysis</strong> &mdash; similar-keyword rows get a quick analysis. Choose <em>Run full analysis</em> in their details to record history and find competitor keywords.</li>
+          <li><strong>Language</strong> &mdash; keyword searches need one language. With <em>All languages</em> selected, OwlASO uses the storefront&rsquo;s main language (for example <code>de</code> in Germany).</li>
+        </ul>
+      </section>
+
+      <!-- ═══ RANK TRACKING ═══ -->
+      <section id="rank-tracking" aria-labelledby="h-rank-tracking">
+        <h2 id="h-rank-tracking">Rank tracking</h2>
+        <p><strong>Position</strong> is where your selected app appears in a store&rsquo;s search results for the keyword. OwlASO reads the top 50 results on each store, so Google Play and App Store positions are tracked separately.</p>
+        <h3 id="rank-history">How history works</h3>
+        <ul>
+          <li>Every full analysis saves a snapshot: popularity, difficulty, opportunity, number of apps, the top app, and the complete ranking order on each store.</li>
+          <li>There is one snapshot per day for each keyword &times; store &times; country &times; language. Analyzing again on the same day replaces that day&rsquo;s snapshot.</li>
+          <li>Up to 180 daily snapshots are kept per keyword.</li>
+          <li>Because the whole ranking order is stored, an app you add later still gets its past positions.</li>
+        </ul>
+        <div class="callout callout-note">
+          <strong>No background jobs</strong>
+          <p>OwlASO doesn&rsquo;t run on a schedule. History grows when you analyze a keyword, so re-check your keywords regularly.</p>
+        </div>
+        <h3 id="rank-storage">Where history is stored</h3>
+        <ul>
+          <li><strong>Desktop app</strong> &mdash; a <code>rank-history</code> folder inside the app&rsquo;s user-data folder (under <code>%APPDATA%</code> on Windows, <code>~/Library/Application Support</code> on macOS, <code>~/.config</code> on Linux).</li>
+          <li><strong>Web mode</strong> &mdash; <code>data/rank-history/</code> in the project folder.</li>
+          <li>Change the location with <code>RANK_HISTORY_DIR</code> or turn history off with <code>DISABLE_RANK_HISTORY=1</code> (see <a href="#configuration">Configuration</a>).</li>
+        </ul>
+      </section>
+
+      <!-- ═══ REVIEWS ═══ -->
+      <section id="reviews" aria-labelledby="h-reviews">
+        <h2 id="h-reviews">Reviews</h2>
+        <p>Open the <strong>Reviews</strong> tab and select an app in the sidebar. Reviews from both stores land in one table &mdash; <em>Date</em>, <em>Rating</em>, <em>Review</em> and <em>Store</em>, plus <em>App</em> when you compare apps.</p>
+        <h3 id="reviews-filter">Instant filters</h3>
+        <p>These run locally on the reviews already loaded, so results update as you type:</p>
+        <ul>
+          <li><strong>Words</strong> &mdash; every word you type must appear in the review. Matches are highlighted.</li>
+          <li><strong>Rating</strong> &mdash; a minimum and maximum star value.</li>
+        </ul>
+        <h3 id="reviews-fetch">Fetch settings</h3>
+        <p>Changing any of these loads new data from the stores:</p>
+        <ul>
+          <li><strong>Store</strong> &mdash; All stores, Google Play or App Store.</li>
+          <li><strong>Country</strong> &mdash; one of 20 storefronts.</li>
+          <li><strong>Language</strong> &mdash; one of 16 languages, or <em>All</em> to merge several. Apple&rsquo;s review feed is per storefront, not per language.</li>
+          <li><strong>Fetch</strong> &mdash; 250, 500, 1K, 2K or 5K reviews per store. <strong>Load more</strong> raises it one step.</li>
+        </ul>
+        <p>The summary bar shows how many reviews each store returned, store-side limits, and any warnings. Duplicate reviews are removed by their store review id.</p>
+        <h3 id="reviews-compare">Compare apps</h3>
+        <p><kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>-click up to 5 apps in the sidebar. Their reviews are merged, newest first, with an <em>App</em> column.</p>
+        <h3 id="reviews-detail">Read a review</h3>
+        <p>Click any review to open it in full. Use <kbd>&larr;</kbd> / <kbd>&rarr;</kbd> to step through the list and <kbd>Esc</kbd> to close.</p>
+      </section>
+
+      <!-- ═══ FULL DATA ═══ -->
+      <section id="full-data" aria-labelledby="h-full-data">
+        <h2 id="h-full-data">Full data</h2>
+        <p><strong>Full data</strong> (in the Reviews filter bar) fetches every reachable review for the selected app &mdash; both stores, every supported language for the storefront. Results stream in group by group (store &times; language) as they load.</p>
+        <ul>
+          <li>Each group shows its review count and rating distribution.</li>
+          <li><strong>Top terms</strong> across all reviews appear as chips; click one to show only the reviews that mention it.</li>
+          <li><strong>Export CSV</strong> or <strong>Export JSON</strong> from the panel.</li>
+        </ul>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Limit</th><th scope="col">Value</th></tr></thead>
+            <tbody>
+              <tr><td>Google Play</td><td>Up to 1,000 reviews per language</td></tr>
+              <tr><td>App Store</td><td>About 500 reviews per storefront (Apple&rsquo;s cap)</td></tr>
+              <tr><td>Total</td><td>20,000 reviews per run</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══ EXPORT ═══ -->
+      <section id="export" aria-labelledby="h-export">
+        <h2 id="h-export">Export</h2>
+        <p>Press <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>+<kbd>E</kbd> or click <strong>Export</strong> to download what you&rsquo;re looking at. Exports respect your current filters.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">View</th><th scope="col">File</th><th scope="col">Columns</th></tr></thead>
+            <tbody>
+              <tr><td>Keywords</td><td><code>keywords-&lt;keyword&gt;.csv</code></td><td>keyword, type (analyzed / similar), popularity, difficulty, opportunity, ratings, avgRating, adsPercent, app, googleRank, appleRank, topApps, store, country, analyzedAt</td></tr>
+              <tr><td>Reviews</td><td><code>reviews-&lt;app&gt;.csv</code></td><td>app, platform, appId, lang, rating, title, text, author, date, version, helpful, replyText, url</td></tr>
+              <tr><td>Full data</td><td><code>full-data-&lt;app&gt;-reviews.csv</code><br><code>full-data-&lt;app&gt;.json</code></td><td>Same review columns (CSV), or the complete structured result (JSON)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Excel-friendly</strong> &mdash; CSV files are UTF-8 with a byte-order mark, so non-Latin text opens correctly.</li>
+          <li><strong>Formula-injection safe</strong> &mdash; cells that start with <code>=</code>, <code>+</code>, <code>-</code>, <code>@</code>, a tab or a carriage return are prefixed with <code>'</code>, so review text can never run as a spreadsheet formula.</li>
+        </ul>
+      </section>
+
+      <!-- ═══ SHORTCUTS ═══ -->
+      <section id="shortcuts" aria-labelledby="h-shortcuts">
+        <h2 id="h-shortcuts">Keyboard shortcuts</h2>
+        <div class="table-wrap">
+          <table class="shortcut-table">
+            <thead><tr><th scope="col">Keys</th><th scope="col">Action</th></tr></thead>
+            <tbody>
+              <tr><td><kbd>/</kbd></td><td>Focus search</td></tr>
+              <tr><td><kbd>A</kbd></td><td>Add app</td></tr>
+              <tr><td><kbd>Enter</kbd></td><td>Analyze keyword / apply review filter</td></tr>
+              <tr><td><kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + <kbd>E</kbd></td><td>Export CSV</td></tr>
+              <tr><td><kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + click</td><td>Select up to 5 apps to compare</td></tr>
+              <tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Previous / next review (in the review dialog)</td></tr>
+              <tr><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td><td>Remove the focused app (undo available)</td></tr>
+              <tr><td><kbd>Esc</kbd></td><td>Close dialog</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══ SETTINGS ═══ -->
+      <section id="settings" aria-labelledby="h-settings">
+        <h2 id="h-settings">Settings &amp; data</h2>
+        <p>Open <strong>Settings</strong> from the gear icon at the bottom of the sidebar.</p>
+        <ul>
+          <li><strong>Appearance</strong> &mdash; Light, Dark or System (follows your OS).</li>
+          <li><strong>Reset app data</strong> &mdash; removes tracked apps, folders and preferences from this device. Keyword rank history is kept.</li>
+          <li><strong>Meta Ads Library</strong> &mdash; marked &ldquo;coming soon&rdquo; in the UI. Advanced users can already enable ad signals with the <code>FB_ADLIB_ACCESS_TOKEN</code> environment variable.</li>
+        </ul>
+      </section>
+
+      <!-- ═══ METRICS ═══ -->
+      <section id="metrics" aria-labelledby="h-metrics">
+        <h2 id="h-metrics">Metrics</h2>
+        <p>For each analysis, OwlASO searches the chosen store(s), loads details for up to 8 top results per store, merges the same app across stores, and keeps up to 15 apps. All scores are computed over those apps and clamped to 0&ndash;100.</p>
+
+        <h3 id="metrics-inputs">Inputs</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Symbol</th><th scope="col">Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>n</code></td><td>Number of ranking apps analyzed (max 15)</td></tr>
+              <tr><td><code>R</code></td><td>Total number of ratings across those apps</td></tr>
+              <tr><td><code>avg</code></td><td>Average star rating of the rated apps (unrated listings are ignored)</td></tr>
+              <tr><td><code>ads</code></td><td>Share of apps showing ads &mdash; Google Play&rsquo;s <em>contains ads</em> flag, or active Meta ads when configured</td></tr>
+              <tr><td><code>authority</code></td><td>Share of apps with at least 50,000 ratings</td></tr>
+              <tr><td><code>strong</code></td><td>Share of apps rated 4.0&#9733; or higher</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="metrics-formulas">Formulas</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>src/aso.js</span></div>
+<pre><code>popularity  = 22 &times; min(1, n / 12)
+            + 40 &times; min(1, log10(1 + R) / 8)
+            + 20 &times; (avg &minus; 1) / 4
+            + 18 &times; ads
+
+difficulty  = 40 &times; authority
+            + 25 &times; ads
+            + 15 &times; strong
+            + 20 &times; min(1, n / 20)
+
+opportunity = popularity &times; (100 &minus; difficulty) / 100</code></pre>
+        </div>
+
+        <h3 id="metrics-reading">Reading the scores</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Pattern</th><th scope="col">What it usually means</th></tr></thead>
+            <tbody>
+              <tr><td>High popularity, low difficulty</td><td>The sweet spot &mdash; high opportunity.</td></tr>
+              <tr><td>High popularity, high difficulty</td><td>Big, established apps dominate. Try longer, more specific variants.</td></tr>
+              <tr><td>Low popularity, low difficulty</td><td>A niche: easy to win, but little traffic.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="metrics-similar">Similar keywords</h3>
+        <p>Suggestions come from three places, in order: 2&ndash;3-word phrases in the ranking apps&rsquo; titles that contain your keyword; modifiers in front (<em>best</em>, <em>free</em>, <em>simple</em>&hellip;); and suffixes behind (<em>app</em>, <em>tracker</em>, <em>planner</em>&hellip;).</p>
+
+        <h3 id="metrics-competitor">Competitor keywords</h3>
+        <p>OwlASO runs up to 10 probe searches on each selected store &mdash; your keyword, the first similar keywords, <em>free / best / top / new</em> + keyword, and keyword + the current year. For the top 5 apps it records which probes they appear for within the top 20 results.</p>
+      </section>
+
+      <!-- ═══ DATA SOURCES ═══ -->
+      <section id="data-sources" aria-labelledby="h-data-sources">
+        <h2 id="h-data-sources">Data sources &amp; limits</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col"></th><th scope="col">App Store</th><th scope="col">Google Play</th></tr></thead>
+            <tbody>
+              <tr><td>Search &amp; details</td><td>iTunes Search &amp; Lookup API</td><td><code>google-play-scraper</code>, HTML fallback</td></tr>
+              <tr><td>Reviews</td><td>Customer-reviews RSS feed</td><td><code>google-play-scraper</code></td></tr>
+              <tr><td>Reviews per page</td><td>50</td><td>150</td></tr>
+              <tr><td>Maximum</td><td>&asymp;&nbsp;500 per storefront (10 pages); one feed per storefront</td><td>5,000 per fetch; 1,000 per language in Full data</td></tr>
+              <tr><td>Sort orders</td><td>Newest, most helpful</td><td>Newest, rating, helpfulness</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google Play has no official public reviews API. Layout changes on Google&rsquo;s side can break the scraper, and Google may throttle heavy use.</p>
+        <h3 id="data-sources-reliability">Staying polite</h3>
+        <ul>
+          <li><strong>Caching</strong> &mdash; searches and reviews for 5 minutes, app details for 15 minutes, in a size-bounded cache.</li>
+          <li><strong>Request coalescing</strong> &mdash; identical requests in flight are sent once.</li>
+          <li><strong>Retries</strong> &mdash; up to 2 retries with backoff on 408, 425, 429 and 5xx responses, honouring <code>Retry-After</code>. Each request times out after 15 seconds.</li>
+        </ul>
+        <div class="callout callout-warn">
+          <strong>Please don&rsquo;t hammer the stores</strong>
+          <p>Very large batches can get you throttled for a while. Spread big jobs out.</p>
+        </div>
+      </section>
+
+      <!-- ═══ SECURITY ═══ -->
+      <section id="security" aria-labelledby="h-security">
+        <h2 id="h-security">Privacy &amp; security</h2>
+        <h3 id="security-data">Your data</h3>
+        <ul>
+          <li>Tracked apps, folders, preferences and recent keywords live in the app&rsquo;s local storage on your device.</li>
+          <li>Rank history is saved as JSON files (see <a href="#rank-storage">where</a>).</li>
+          <li>There is no OwlASO server, no account and no analytics.</li>
+        </ul>
+        <h3 id="security-network">Outbound connections</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Host</th><th scope="col">Why</th></tr></thead>
+            <tbody>
+              <tr><td><code>itunes.apple.com</code></td><td>App Store search, lookup and reviews</td></tr>
+              <tr><td><code>play.google.com</code></td><td>Google Play search, details and reviews</td></tr>
+              <tr><td>Store image CDNs</td><td>App icons</td></tr>
+              <tr><td><code>flagcdn.com</code></td><td>Country flag icons in the pickers</td></tr>
+              <tr><td><code>graph.facebook.com</code></td><td>Only when <code>FB_ADLIB_ACCESS_TOKEN</code> is set</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="security-web">Web mode</h3>
+        <ul>
+          <li>Binds to <code>127.0.0.1</code> by default.</li>
+          <li>Only <code>localhost</code>, IP literals and <code>ALLOWED_HOSTS</code> are accepted in the <code>Host</code> header, which blocks DNS-rebinding attacks.</li>
+          <li><code>/api/*</code> refuses cross-site browser requests (<code>Sec-Fetch-Site</code> / <code>Origin</code> checks), which blocks CSRF from other websites.</li>
+          <li><code>GET</code>/<code>HEAD</code> only; strict Content-Security-Policy with no inline scripts, <code>nosniff</code>, <code>frame-ancestors 'none'</code> and same-origin COOP/CORP.</li>
+          <li>Static files are resolved with path-traversal checks.</li>
+        </ul>
+        <h3 id="security-desktop">Desktop app</h3>
+        <ul>
+          <li>Sandboxed renderer with context isolation, Node integration off and no <code>&lt;webview&gt;</code>.</li>
+          <li>The UI loads from a private <code>app://</code> scheme and the API runs in the main process &mdash; no network port is opened.</li>
+          <li>Navigation away from the app is blocked; only <code>http(s)</code> links open externally, in your browser.</li>
+          <li>Every permission request (camera, microphone, notifications&hellip;) is denied.</li>
+        </ul>
+        <h3 id="security-exports">Files &amp; exports</h3>
+        <ul>
+          <li>Rank-history file names come from a SHA-256 hash of the query, so request parameters can never choose the file path.</li>
+          <li>CSV exports neutralise formula injection (see <a href="#export">Export</a>).</li>
+        </ul>
+        <div class="callout callout-warn">
+          <strong>Exposing web mode on a network</strong>
+          <p>With <code>HOST=0.0.0.0</code>, anyone who can reach the port can trigger store traffic and write history files. Only do this on a network you trust.</p>
+        </div>
+        <p>Found a vulnerability? Please report it privately through a <a href="https://github.com/owlaso/owlaso/security/advisories/new" target="_blank" rel="noopener noreferrer">GitHub Security Advisory</a> rather than a public issue. Version 1.6.x is supported.</p>
+      </section>
+
+      <!-- ═══ CONFIGURATION ═══ -->
+      <section id="configuration" aria-labelledby="h-configuration">
+        <h2 id="h-configuration">Configuration</h2>
+        <p>OwlASO is configured with environment variables. <code>PORT</code>, <code>HOST</code> and <code>ALLOWED_HOSTS</code> apply to web mode; the rest also apply to the desktop app when you start it from a terminal.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Variable</th><th scope="col">Default</th><th scope="col">Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>PORT</code></td><td><code>3000</code></td><td>Web server port</td></tr>
+              <tr><td><code>HOST</code></td><td><code>127.0.0.1</code></td><td>Bind address</td></tr>
+              <tr><td><code>ALLOWED_HOSTS</code></td><td>&mdash;</td><td>Comma-separated extra hostnames accepted in the <code>Host</code> header</td></tr>
+              <tr><td><code>RANK_HISTORY_DIR</code></td><td><code>data/rank-history</code> (desktop: user-data folder)</td><td>Where keyword history is stored</td></tr>
+              <tr><td><code>DISABLE_RANK_HISTORY</code></td><td>&mdash;</td><td><code>1</code> disables history</td></tr>
+              <tr><td><code>SEARCH_CACHE_TTL_MS</code></td><td><code>300000</code> (5 min)</td><td>Search cache lifetime</td></tr>
+              <tr><td><code>REVIEW_CACHE_TTL_MS</code></td><td><code>300000</code> (5 min)</td><td>Review cache lifetime</td></tr>
+              <tr><td><code>DETAILS_CACHE_TTL_MS</code></td><td><code>900000</code> (15 min)</td><td>App-details cache lifetime</td></tr>
+              <tr><td><code>CACHE_MAX_WEIGHT</code></td><td><code>100000</code></td><td>Cache size bound (&asymp; number of cached rows)</td></tr>
+              <tr><td><code>DISABLE_CACHE</code></td><td>&mdash;</td><td><code>1</code> disables caching</td></tr>
+              <tr><td><code>MOCK_STORE_DATA</code></td><td>&mdash;</td><td><code>1</code> serves built-in demo data (no network)</td></tr>
+              <tr><td><code>FB_ADLIB_ACCESS_TOKEN</code></td><td>&mdash;</td><td>Optional Meta Ad Library token for ad signals</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="code-block">
+          <div class="code-block-head"><span>Examples</span></div>
+<pre><code>PORT=3001 npm start                          <span class="c"># another port</span>
+MOCK_STORE_DATA=1 npm start                  <span class="c"># offline demo data</span>
+HOST=0.0.0.0 ALLOWED_HOSTS=owlaso.lan npm start  <span class="c"># trusted LAN only</span></code></pre>
+        </div>
+        <p>On Windows PowerShell, set variables first: <code>$env:PORT = "3001"; npm start</code>.</p>
+      </section>
+
+      <!-- ═══ API ═══ -->
+      <section id="api" aria-labelledby="h-api">
+        <h2 id="h-api">HTTP API</h2>
+        <p>Web mode exposes a small, read-only JSON API on the same port (default <code>http://localhost:3000</code>). The desktop app uses the same router internally, without opening a port.</p>
+        <ul>
+          <li>Every endpoint is <code>GET</code> and returns JSON unless noted.</li>
+          <li>Invalid input returns <code>400</code> with <code>{"error": "&hellip;"}</code>; unknown routes return <code>404</code>.</li>
+          <li><code>country</code> is a 2-letter storefront (default <code>us</code>); <code>lang</code> defaults to the storefront&rsquo;s main language.</li>
+          <li>Browser requests from other websites are refused (<code>403</code>). curl, scripts and same-origin pages work.</li>
+        </ul>
+
+        <h3 id="api-endpoints">Endpoints</h3>
+        <div class="table-wrap">
+          <table class="api-table">
+            <thead><tr><th scope="col">Endpoint</th><th scope="col">Parameters</th></tr></thead>
+            <tbody>
+              <tr><td><code>/api/health</code></td><td>&mdash; returns <code>ok</code>, <code>version</code>, <code>mock</code>, <code>time</code></td></tr>
+              <tr><td><code>/api/search</code></td><td><code>q</code>, <code>platform=all|google|apple</code>, <code>country</code>, <code>lang</code>, <code>limit</code></td></tr>
+              <tr><td><code>/api/asosearch</code></td><td><code>q</code> (2&ndash;100 chars), <code>store=both|google|apple</code>, <code>country</code>, <code>lang</code>, <code>lite=1</code> (skip competitor probes and history)</td></tr>
+              <tr><td><code>/api/asosearch/history</code></td><td><code>q</code>, <code>store</code>, <code>country</code>, <code>lang</code> &rarr; daily snapshots with per-store rankings</td></tr>
+              <tr><td><code>/api/app-details</code></td><td><code>appId</code>, <code>platform</code>, <code>appId2</code>, <code>store=both</code>, <code>country</code>, <code>lang</code></td></tr>
+              <tr><td><code>/api/reviews</code></td><td><code>appId</code>, <code>platform=google|apple|both</code>, <code>appPlatform</code>, <code>appId2</code>, <code>title</code>, <code>developer</code>, <code>country</code>, <code>lang</code>, <code>max</code>, <code>sort</code>, plus <a href="#api-filters">filters</a></td></tr>
+              <tr><td><code>/api/reviews.csv</code></td><td>Same as <code>/api/reviews</code>; CSV download</td></tr>
+              <tr><td><code>/api/reviews.full.stream</code></td><td><code>appId</code>, <code>platform</code>, <code>appPlatform</code>, <code>appId2</code>, <code>title</code>, <code>country</code> &rarr; NDJSON stream</td></tr>
+              <tr><td><code>/api/reviews.full</code></td><td>Same, as one JSON document</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="api-both-stores">Fetching both stores</h3>
+        <p><code>appPlatform</code> says which store <code>appId</code> belongs to; it&rsquo;s inferred from the id format when omitted (digits = App Store, package name = Google Play). With <code>platform=both</code>, pass the other store&rsquo;s id as <code>appId2</code>. Without it, OwlASO looks the counterpart up by <code>title</code> (+ <code>developer</code>) and only accepts a confident match.</p>
+
+        <h3 id="api-filters">Review parameters &amp; filters</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Parameter</th><th scope="col">Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>max</code></td><td>Reviews per store, 1&ndash;5000 (default 200)</td></tr>
+              <tr><td><code>sort</code></td><td><code>newest</code> (default), <code>rating</code>, <code>helpfulness</code></td></tr>
+              <tr><td><code>lang=all</code></td><td>Merge several languages (<code>languages</code> = comma list, <code>maxLanguages</code> default 6)</td></tr>
+              <tr><td><code>stars</code></td><td>Exact star values, e.g. <code>1,2</code></td></tr>
+              <tr><td><code>minRating</code> / <code>maxRating</code></td><td>Inclusive star range</td></tr>
+              <tr><td><code>allKeywords</code></td><td>Every word must appear</td></tr>
+              <tr><td><code>anyKeyword</code></td><td>At least one word must appear</td></tr>
+              <tr><td><code>keyword</code></td><td>The exact phrase must appear</td></tr>
+              <tr><td><code>dateFrom</code> / <code>dateTo</code></td><td>ISO dates; a bare <code>YYYY-MM-DD</code> for <code>dateTo</code> includes that whole day (UTC)</td></tr>
+              <tr><td><code>version</code></td><td>App version contains this text</td></tr>
+              <tr><td><code>minLength</code></td><td>Minimum review text length</td></tr>
+              <tr><td><code>replyOnly=true</code></td><td>Only reviews with a developer reply</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Text filters match the review title, text, author and version, case-insensitively.</p>
+
+        <h3 id="api-examples">Examples</h3>
+        <div class="code-block">
+          <div class="code-block-head"><span>curl</span></div>
+<pre><code><span class="c"># Health check</span>
+curl -s http://localhost:3000/api/health
+
+<span class="c"># Score a keyword on both stores (US)</span>
+curl -s 'http://localhost:3000/api/asosearch?q=habit%20tracker&amp;store=both&amp;country=us'
+
+<span class="c"># 1–2★ Spotify reviews mentioning "crash", both stores</span>
+curl -s 'http://localhost:3000/api/reviews?appId=com.spotify.music&amp;appId2=324684580&amp;platform=both&amp;maxRating=2&amp;allKeywords=crash&amp;max=500'
+
+<span class="c"># Same, as a CSV file</span>
+curl -s -o reviews.csv 'http://localhost:3000/api/reviews.csv?appId=com.spotify.music&amp;appId2=324684580&amp;platform=both&amp;maxRating=2'
+
+<span class="c"># Stream every reachable review (NDJSON)</span>
+curl -sN 'http://localhost:3000/api/reviews.full.stream?appId=324684580&amp;appId2=com.spotify.music&amp;platform=both&amp;country=us'</code></pre>
+        </div>
+
+        <h3 id="api-responses">Responses</h3>
+        <p><code>/api/reviews</code> returns <code>reviews</code>, <code>totalFetched</code>, <code>totalAfterFilters</code> and a <code>meta</code> object (<code>sources</code>, <code>errors</code>, <code>warnings</code>, <code>notes</code>, <code>moreAvailable</code>). Each review looks like this:</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>Review</span></div>
+<pre><code>{
+  "id": "…",
+  "platform": "google",
+  "appId": "com.spotify.music",
+  "rating": 2,
+  "title": "",
+  "text": "Crashes every time I open a playlist",
+  "author": "…",
+  "date": "2026-09-20T10:15:00.000Z",
+  "version": "9.0.62",
+  "helpful": 3,
+  "replyText": "",
+  "url": "https://play.google.com/store/apps/details?id=…"
+}</code></pre>
+        </div>
+        <p><code>/api/asosearch</code> returns the <code>keyword</code>, <code>similar</code> keywords, <code>competitorKeywords</code>, the ranking <code>apps</code> (with per-store listings), <code>rankings</code> (app ids in search order per store), <code>metrics</code> (<code>popularity</code>, <code>difficulty</code>, <code>opportunity</code> and their inputs), plus <code>errors</code> and <code>warnings</code>.</p>
+        <p>The stream sends one JSON object per line: a <code>group</code> line for each completed store &times; language group (with <code>count</code>, <code>stars</code>, <code>avgRating</code>, <code>topTerms</code> and its <code>reviews</code>), then a final <code>done</code> line with the totals &mdash; or an <code>error</code> line.</p>
+        <div class="code-block">
+          <div class="code-block-head"><span>NDJSON</span></div>
+<pre><code>{"type":"group","group":{"platform":"google","lang":"en","count":1000,…}}
+{"type":"group","group":{"platform":"apple","lang":"all","count":500,…}}
+{"type":"done","totalGroups":2,"totalReviews":1500,"perStore":{…},…}</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ DEVELOPMENT ═══ -->
+      <section id="development" aria-labelledby="h-development">
+        <h2 id="h-development">Development</h2>
+        <div class="code-block">
+          <div class="code-block-head"><span>Checks</span></div>
+<pre><code>npm test              <span class="c"># unit + integration tests (no network)</span>
+npm run smoke:mock    <span class="c"># boots the server with demo data and hits every route</span>
+npm run smoke:live    <span class="c"># real Apple/Google calls: needs internet, may be throttled</span></code></pre>
+        </div>
+        <h3 id="development-layout">Project layout</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Path</th><th scope="col">What&rsquo;s inside</th></tr></thead>
+            <tbody>
+              <tr><td><code>src/server.js</code></td><td>Web server: static files, security headers, host and cross-site checks</td></tr>
+              <tr><td><code>src/api.js</code></td><td>API router shared by the web server and the desktop app</td></tr>
+              <tr><td><code>src/providers.js</code></td><td>Store clients: search, details, reviews, caching, retries</td></tr>
+              <tr><td><code>src/aso.js</code></td><td>Keyword analysis, metrics, similar &amp; competitor keywords, rank history</td></tr>
+              <tr><td><code>src/filters.js</code></td><td>Review filters</td></tr>
+              <tr><td><code>src/ads.js</code></td><td>Optional Meta Ad Library signals</td></tr>
+              <tr><td><code>electron/</code></td><td>Desktop shell: <code>app://</code> protocol, window, hardening, preload bridge</td></tr>
+              <tr><td><code>public/</code></td><td>The UI: <code>index.html</code>, <code>app.js</code>, <code>styles.css</code></td></tr>
+              <tr><td><code>test/</code></td><td><code>node:test</code> suites and smoke scripts</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Issues and pull requests are welcome on <a href="https://github.com/owlaso/owlaso" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+      </section>
+
+      <!-- ═══ TROUBLESHOOTING ═══ -->
+      <section id="troubleshooting" aria-labelledby="h-troubleshooting">
+        <h2 id="h-troubleshooting">Troubleshooting</h2>
+        <dl class="faq-dl">
+          <dt>&ldquo;Port 3000 is already in use&rdquo;</dt>
+          <dd>Another program is using the port. Start on a different one: <code>PORT=3001 npm start</code>.</dd>
+
+          <dt><code>403 Forbidden host</code></dt>
+          <dd>You opened web mode through a hostname other than <code>localhost</code> or an IP address. Add the name to <code>ALLOWED_HOSTS</code>.</dd>
+
+          <dt>&ldquo;Cross-site requests are not allowed.&rdquo;</dt>
+          <dd>A page on another origin called the API. Call it from the OwlASO page itself, or from curl or a script.</dd>
+
+          <dt>Google Play returns errors or no results</dt>
+          <dd>Google may be throttling you, or its page layout changed. Wait a few minutes and retry. <code>npm run smoke:live</code> checks both stores; a newer OwlASO release may include a fix.</dd>
+
+          <dt>Only about 500 App Store reviews</dt>
+          <dd>That&rsquo;s Apple&rsquo;s cap per storefront. Switch the country to read another storefront.</dd>
+
+          <dt>No trend arrows or chart</dt>
+          <dd>History needs analyses on at least two different days for the same keyword, store, country and language.</dd>
+
+          <dt>Position shows <code>50+</code></dt>
+          <dd>The selected app isn&rsquo;t in the top 50 results for that keyword on that store. Make sure the right app is selected in the sidebar.</dd>
+
+          <dt><code>npm install</code> fails or warns about the engine</dt>
+          <dd>OwlASO needs Node.js 22.12 or newer. Check with <code>node -v</code>.</dd>
+
+          <dt>The Linux AppImage won&rsquo;t start</dt>
+          <dd>Make it executable (<code>chmod +x OwlASO-*.AppImage</code>). Some distributions also need FUSE 2 (for example the <code>libfuse2</code> package).</dd>
+        </dl>
+        <p>Still stuck? <a href="https://github.com/owlaso/owlaso/issues" target="_blank" rel="noopener noreferrer">Open an issue</a> with your OS, OwlASO version and the error message.</p>
+      </section>
+
+      <!-- ═══ CHANGELOG ═══ -->
+      <section id="changelog" aria-labelledby="h-changelog">
+        <h2 id="h-changelog">Changelog</h2>
+        <h3 id="v1-6-0">1.6.0-beta.1 <span class="docs-date">September 2026</span></h3>
+        <ul>
+          <li><strong>Security</strong> &mdash; fixed a path traversal in rank-history writes, a crash on malformed <code>Host</code> headers, CSRF / DNS-rebinding exposure of the local API, CSV formula injection and a broken CSV quote in full-data exports. Added a CSP and security headers, Electron sandboxing, navigation and permission lockdown, and an <code>http(s)</code>-only external-link allowlist. Upgraded Electron 31 &rarr; 44 and electron-builder 24 &rarr; 26.</li>
+          <li><strong>Correctness</strong> &mdash; &ldquo;All stores&rdquo; really fetches both stores; the Add-app dialog searches both stores; ranks follow real search order; Position is your app&rsquo;s rank instead of an average; history is keyed by country and language, one snapshot per day, and works for non-Latin keywords; counterpart matching no longer falls back to unrelated apps; unrated listings no longer drag ratings down; duplicate reviews are removed.</li>
+          <li><strong>Performance</strong> &mdash; a shared, size-bounded cache with request coalescing, far fewer store requests per keyword analysis, and instant local review filtering.</li>
+          <li><strong>UX</strong> &mdash; Keywords/Reviews tabs with a contextual filter bar, store column and match highlighting, multi-app comparison, <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> review navigation, toasts with undo, keyboard and screen-reader support, trend charts, better empty and error states, no dark-mode flash, native Edit menu on macOS.</li>
+          <li><strong>Desktop</strong> &mdash; first packaged Windows installer (NSIS, x64).</li>
+        </ul>
+        <p><a href="https://github.com/owlaso/owlaso/releases" target="_blank" rel="noopener noreferrer">All releases on GitHub &rarr;</a></p>
+      </section>
+
+      <nav class="docs-pager" aria-label="More">
+        <a href="../">&larr; Back to the homepage</a>
+        <a href="#overview">Back to top &uarr;</a>
+      </nav>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-bottom footer-bottom-solo">
+      <span>&copy; 2026 OwlASO &middot; <a href="https://github.com/owlaso/owlaso/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></span>
+      <span><a href="https://github.com/owlaso/owlaso" target="_blank" rel="noopener noreferrer">GitHub</a> &middot; <a href="https://github.com/owlaso/owlaso/releases" target="_blank" rel="noopener noreferrer">Releases</a> &middot; <a href="https://github.com/owlaso/owlaso/issues" target="_blank" rel="noopener noreferrer">Issues</a></span>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/docs.js"></script>
+</body>
+</html>
