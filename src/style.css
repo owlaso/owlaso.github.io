@@ -1217,6 +1217,7 @@ html[data-theme="dark"] .shot-light { display: none; }
   padding-top: 20px;
   border-top: 1px solid var(--border);
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
