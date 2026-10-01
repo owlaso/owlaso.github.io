@@ -1225,6 +1225,13 @@ html[data-theme="dark"] .shot-light { display: none; }
   color: var(--text-secondary);
 }
 
+.footer-bottom-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
 .footer-bottom a { color: inherit; }
 
 /* ═══ ANIMATIONS ═══ */
