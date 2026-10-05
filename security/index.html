@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=https://github.com/owlaso/owlaso/security/policy">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        d.setAttribute('data-theme', t);
+      } catch (e) {}
+      location.replace('https://github.com/owlaso/owlaso/security/policy');
+    })();
+  </script>
+
+  <title>Security — OwlASO</title>
+  <meta name="description" content="OwlASO security policy and private vulnerability reporting on GitHub.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://github.com/owlaso/owlaso/security/policy">
+
+  <link rel="icon" href="/icon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .redirect { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; text-align: center; }
+    .redirect h1 { font-size: 24px; margin-bottom: 12px; }
+    .redirect p { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <main class="redirect">
+    <div>
+      <img src="/favicon.svg" alt="" width="48" height="48">
+      <h1>Redirecting to our security policy&hellip;</h1>
+      <p>OwlASO security advisories and reporting live on GitHub.</p>
+      <p><a href="https://github.com/owlaso/owlaso/security/policy">Security policy</a> &middot; <a href="https://github.com/owlaso/owlaso/security/advisories/new">Report a vulnerability</a> &middot; <a href="https://github.com/owlaso/owlaso-mcp/security/advisories/new">Report an MCP server vulnerability</a></p>
+    </div>
+  </main>
+</body>
+</html>

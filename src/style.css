@@ -365,6 +365,16 @@ html[data-theme="dark"] .icon-sun { display: none; }
   transition: border-color .2s ease, transform .2s ease;
 }
 
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.hero-badges .hero-badge { margin-bottom: 0; }
+
 .hero-badge:hover { border-color: var(--accent); transform: translateY(-1px); }
 
 .hero-badge-tag {
