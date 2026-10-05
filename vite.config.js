@@ -13,6 +13,7 @@ export default defineConfig({
       input: {
         main: page('./index.html'),
         docs: page('./docs/index.html'),
+        security: page('./security/index.html'),
       },
     },
   },
