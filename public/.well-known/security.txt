@@ -1,6 +1,7 @@
 Contact: https://github.com/owlaso/owlaso/security/advisories/new
 Contact: https://github.com/owlaso/owlaso-mcp/security/advisories/new
+Contact: https://github.com/owlaso/owlaso.github.io/security/advisories/new
 Expires: 2027-10-05T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://owlaso.github.io/.well-known/security.txt
-Policy: https://github.com/owlaso/owlaso/security/policy
+Policy: https://owlaso.github.io/security/
