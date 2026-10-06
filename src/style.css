@@ -1232,6 +1232,13 @@ html[data-theme="dark"] .shot-light { display: none; }
   gap: 8px;
 }
 
+.footer-badges {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
 .footer-bottom a { color: inherit; }
 
 /* ═══ ANIMATIONS ═══ */
