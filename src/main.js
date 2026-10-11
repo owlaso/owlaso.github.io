@@ -3,10 +3,12 @@
    ═══════════════════════════════════════════════ */
 
 import { initTheme, initNav, initCopyButtons } from './common.js';
+import { initI18n } from './i18n.js';
 
 initTheme();
 initNav();
 initCopyButtons();
+initI18n();
 
 // ─── Scroll Reveal (Intersection Observer) ───
 const reveals = document.querySelectorAll('.reveal');

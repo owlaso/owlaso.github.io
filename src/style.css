@@ -300,6 +300,13 @@ html[data-theme="dark"] .icon-sun { display: none; }
 
 .nav-menu-btn { display: none; }
 
+/* Language toggle */
+.lang-toggle {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+
 /* ═══ BUTTONS ═══ */
 .btn {
   height: 48px;
