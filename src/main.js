@@ -4,11 +4,13 @@
 
 import { initTheme, initNav, initCopyButtons } from './common.js';
 import { initI18n } from './i18n.js';
+import { initStats } from './stats.js';
 
 initTheme();
 initNav();
 initCopyButtons();
 initI18n();
+initStats();
 
 // ─── Scroll Reveal (Intersection Observer) ───
 const reveals = document.querySelectorAll('.reveal');

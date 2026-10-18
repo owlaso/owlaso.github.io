@@ -469,6 +469,9 @@ html[data-theme="dark"] .icon-sun { display: none; }
 .hero-meta svg { color: var(--green); flex-shrink: 0; }
 .hero-meta a { color: var(--accent-text); font-weight: 600; text-decoration: none; }
 .hero-meta a:hover { text-decoration: underline; }
+.hero-stat { display: inline-flex; align-items: center; gap: 6px; }
+.hero-stat > span { color: var(--text-secondary); }
+.hero-stat .stat-num { color: var(--accent-text); font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* ═══ HERO DEMO VIDEO ═══ */
 .hero-demo {
