@@ -33,9 +33,19 @@ if ('IntersectionObserver' in window && !reduceMotion) {
   reveals.forEach((el) => el.classList.add('visible'));
 }
 
-// ─── Screen tabs (roving tabindex, automatic activation) ───
+// ─── Screen tabs (roving tabindex, automatic activation + sliding chip) ───
 document.querySelectorAll('[data-tabs]').forEach((container) => {
   const tabs = [...container.querySelectorAll('[role="tab"]')];
+  const track = container.querySelector('.shot-tabs');
+  const indicator = track?.querySelector('.shot-tab-indicator');
+
+  // PanelUI tabs: one chip travels between the measured trigger positions.
+  const moveIndicator = (tab) => {
+    if (!indicator || !tab || !track) return;
+    indicator.style.transform = `translateX(${tab.offsetLeft}px)`;
+    indicator.style.width = `${tab.offsetWidth}px`;
+    indicator.style.opacity = '1';
+  };
 
   const select = (tab, focus) => {
     tabs.forEach((t) => {
@@ -44,6 +54,7 @@ document.querySelectorAll('[data-tabs]').forEach((container) => {
       t.tabIndex = on ? 0 : -1;
       document.getElementById(t.getAttribute('aria-controls'))?.classList.toggle('active', on);
     });
+    moveIndicator(tab);
     if (focus) tab.focus();
   };
 
@@ -56,6 +67,18 @@ document.querySelectorAll('[data-tabs]').forEach((container) => {
       select(tabs[(target + tabs.length) % tabs.length], true);
     });
   });
+
+  // First measurement has nowhere to animate from; re-measure if the row
+  // shifts (fonts loading, viewport changes).
+  const initial = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+  if (indicator && initial) {
+    requestAnimationFrame(() => moveIndicator(initial));
+    window.addEventListener('load', () => moveIndicator(initial));
+    window.addEventListener('resize', () => {
+      const current = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+      if (current) moveIndicator(current);
+    });
+  }
 });
 
 // ─── Demo video: play overlay + chapters that follow playback ───

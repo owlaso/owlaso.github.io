@@ -36,7 +36,7 @@
   <link rel="icon" href="/icon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#6366f1">
+  <meta name="theme-color" content="#5e6ad2">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -111,7 +111,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
@@ -329,6 +329,7 @@
 
       <div class="shots" data-tabs>
         <div class="shot-tabs" role="tablist" aria-label="App screens">
+          <span class="shot-tab-indicator" aria-hidden="true"></span>
           <button type="button" class="shot-tab" role="tab" id="tab-keywords" aria-controls="panel-keywords" aria-selected="true" tabindex="0" data-i18n="tab.keywords">Keywords</button>
           <button type="button" class="shot-tab" role="tab" id="tab-keyword-detail" aria-controls="panel-keyword-detail" aria-selected="false" tabindex="-1" data-i18n="tab.keywordDetail">Keyword details</button>
           <button type="button" class="shot-tab" role="tab" id="tab-all-countries" aria-controls="panel-all-countries" aria-selected="false" tabindex="-1" data-i18n="tab.allCountries">All countries</button>
@@ -417,26 +418,26 @@
             <div class="metric-head"><h3 data-i18n="pop.head">Popularity</h3><span class="metric-range" data-i18n="pop.range">0&ndash;100</span></div>
             <p data-i18n="pop.desc">How much demand a keyword shows, judged by the apps that rank for it.</p>
             <div class="metric-bar" aria-hidden="true">
-              <span style="width:40%;background:#6366f1"></span><span style="width:22%;background:#818cf8"></span><span style="width:20%;background:#a78bfa"></span><span style="width:18%;background:#c4b5fd"></span>
+              <span style="width:40%;background:#5e6ad2"></span><span style="width:22%;background:#727ce0"></span><span style="width:20%;background:#8c93e6"></span><span style="width:18%;background:#a6adec"></span>
             </div>
             <ul class="weights">
-              <li><b>40</b><span><i class="swatch" style="background:#6366f1"></i><span data-i18n="pop.w1">Rating volume of ranking apps (log scale)</span></span></li>
-              <li><b>22</b><span><i class="swatch" style="background:#818cf8"></i><span data-i18n="pop.w2">Breadth of results</span></span></li>
-              <li><b>20</b><span><i class="swatch" style="background:#a78bfa"></i><span data-i18n="pop.w3">Average star rating</span></span></li>
-              <li><b>18</b><span><i class="swatch" style="background:#c4b5fd"></i><span data-i18n="pop.w4">Share of apps running ads</span></span></li>
+              <li><b>40</b><span><i class="swatch" style="background:#5e6ad2"></i><span data-i18n="pop.w1">Rating volume of ranking apps (log scale)</span></span></li>
+              <li><b>22</b><span><i class="swatch" style="background:#727ce0"></i><span data-i18n="pop.w2">Breadth of results</span></span></li>
+              <li><b>20</b><span><i class="swatch" style="background:#8c93e6"></i><span data-i18n="pop.w3">Average star rating</span></span></li>
+              <li><b>18</b><span><i class="swatch" style="background:#a6adec"></i><span data-i18n="pop.w4">Share of apps running ads</span></span></li>
             </ul>
           </article>
           <article class="metric-card reveal">
             <div class="metric-head"><h3 data-i18n="diff.head">Difficulty</h3><span class="metric-range" data-i18n="diff.range">0&ndash;100</span></div>
             <p data-i18n="diff.desc">How hard it is to break into the results for this keyword.</p>
             <div class="metric-bar" aria-hidden="true">
-              <span style="width:40%;background:#f59e0b"></span><span style="width:25%;background:#fbbf24"></span><span style="width:20%;background:#fcd34d"></span><span style="width:15%;background:#fde68a"></span>
+              <span style="width:40%;background:#e5bb3f"></span><span style="width:25%;background:#edc959"></span><span style="width:20%;background:#f2d47d"></span><span style="width:15%;background:#f8e1a6"></span>
             </div>
             <ul class="weights">
-              <li><b>40</b><span><i class="swatch" style="background:#f59e0b"></i><span data-i18n="diff.w1">Share of &ldquo;authority&rdquo; apps (&ge;&nbsp;50K ratings)</span></span></li>
-              <li><b>25</b><span><i class="swatch" style="background:#fbbf24"></i><span data-i18n="diff.w2">Share of apps running ads</span></span></li>
-              <li><b>20</b><span><i class="swatch" style="background:#fcd34d"></i><span data-i18n="diff.w3">Breadth of results</span></span></li>
-              <li><b>15</b><span><i class="swatch" style="background:#fde68a"></i><span data-i18n="diff.w4">Share of apps rated &ge;&nbsp;4&#9733;</span></span></li>
+              <li><b>40</b><span><i class="swatch" style="background:#e5bb3f"></i><span data-i18n="diff.w1">Share of &ldquo;authority&rdquo; apps (&ge;&nbsp;50K ratings)</span></span></li>
+              <li><b>25</b><span><i class="swatch" style="background:#edc959"></i><span data-i18n="diff.w2">Share of apps running ads</span></span></li>
+              <li><b>20</b><span><i class="swatch" style="background:#f2d47d"></i><span data-i18n="diff.w3">Breadth of results</span></span></li>
+              <li><b>15</b><span><i class="swatch" style="background:#f8e1a6"></i><span data-i18n="diff.w4">Share of apps rated &ge;&nbsp;4&#9733;</span></span></li>
             </ul>
           </article>
           <article class="metric-card reveal">
