@@ -9,7 +9,7 @@ Landing page and documentation for **OwlASO**, the free, open-source desktop app
 
 - [Vite](https://vitejs.dev) multi-page build, vanilla JS/CSS — no framework
 - Light/dark theme: follows the OS until the visitor toggles it; applied before first paint (no flash)
-- Theme-aware product screenshots: WebP pairs in `public/screenshots/` (`<screen>-dark.webp` / `<screen>-light.webp`)
+- Theme-aware product screenshots: PNG pairs in `public/screenshots/` (`<screen>-dark.png` / `<screen>-light.png`)
 - Accessible by default: skip link, keyboard-friendly nav, `prefers-reduced-motion` support, AA-contrast buttons
 
 ## Structure
@@ -24,7 +24,7 @@ Landing page and documentation for **OwlASO**, the free, open-source desktop app
 | `src/main.js` / `src/docs.js` | Page scripts |
 | `public/` | Static files copied as-is: `screenshots/`, icons, `og-image.png`, `robots.txt`, `sitemap.xml` |
 
-Reference static files with a root path (`/screenshots/keywords-dark.webp`); Vite rewrites them to relative URLs per page, so the site works from any sub-path.
+Reference static files with a root path (`/screenshots/keywords-dark.png`); Vite rewrites them to relative URLs per page, so the site works from any sub-path.
 
 ## Develop
 
@@ -50,7 +50,7 @@ The site describes the app, so update it together with app releases:
 
 - **Version** — hero badge, install card and JSON-LD `softwareVersion` in `index.html`; eyebrow and changelog in `docs/index.html`
 - **Facts** — storefronts (20), review languages (16), history (180 days), limits and formulas come from the app source (`public/app.js`, `src/providers.js`, `src/aso.js`)
-- **Screenshots** — `public/screenshots/` holds dark/light WebP pairs at 1920×1200 (captured at 2880×1800, downscaled, WebP quality ≈ 0.84). Replace a pair with the same file names; if the size changes, update the `width`/`height` attributes in `index.html` and `docs/index.html`. `og-image.png` embeds `keywords-dark.webp`
+- **Screenshots** — `public/screenshots/` holds dark/light PNG pairs at 1920×1200. Replace a pair with the same file names; if the size changes, update the `width`/`height` attributes in `index.html` and `docs/index.html`. `og-image.png` embeds `keywords-dark.png`
 - **Sitemap** — bump `lastmod` in `public/sitemap.xml`
 
 ## Optional: Vercel

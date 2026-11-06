@@ -2,11 +2,12 @@
    OwlASO — Docs Page Scripts
    ═══════════════════════════════════════════════ */
 
-import { initTheme, initNav, initCopyButtons } from './common.js';
+import { initTheme, initNav, initCopyButtons, initCookieConsent } from './common.js';
 
 initTheme();
 initNav();
 initCopyButtons();
+initCookieConsent();
 
 // ─── Heading anchors ───
 document.querySelectorAll('.docs-content section h2[id], .docs-content section h3[id]').forEach((heading) => {

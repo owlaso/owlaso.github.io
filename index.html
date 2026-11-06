@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-    // Apply the theme before first paint (no light flash for dark-mode users).
+    // Apply the theme and language before first paint (no flash).
     (function () {
       var d = document.documentElement;
       d.classList.add('js');
@@ -15,7 +15,8 @@
       } catch (e) {}
       try {
         var lang = localStorage.getItem('lang');
-        if (lang === 'tr' || lang === 'en') {
+        var validLangs = ['en','tr','es','fr','de','ja','ko','pt','zh','ru','it'];
+        if (validLangs.includes(lang)) {
           d.setAttribute('lang', lang);
         } else {
           d.setAttribute('lang', 'en');
@@ -81,7 +82,7 @@
       "name": "OwlASO",
       "url": "https://github.com/owlaso"
     },
-    "screenshot": "https://owlaso.github.io/screenshots/keywords-dark.webp",
+    "screenshot": "https://owlaso.github.io/screenshots/keywords-dark.png",
     "featureList": [
       "Keyword popularity, difficulty and opportunity scores",
       "Daily keyword rank tracking for Google Play and the App Store",
@@ -101,11 +102,11 @@
     "@context": "https://schema.org",
     "@type": "VideoObject",
     "name": "OwlASO product demo",
-    "description": "A 90-second walkthrough of OwlASO: add an app, analyze keywords, compare all countries, read reviews from both stores and explore full review data.",
+    "description": "A 56-second walkthrough of OwlASO: add an app, analyze keywords, compare all countries, read reviews from both stores and explore full review data.",
     "thumbnailUrl": "https://owlaso.github.io/video/owlaso-demo-poster.webp",
     "contentUrl": "https://owlaso.github.io/video/owlaso-demo.mp4",
-    "uploadDate": "2026-10-06",
-    "duration": "PT1M34S"
+    "uploadDate": "2026-11-01",
+    "duration": "PT56S"
   }
   </script>
 
@@ -123,6 +124,7 @@
       <a href="./" class="nav-brand" aria-label="OwlASO home">
         <img class="nav-logo" src="/favicon.svg" alt="" width="28" height="28">
         <span class="nav-title">OwlASO</span>
+        <span class="nav-badge" data-i18n="nav.version">v1.6</span>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="#demo" data-i18n="nav.demo">Demo</a>
@@ -134,7 +136,26 @@
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
       <div class="nav-actions">
-        <button type="button" class="icon-btn lang-toggle" data-lang-toggle aria-label="Switch language" title="Türkçe / English">TR</button>
+        <div class="lang-dropdown" data-lang-dropdown>
+          <button type="button" class="icon-btn lang-toggle" data-lang-toggle aria-label="Switch language" aria-expanded="false" aria-haspopup="listbox">
+            <img class="lang-flag" data-lang-flag src="/flags/us.svg" width="15" height="15" alt="">
+            <span class="lang-code" data-lang-code>EN</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="lang-menu" role="listbox" aria-label="Languages" data-lang-menu hidden>
+            <button type="button" role="option" data-lang="en" aria-selected="true"><img class="lang-flag" src="/flags/us.svg" width="16" height="16" alt=""><span class="lang-name">English</span><span class="lang-code">EN</span></button>
+            <button type="button" role="option" data-lang="tr" aria-selected="false"><img class="lang-flag" src="/flags/tr.svg" width="16" height="16" alt=""><span class="lang-name">Türkçe</span><span class="lang-code">TR</span></button>
+            <button type="button" role="option" data-lang="es" aria-selected="false"><img class="lang-flag" src="/flags/es.svg" width="16" height="16" alt=""><span class="lang-name">Español</span><span class="lang-code">ES</span></button>
+            <button type="button" role="option" data-lang="fr" aria-selected="false"><img class="lang-flag" src="/flags/fr.svg" width="16" height="16" alt=""><span class="lang-name">Français</span><span class="lang-code">FR</span></button>
+            <button type="button" role="option" data-lang="de" aria-selected="false"><img class="lang-flag" src="/flags/de.svg" width="16" height="16" alt=""><span class="lang-name">Deutsch</span><span class="lang-code">DE</span></button>
+            <button type="button" role="option" data-lang="ja" aria-selected="false"><img class="lang-flag" src="/flags/jp.svg" width="16" height="16" alt=""><span class="lang-name">日本語</span><span class="lang-code">JA</span></button>
+            <button type="button" role="option" data-lang="ko" aria-selected="false"><img class="lang-flag" src="/flags/kr.svg" width="16" height="16" alt=""><span class="lang-name">한국어</span><span class="lang-code">KO</span></button>
+            <button type="button" role="option" data-lang="pt" aria-selected="false"><img class="lang-flag" src="/flags/pt.svg" width="16" height="16" alt=""><span class="lang-name">Português</span><span class="lang-code">PT</span></button>
+            <button type="button" role="option" data-lang="zh" aria-selected="false"><img class="lang-flag" src="/flags/cn.svg" width="16" height="16" alt=""><span class="lang-name">中文</span><span class="lang-code">ZH</span></button>
+            <button type="button" role="option" data-lang="ru" aria-selected="false"><img class="lang-flag" src="/flags/ru.svg" width="16" height="16" alt=""><span class="lang-name">Русский</span><span class="lang-code">RU</span></button>
+            <button type="button" role="option" data-lang="it" aria-selected="false"><img class="lang-flag" src="/flags/it.svg" width="16" height="16" alt=""><span class="lang-name">Italiano</span><span class="lang-code">IT</span></button>
+          </div>
+        </div>
         <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
           <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -151,381 +172,689 @@
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div class="animate-in">
-          <a class="hero-badge" href="https://github.com/owlaso/owlaso-mcp" target="_blank" rel="noopener noreferrer">
-            <span class="hero-badge-tag" data-i18n="hero.badge.new">NEW</span><span data-i18n-html="hero.badge.text">OwlASO MCP is out<span class="hide-sm">: use OwlASO from Claude &amp; other AI clients</span></span><span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-        <h1 class="animate-in delay-1" id="heroTitle">
-          <span data-i18n="hero.title.line1">ASO keywords &amp; reviews</span><br>
-          <span class="gradient-text" data-i18n="hero.title.line2">for both app stores</span>
-        </h1>
-        <p class="hero-sub animate-in delay-2" data-i18n="hero.subtitle">
-          Score keywords, track where your app ranks every day, and read every review from Google Play and the App Store &mdash; in one free desktop app that runs on your machine.
-        </p>
-        <div class="hero-buttons animate-in delay-3">
-          <a href="https://github.com/owlaso/owlaso/releases/latest" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-            <span data-i18n="hero.download.windows">Download for Windows</span>
-          </a>
-          <a href="#demo" class="btn btn-secondary" data-demo-start>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
-            <span data-i18n="hero.watch">Watch the demo</span> <span class="btn-meta">1:34</span>
-          </a>
-        </div>
-        <p class="hero-meta animate-in delay-3">
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="hero.meta.free">Free &amp; MIT licensed</span></span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="hero.meta.noAccount">No account or API key</span></span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="hero.meta.macLinux">macOS &amp; Linux:</span>&nbsp;<a href="#install" data-i18n="hero.meta.macLinuxLink">run from source</a></span>
-          <a class="hero-stat" href="https://github.com/owlaso/owlaso" target="_blank" rel="noopener noreferrer" title="Total stars across all OwlASO repositories">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <b class="stat-num" data-stat="stars">&ndash;</b>
-            <span data-i18n="hero.stat.stars">stars on GitHub</span>
-          </a>
-          <span class="hero-stat" title="Site visits on owlaso.github.io">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            <b class="stat-num" data-stat="visits">&ndash;</b>
-            <span data-i18n="hero.stat.visits">site visits</span>
-          </span>
-        </p>
-      </div>
-
-      <!-- PRODUCT DEMO VIDEO -->
-      <div class="hero-demo animate-in delay-3" id="demo">
-        <div class="demo-player" data-demo>
-          <video class="demo-video" controls preload="none" playsinline poster="/video/owlaso-demo-poster.webp" width="1920" height="1080" aria-label="OwlASO product demo: adding an app, analyzing keywords, comparing countries and reading reviews" data-i18n-aria-label="demo.video.aria">
-            <source src="/video/owlaso-demo.mp4" type="video/mp4">
-            <a href="/video/owlaso-demo.mp4">Download the OwlASO demo video (MP4)</a>
-          </video>
-          <button type="button" class="demo-play" data-demo-play aria-label="Play the OwlASO product demo, 1 minute 34 seconds" data-i18n-aria-label="demo.play.aria">
-            <span class="demo-play-icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
+    <!-- ═══ HERO ═══ -->
+    <section class="p-hero" aria-labelledby="heroTitle">
+      <div class="p-hero-grid">
+        <div class="p-hero-copy">
+          <div class="animate-in">
+            <a class="p-badge" href="https://github.com/owlaso/owlaso-mcp" target="_blank" rel="noopener noreferrer">
+              <span class="p-badge-tag" data-i18n="hero.badge.new">NEW</span>
+              <span data-i18n-html="hero.badge.text">OwlASO MCP is out<span class="hide-sm">: use OwlASO from Claude &amp; other AI clients</span></span>
+              <span class="p-badge-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+          <h1 class="p-hero-title animate-in delay-1" id="heroTitle">
+            <span data-i18n="hero.title.line1">ASO keywords &amp; reviews</span>
+            <span class="p-gradient-text" data-i18n="hero.title.line2">for both app stores</span>
+          </h1>
+          <p class="p-hero-sub animate-in delay-2" data-i18n="hero.subtitle">
+            Score keywords, track where your app ranks every day, and read every review from Google Play and the App Store &mdash; in one free desktop app that runs on your machine.
+          </p>
+          <div class="p-hero-actions animate-in delay-3">
+            <a href="https://github.com/owlaso/owlaso/releases/latest" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+              <span data-i18n="hero.download.windows">Download for Windows</span>
+            </a>
+            <a href="#demo" class="btn btn-secondary" data-demo-start>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
+              <span data-i18n="hero.watch">Watch the demo</span> <span class="btn-meta">0:56</span>
+            </a>
+          </div>
+          <div class="p-hero-meta animate-in delay-3">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="hero.meta.free">Free &amp; MIT licensed</span></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="hero.meta.noAccount">No account or API key</span></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="hero.meta.macLinux">macOS &amp; Linux:</span>&nbsp;<a href="#install" data-i18n="hero.meta.macLinuxLink">run from source</a></span>
+            <a class="p-hero-stat" href="https://github.com/owlaso/owlaso" target="_blank" rel="noopener noreferrer" title="Total stars across all OwlASO repositories">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <b class="stat-num" data-stat="stars">&ndash;</b>
+              <span data-i18n="hero.stat.stars">stars on GitHub</span>
+            </a>
+            <span class="p-hero-stat" title="Site visits on owlaso.github.io">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <b class="stat-num" data-stat="visits">&ndash;</b>
+              <span data-i18n="hero.stat.visits">site visits</span>
             </span>
-            <span class="demo-play-text" aria-hidden="true"><strong data-i18n="demo.play.text1">Watch the demo</strong><span data-i18n="demo.play.text2">1:34 &middot; the whole app in 90&nbsp;seconds</span></span>
-          </button>
-        </div>
-        <ol class="demo-chapters" aria-label="Demo chapters">
-          <li><button type="button" class="demo-chapter" data-time="0"><span class="demo-chapter-time">0:00</span><span class="demo-chapter-name" data-i18n="demo.chapter.0">Get started</span><span class="demo-chapter-bar" aria-hidden="true"></span></button></li>
-          <li><button type="button" class="demo-chapter" data-time="18"><span class="demo-chapter-time">0:18</span><span class="demo-chapter-name" data-i18n="demo.chapter.18">Keywords</span><span class="demo-chapter-bar" aria-hidden="true"></span></button></li>
-          <li><button type="button" class="demo-chapter" data-time="39"><span class="demo-chapter-time">0:39</span><span class="demo-chapter-name" data-i18n="demo.chapter.39">All countries</span><span class="demo-chapter-bar" aria-hidden="true"></span></button></li>
-          <li><button type="button" class="demo-chapter" data-time="47"><span class="demo-chapter-time">0:47</span><span class="demo-chapter-name" data-i18n="demo.chapter.47">Reviews</span><span class="demo-chapter-bar" aria-hidden="true"></span></button></li>
-          <li><button type="button" class="demo-chapter" data-time="65"><span class="demo-chapter-time">1:05</span><span class="demo-chapter-name" data-i18n="demo.chapter.65">Full data</span><span class="demo-chapter-bar" aria-hidden="true"></span></button></li>
-          <li><button type="button" class="demo-chapter" data-time="78"><span class="demo-chapter-time">1:18</span><span class="demo-chapter-name" data-i18n="demo.chapter.78">Tour &amp; settings</span><span class="demo-chapter-bar" aria-hidden="true"></span></button></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- FACTS -->
-    <section class="facts" aria-label="OwlASO at a glance">
-      <ul class="facts-grid">
-        <li class="reveal"><span class="fact-value">2</span><span class="fact-label" data-i18n="facts.2">App stores, one table</span></li>
-        <li class="reveal"><span class="fact-value">20</span><span class="fact-label" data-i18n="facts.20">Storefronts</span></li>
-        <li class="reveal"><span class="fact-value">16</span><span class="fact-label" data-i18n="facts.16">Review languages</span></li>
-        <li class="reveal"><span class="fact-value">180</span><span class="fact-label" data-i18n="facts.180">Days of rank history</span></li>
-      </ul>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="section" id="features" aria-labelledby="featuresTitle">
-      <div class="section-label" data-i18n="features.label">Features</div>
-      <h2 class="section-title" id="featuresTitle" data-i18n="features.title">From keyword idea to user complaint</h2>
-      <p class="section-desc" data-i18n="features.desc">Research keywords, watch your rankings move and hear what users say &mdash; without switching tools or paying per seat.</p>
-
-      <div class="features-grid">
-        <article class="feature-card reveal" style="--icon-bg:var(--accent-soft);--icon-color:var(--accent)">
-          <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <h3 data-i18n="feature1.title">Keyword research</h3>
-          <p data-i18n="feature1.desc">Analyze any keyword on one or both stores and see who ranks for it.</p>
-          <ul class="feature-points">
-            <li data-i18n-html="feature1.p1">Popularity, difficulty &amp; opportunity <span class="nowrap">(0&ndash;100)</span></li>
-            <li data-i18n="feature1.p2">5 similar keywords scored side by side</li>
-            <li data-i18n="feature1.p3">Keywords your competitors also rank for</li>
-          </ul>
-        </article>
-        <article class="feature-card reveal" style="--icon-bg:var(--green-soft);--icon-color:var(--green)">
-          <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <h3 data-i18n="feature2.title">Rank tracking</h3>
-          <p data-i18n="feature2.desc">Know exactly where your app sits for every keyword, on each store.</p>
-          <ul class="feature-points">
-            <li data-i18n="feature2.p1">Position in the top 50 per store</li>
-            <li data-i18n="feature2.p2">Daily snapshots with trend arrows &amp; charts</li>
-            <li data-i18n="feature2.p3">History kept locally for 180 days</li>
-          </ul>
-        </article>
-        <article class="feature-card reveal" style="--icon-bg:var(--amber-soft);--icon-color:var(--amber)">
-          <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <h3 data-i18n="feature3.title">All countries at once</h3>
-          <p data-i18n="feature3.desc">Run one keyword in all 20 storefronts and find your best markets.</p>
-          <ul class="feature-points">
-            <li data-i18n="feature3.p1">One row per country, best opportunity first</li>
-            <li data-i18n="feature3.p2">&ldquo;Top market&rdquo; badges on the winners</li>
-            <li data-i18n="feature3.p3">Reviews from every App Store storefront</li>
-          </ul>
-        </article>
-        <article class="feature-card reveal" style="--icon-bg:var(--blue-soft);--icon-color:var(--blue)">
-          <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <h3 data-i18n="feature4.title">Reviews from both stores</h3>
-          <p data-i18n="feature4.desc">Google Play and App Store reviews in one table, with a store column.</p>
-          <ul class="feature-points">
-            <li data-i18n="feature4.p1">Instant word &amp; star filters, highlighted matches</li>
-            <li data-i18n="feature4.p2">Compare up to 5 apps with Ctrl/&#8984;-click</li>
-            <li data-i18n="feature4.p3">Step through reviews with &larr; / &rarr;</li>
-          </ul>
-        </article>
-        <article class="feature-card reveal" style="--icon-bg:var(--purple-soft);--icon-color:var(--purple)">
-          <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
-          <h3 data-i18n="feature5.title">Full-data explorer</h3>
-          <p data-i18n="feature5.desc">Every reachable review across stores and languages, in one place.</p>
-          <ul class="feature-points">
-            <li data-i18n="feature5.p1">Live progress for each store &amp; language</li>
-            <li data-i18n="feature5.p2">Filter by rating, store or language; search &amp; sort</li>
-            <li data-i18n="feature5.p3">What users complain about vs. love</li>
-          </ul>
-        </article>
-        <article class="feature-card reveal" style="--icon-bg:var(--red-soft);--icon-color:var(--red)">
-          <div class="feature-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </div>
-          <h3 data-i18n="feature6.title">Export anything</h3>
-          <p data-i18n="feature6.desc">Press Ctrl/&#8984;+E to export exactly what you are looking at.</p>
-          <ul class="feature-points">
-            <li data-i18n="feature6.p1">CSV for keywords, reviews &amp; full data</li>
-            <li data-i18n="feature6.p2">JSON for full-data results</li>
-            <li data-i18n="feature6.p3">Excel-ready UTF-8, formula-injection safe</li>
-          </ul>
-        </article>
-      </div>
+        </div>
 
-      <ul class="also-row reveal" aria-label="Also included">
-        <li class="also-label" data-i18n="also.label">Also:</li>
-        <li class="chip" data-i18n="chip.tour">Guided tour &amp; help tooltips</li>
-        <li class="chip" data-i18n="chip.folders">Folders &amp; drag-and-drop</li>
-        <li class="chip" data-i18n="chip.theme">Light / dark / system theme</li>
-        <li class="chip" data-i18n="chip.shortcuts">Keyboard shortcuts</li>
-        <li class="chip" data-i18n="chip.undo">Undo for deletes</li>
-        <li class="chip" data-i18n="chip.a11y">Screen-reader labels</li>
-      </ul>
-    </section>
+        <div class="p-hero-visual animate-in delay-2">
+          <div class="p-hero-orbit" aria-hidden="true"></div>
+          <div class="p-planet" data-planet data-rotation="78,18" data-auto-rotate="4">
+            <div class="p-planet-globe" data-planet-globe role="slider" tabindex="0"
+              aria-label="Interactive dotted globe of OwlASO storefronts. Drag to turn, or use the arrow keys."
+              data-i18n-aria-label="hero.planet.aria"
+              aria-orientation="horizontal" aria-valuemin="-180" aria-valuemax="180" aria-valuenow="78">
+              <canvas class="p-planet-canvas" data-planet-canvas aria-hidden="true"></canvas>
+              <div class="p-planet-markers">
+                <div class="p-planet-marker" data-planet-marker data-marker="us" data-lat="37.09" data-lng="-95.71" style="--marker-color:var(--primary)">
+                  <button type="button" aria-label="United States" data-i18n-aria-label="geo.us" aria-pressed="false">
+                    <span class="p-planet-label"><span data-i18n="geo.us">United States</span><span class="p-planet-count">01</span></span>
+                    <span class="p-planet-pin" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="p-planet-marker" data-planet-marker data-marker="br" data-lat="-14.24" data-lng="-51.93" style="--marker-color:var(--success)">
+                  <button type="button" aria-label="Brazil" data-i18n-aria-label="geo.br" aria-pressed="false">
+                    <span class="p-planet-label"><span data-i18n="geo.br">Brazil</span><span class="p-planet-count">02</span></span>
+                    <span class="p-planet-pin" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="p-planet-marker" data-planet-marker data-marker="tr" data-lat="38.96" data-lng="35.24" style="--marker-color:var(--warning)">
+                  <button type="button" aria-label="Türkiye" data-i18n-aria-label="geo.tr" aria-pressed="false">
+                    <span class="p-planet-label"><span data-i18n="geo.tr">Türkiye</span><span class="p-planet-count">03</span></span>
+                    <span class="p-planet-pin" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="p-planet-marker" data-planet-marker data-marker="id" data-lat="-0.79" data-lng="113.92" style="--marker-color:var(--info)">
+                  <button type="button" aria-label="Indonesia" data-i18n-aria-label="geo.id" aria-pressed="false">
+                    <span class="p-planet-label"><span data-i18n="geo.id">Indonesia</span><span class="p-planet-count">04</span></span>
+                    <span class="p-planet-pin" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="p-planet-marker" data-planet-marker data-marker="gb" data-lat="55.38" data-lng="-3.44" style="--marker-color:var(--purple)">
+                  <button type="button" aria-label="United Kingdom" data-i18n-aria-label="geo.gb" aria-pressed="false">
+                    <span class="p-planet-label"><span data-i18n="geo.gb">United Kingdom</span><span class="p-planet-count">05</span></span>
+                    <span class="p-planet-pin" aria-hidden="true"></span>
+                  </button>
+                </div>
+                <div class="p-planet-marker" data-planet-marker data-marker="jp" data-lat="36.2" data-lng="138.25" style="--marker-color:var(--destructive)">
+                  <button type="button" aria-label="Japan" data-i18n-aria-label="geo.jp" aria-pressed="false">
+                    <span class="p-planet-label"><span data-i18n="geo.jp">Japan</span><span class="p-planet-count">06</span></span>
+                    <span class="p-planet-pin" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-    <!-- PRODUCT TOUR -->
-    <section class="section" id="tour" aria-labelledby="tourTitle">
-      <div class="section-label" data-i18n="tour.label">See it in action</div>
-      <h2 class="section-title" id="tourTitle" data-i18n="tour.title">A quick look inside</h2>
-      <p class="section-desc" data-i18n="tour.desc">Real screens from OwlASO, filled with demo data.</p>
+            <div class="p-kpi-float p-kpi-float-a" aria-hidden="true">
+              <div class="p-kpi-head">
+                <span class="p-kpi-icon" style="--tone:var(--success)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </span>
+                <span data-i18n="hero.kpi1.label">Popularity</span>
+              </div>
+              <div class="p-kpi-number"><span data-roll="78">78</span><span class="p-kpi-unit">/100</span></div>
+              <div class="p-kpi-foot">
+                <span class="p-kpi-note" data-i18n="hero.kpi1.note">habit tracker · 0–100</span>
+                <span class="p-pill" data-tone="success" data-i18n="hero.kpi1.badge">+12 this week</span>
+              </div>
+            </div>
 
-      <div class="shots" data-tabs>
-        <div class="shot-tabs" role="tablist" aria-label="App screens">
-          <span class="shot-tab-indicator" aria-hidden="true"></span>
-          <button type="button" class="shot-tab" role="tab" id="tab-keywords" aria-controls="panel-keywords" aria-selected="true" tabindex="0" data-i18n="tab.keywords">Keywords</button>
-          <button type="button" class="shot-tab" role="tab" id="tab-keyword-detail" aria-controls="panel-keyword-detail" aria-selected="false" tabindex="-1" data-i18n="tab.keywordDetail">Keyword details</button>
-          <button type="button" class="shot-tab" role="tab" id="tab-all-countries" aria-controls="panel-all-countries" aria-selected="false" tabindex="-1" data-i18n="tab.allCountries">All countries</button>
-          <button type="button" class="shot-tab" role="tab" id="tab-reviews-filter" aria-controls="panel-reviews-filter" aria-selected="false" tabindex="-1" data-i18n="tab.reviews">Reviews</button>
-          <button type="button" class="shot-tab" role="tab" id="tab-full-data" aria-controls="panel-full-data" aria-selected="false" tabindex="-1" data-i18n="tab.fullData">Full data</button>
-          <button type="button" class="shot-tab" role="tab" id="tab-guided-tour" aria-controls="panel-guided-tour" aria-selected="false" tabindex="-1" data-i18n="tab.guidedTour">Guided tour</button>
-        </div>
-        <div class="shot-panel active" role="tabpanel" id="panel-keywords" aria-labelledby="tab-keywords">
-          <p class="shot-caption" data-i18n-html="shot.keywords.cap">Score a keyword and 5 similar ones at once. <strong>Position</strong> shows where your app ranks on each store, with the daily change.</p>
-          <figure class="app-window shot-window">
-            <div class="app-titlebar" aria-hidden="true">
-              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-              <span class="app-title">OwlASO — Keywords</span>
+            <div class="p-kpi-float p-kpi-float-b" aria-hidden="true">
+              <div class="p-kpi-head">
+                <span class="p-kpi-icon" style="--tone:var(--info)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </span>
+                <span data-i18n="hero.kpi2.label">Storefronts scanned</span>
+              </div>
+              <div class="p-kpi-number"><span data-roll="20">20</span><span class="p-kpi-unit">/20</span></div>
+              <div class="p-kpi-foot">
+                <span class="p-kpi-note">Google Play + App Store</span>
+                <span class="p-pill" data-tone="info" data-i18n="hero.kpi2.badge">Both stores</span>
+              </div>
             </div>
-            <img class="app-shot shot-dark" src="/screenshots/keywords-dark.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, per-store position and ranking apps (dark theme)" data-i18n-alt="shot.keywords.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/screenshots/keywords-light.webp" alt="Keywords tab: “habit tracker” and 5 similar keywords with popularity, difficulty, per-store position and ranking apps" data-i18n-alt="shot.keywords.img.light" width="1920" height="1200" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="shot-panel" role="tabpanel" id="panel-keyword-detail" aria-labelledby="tab-keyword-detail">
-          <p class="shot-caption" data-i18n="shot.keywordDetail.cap">Open any keyword for all its numbers, trend charts, your app&rsquo;s best rank over time and the keywords the top apps also rank for.</p>
-          <figure class="app-window shot-window">
-            <div class="app-titlebar" aria-hidden="true">
-              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-              <span class="app-title">OwlASO — Keyword details</span>
+
+            <div class="p-planet-controls" role="group" aria-label="Turn the globe">
+              <button type="button" data-planet-rotate="-60" aria-label="Turn west" title="Turn west">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+              </button>
+              <span class="p-planet-caption" data-i18n="hero.planet.hint">Drag to turn</span>
+              <button type="button" data-planet-rotate="60" aria-label="Turn east" title="Turn east">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </button>
+              <span class="p-planet-divider" aria-hidden="true"></span>
+              <button type="button" data-planet-toggle aria-label="Pause rotation" title="Pause rotation" aria-pressed="false">
+                <svg class="p-planet-icon-pause" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+                <svg class="p-planet-icon-play" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
+              </button>
+              <button type="button" data-planet-reset aria-label="Reset globe" title="Reset globe" data-i18n-aria-label="hero.planet.reset" data-i18n-title="hero.planet.reset">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+              </button>
             </div>
-            <img class="app-shot shot-dark" src="/screenshots/keyword-detail-dark.webp" alt="Keyword details for “habit tracker”: popularity 78, difficulty 64, opportunity 28, store ranks, 30-day trend charts and competitor keywords (dark theme)" data-i18n-alt="shot.keywordDetail.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/screenshots/keyword-detail-light.webp" alt="Keyword details for “habit tracker”: popularity 78, difficulty 64, opportunity 28, store ranks, 30-day trend charts and competitor keywords" data-i18n-alt="shot.keywordDetail.img.light" width="1920" height="1200" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="shot-panel" role="tabpanel" id="panel-all-countries" aria-labelledby="tab-all-countries">
-          <p class="shot-caption" data-i18n="shot.allCountries.cap">Run one keyword in all 20 storefronts. Rows are sorted by opportunity, so your best markets come first.</p>
-          <figure class="app-window shot-window">
-            <div class="app-titlebar" aria-hidden="true">
-              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-              <span class="app-title">OwlASO — All countries</span>
-            </div>
-            <img class="app-shot shot-dark" src="/screenshots/all-countries-dark.webp" alt="All countries view: “habit tracker” analyzed per country with Brazil, Turkey and Indonesia marked as top markets (dark theme)" data-i18n-alt="shot.allCountries.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/screenshots/all-countries-light.webp" alt="All countries view: “habit tracker” analyzed per country with Brazil, Turkey and Indonesia marked as top markets" data-i18n-alt="shot.allCountries.img.light" width="1920" height="1200" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="shot-panel" role="tabpanel" id="panel-reviews-filter" aria-labelledby="tab-reviews-filter">
-          <p class="shot-caption" data-i18n="shot.reviews.cap">Both stores in one table. Type a word to filter instantly &mdash; matches are highlighted and the store is on every row.</p>
-          <figure class="app-window shot-window">
-            <div class="app-titlebar" aria-hidden="true">
-              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-              <span class="app-title">OwlASO — Reviews</span>
-            </div>
-            <img class="app-shot shot-dark" src="/screenshots/reviews-filter-dark.webp" alt="Reviews filtered by the word “sync”: 26 matches from Google Play and the App Store with the word highlighted (dark theme)" data-i18n-alt="shot.reviews.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/screenshots/reviews-filter-light.webp" alt="Reviews filtered by the word “sync”: 26 matches from Google Play and the App Store with the word highlighted" data-i18n-alt="shot.reviews.img.light" width="1920" height="1200" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="shot-panel" role="tabpanel" id="panel-full-data" aria-labelledby="tab-full-data">
-          <p class="shot-caption" data-i18n="shot.fullData.cap">Every reachable review in one explorer: rating, store and language facets, search, sorting, and what users complain about.</p>
-          <figure class="app-window shot-window">
-            <div class="app-titlebar" aria-hidden="true">
-              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-              <span class="app-title">OwlASO — Full data</span>
-            </div>
-            <img class="app-shot shot-dark" src="/screenshots/full-data-dark.webp" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list (dark theme)" data-i18n-alt="shot.fullData.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/screenshots/full-data-light.webp" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list" data-i18n-alt="shot.fullData.img.light" width="1920" height="1200" loading="lazy" decoding="async">
-          </figure>
-        </div>
-        <div class="shot-panel" role="tabpanel" id="panel-guided-tour" aria-labelledby="tab-guided-tour">
-          <p class="shot-caption" data-i18n-html="shot.guidedTour.cap">New here? A one-minute guided tour walks you through every part of the app. Press <kbd>?</kbd> any time to replay it.</p>
-          <figure class="app-window shot-window">
-            <div class="app-titlebar" aria-hidden="true">
-              <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
-              <span class="app-title">OwlASO — Guided tour</span>
-            </div>
-            <img class="app-shot shot-dark" src="/screenshots/guided-tour-dark.webp" alt="Guided tour step 6 of 11, “Read the scores”, highlighting the keyword table columns (dark theme)" data-i18n-alt="shot.guidedTour.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
-            <img class="app-shot shot-light" src="/screenshots/guided-tour-light.webp" alt="Guided tour step 6 of 11, “Read the scores”, highlighting the keyword table columns" data-i18n-alt="shot.guidedTour.img.light" width="1920" height="1200" loading="lazy" decoding="async">
-          </figure>
+
+            <ul class="p-planet-list" aria-label="Storefronts">
+              <li><button type="button" data-planet-target="us" aria-pressed="false"><span class="p-planet-list-dot" style="--marker-color:var(--primary)" aria-hidden="true"></span><span data-i18n="geo.us">United States</span></button></li>
+              <li><button type="button" data-planet-target="br" aria-pressed="false"><span class="p-planet-list-dot" style="--marker-color:var(--success)" aria-hidden="true"></span><span data-i18n="geo.br">Brazil</span></button></li>
+              <li><button type="button" data-planet-target="tr" aria-pressed="false"><span class="p-planet-list-dot" style="--marker-color:var(--warning)" aria-hidden="true"></span><span data-i18n="geo.tr">Türkiye</span></button></li>
+              <li><button type="button" data-planet-target="id" aria-pressed="false"><span class="p-planet-list-dot" style="--marker-color:var(--info)" aria-hidden="true"></span><span data-i18n="geo.id">Indonesia</span></button></li>
+              <li><button type="button" data-planet-target="gb" aria-pressed="false"><span class="p-planet-list-dot" style="--marker-color:var(--purple)" aria-hidden="true"></span><span data-i18n="geo.gb">United Kingdom</span></button></li>
+              <li><button type="button" data-planet-target="jp" aria-pressed="false"><span class="p-planet-list-dot" style="--marker-color:var(--destructive)" aria-hidden="true"></span><span data-i18n="geo.jp">Japan</span></button></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SCORES -->
-    <div class="section-alt">
-      <section class="section" id="scores" aria-labelledby="scoresTitle">
-        <div class="section-label" data-i18n="scores.label">Transparent scores</div>
-        <h2 class="section-title" id="scoresTitle" data-i18n="scores.title">No black-box numbers</h2>
-        <p class="section-desc" data-i18n="scores.desc">Every score is computed from public store data with a formula you can read &mdash; and check in the source.</p>
+    <!-- ═══ FACTS — KPI band ═══ -->
+    <section class="p-facts" aria-label="OwlASO at a glance">
+      <div class="p-frame p-frame-band p-facts-frame reveal">
+        <div class="p-frame-header">
+          <div>
+            <p class="p-frame-title" data-i18n="facts.label">At a glance</p>
+            <p class="p-frame-desc" data-i18n="facts.note">Everything runs locally</p>
+          </div>
+          <div class="p-frame-action"><span class="p-status"><span class="p-status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Local-first</span></span></div>
+        </div>
+        <div class="p-frame-panel">
+          <ul class="p-facts-grid">
+            <li>
+              <span class="p-fact-value" data-roll="2">2</span>
+              <span class="p-fact-label" data-i18n="facts.2">App stores, one table</span>
+            </li>
+            <li>
+              <span class="p-fact-value" data-roll="20">20</span>
+              <span class="p-fact-label" data-i18n="facts.20">Storefronts</span>
+            </li>
+            <li>
+              <span class="p-fact-value" data-roll="16">16</span>
+              <span class="p-fact-label" data-i18n="facts.16">Review languages</span>
+            </li>
+            <li>
+              <span class="p-fact-value" data-roll="180">180</span>
+              <span class="p-fact-label" data-i18n="facts.180">Days of rank history</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-        <div class="metrics-grid">
-          <article class="metric-card reveal">
-            <div class="metric-head"><h3 data-i18n="pop.head">Popularity</h3><span class="metric-range" data-i18n="pop.range">0&ndash;100</span></div>
-            <p data-i18n="pop.desc">How much demand a keyword shows, judged by the apps that rank for it.</p>
-            <div class="metric-bar" aria-hidden="true">
-              <span style="width:40%;background:#5e6ad2"></span><span style="width:22%;background:#727ce0"></span><span style="width:20%;background:#8c93e6"></span><span style="width:18%;background:#a6adec"></span>
+    <!-- ═══ DEMO ═══ -->
+    <section class="p-section p-demo-section" id="demo" aria-labelledby="demoTitle">
+      <div class="p-section-head reveal">
+        <span class="p-label" data-i18n="demo.label">Product demo</span>
+        <h2 class="p-title" id="demoTitle" data-i18n="demo.title">The whole workflow, in under a minute</h2>
+        <p class="p-desc" data-i18n="demo.desc">Add an app, score keywords across both stores, compare 20 storefronts and read every review — without leaving the window.</p>
+      </div>
+
+      <div class="p-frame p-frame-default reveal">
+        <div class="p-frame-header">
+          <div>
+            <p class="p-frame-title" data-i18n="demo.frame.title">OwlASO walkthrough</p>
+            <p class="p-frame-desc" data-i18n="demo.frame.desc">From a cold start to a full review explorer</p>
+          </div>
+          <div class="p-frame-action"><span class="p-pill" data-tone="info">0:56</span></div>
+        </div>
+        <div class="p-frame-panel">
+          <div class="demo-player" data-demo>
+            <video class="demo-video" controls preload="none" playsinline poster="/video/owlaso-demo-poster.webp" width="1920" height="1080" aria-label="OwlASO product demo: adding an app, analyzing keywords, comparing countries and reading reviews" data-i18n-aria-label="demo.video.aria">
+              <source src="/video/owlaso-demo.mp4" type="video/mp4">
+              <a href="/video/owlaso-demo.mp4">Download the OwlASO demo video (MP4)</a>
+            </video>
+            <button type="button" class="demo-play" data-demo-play aria-label="Play the OwlASO product demo, 56 seconds" data-i18n-aria-label="demo.play.aria">
+              <span class="demo-play-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
+              </span>
+              <span class="demo-play-text" aria-hidden="true"><strong data-i18n="demo.play.text1">Watch the demo</strong><span data-i18n="demo.play.text2">0:56 &middot; the whole app in under a&nbsp;minute</span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="p-section" id="features" aria-labelledby="featuresTitle">
+      <div class="p-section-head reveal">
+        <span class="p-label" data-i18n="features.label">Features</span>
+        <h2 class="p-title" id="featuresTitle" data-i18n="features.title">From keyword idea to user complaint</h2>
+        <p class="p-desc" data-i18n="features.desc">Research keywords, watch your rankings move and hear what users say — without switching tools or paying per seat.</p>
+      </div>
+
+      <div class="p-feature-grid">
+        <article class="p-tilt reveal" data-tilt data-tone="primary">
+          <div class="p-tilt-card">
+            <span class="p-tilt-glare" aria-hidden="true"></span>
+            <div class="p-tilt-layer p-tilt-art" style="--pu-depth:20" aria-hidden="true">
+              <span class="p-feature-index">01</span>
+              <span class="p-icon-tile" data-tone="primary">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
             </div>
-            <ul class="weights">
-              <li><b>40</b><span><i class="swatch" style="background:#5e6ad2"></i><span data-i18n="pop.w1">Rating volume of ranking apps (log scale)</span></span></li>
-              <li><b>22</b><span><i class="swatch" style="background:#727ce0"></i><span data-i18n="pop.w2">Breadth of results</span></span></li>
-              <li><b>20</b><span><i class="swatch" style="background:#8c93e6"></i><span data-i18n="pop.w3">Average star rating</span></span></li>
-              <li><b>18</b><span><i class="swatch" style="background:#a6adec"></i><span data-i18n="pop.w4">Share of apps running ads</span></span></li>
-            </ul>
-          </article>
-          <article class="metric-card reveal">
-            <div class="metric-head"><h3 data-i18n="diff.head">Difficulty</h3><span class="metric-range" data-i18n="diff.range">0&ndash;100</span></div>
-            <p data-i18n="diff.desc">How hard it is to break into the results for this keyword.</p>
-            <div class="metric-bar" aria-hidden="true">
-              <span style="width:40%;background:#e5bb3f"></span><span style="width:25%;background:#edc959"></span><span style="width:20%;background:#f2d47d"></span><span style="width:15%;background:#f8e1a6"></span>
+            <div class="p-tilt-layer p-tilt-copy" style="--pu-depth:8">
+              <div class="p-card-top">
+                <span class="p-chip" data-i18n="feature1.tag">Research</span>
+                <span class="p-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <h3 class="p-card-title" data-i18n="feature1.title">Keyword research</h3>
+              <p class="p-card-desc" data-i18n="feature1.desc">Analyze any keyword on one or both stores and see who ranks for it.</p>
+              <ul class="p-points">
+                <li data-i18n-html="feature1.p1">Popularity, difficulty &amp; opportunity <span class="nowrap">(0&ndash;100)</span></li>
+                <li data-i18n="feature1.p2">5 similar keywords scored side by side</li>
+                <li data-i18n="feature1.p3">Keywords your competitors also rank for</li>
+              </ul>
             </div>
-            <ul class="weights">
-              <li><b>40</b><span><i class="swatch" style="background:#e5bb3f"></i><span data-i18n="diff.w1">Share of &ldquo;authority&rdquo; apps (&ge;&nbsp;50K ratings)</span></span></li>
-              <li><b>25</b><span><i class="swatch" style="background:#edc959"></i><span data-i18n="diff.w2">Share of apps running ads</span></span></li>
-              <li><b>20</b><span><i class="swatch" style="background:#f2d47d"></i><span data-i18n="diff.w3">Breadth of results</span></span></li>
-              <li><b>15</b><span><i class="swatch" style="background:#f8e1a6"></i><span data-i18n="diff.w4">Share of apps rated &ge;&nbsp;4&#9733;</span></span></li>
-            </ul>
-          </article>
-          <article class="metric-card reveal">
-            <div class="metric-head"><h3 data-i18n="opp.head">Opportunity</h3><span class="metric-range" data-i18n="opp.range">0&ndash;100</span></div>
-            <p data-i18n="opp.desc">High demand you can realistically compete for. Sort by this first.</p>
-            <div class="formula" data-i18n-html="opp.formula">opportunity = popularity<br>&nbsp;&nbsp;&times; (100 &minus; difficulty) / 100</div>
-            <ul class="weights">
-              <li><b>56</b><span data-i18n="opp.e1">popularity 80, difficulty 30 &mdash; go for it</span></li>
-              <li><b>18</b><span data-i18n="opp.e2">popularity 20, difficulty 10 &mdash; small niche</span></li>
-              <li><b>8</b><span data-i18n="opp.e3">popularity 80, difficulty 90 &mdash; crowded</span></li>
-            </ul>
-          </article>
+            <div class="p-card-foot"><span data-i18n="feature1.foot">Scored on both stores</span><span class="p-card-foot-mark" aria-hidden="true">P / D / O</span></div>
+          </div>
+        </article>
+
+        <article class="p-tilt reveal" data-tilt data-tone="success">
+          <div class="p-tilt-card">
+            <span class="p-tilt-glare" aria-hidden="true"></span>
+            <div class="p-tilt-layer p-tilt-art" style="--pu-depth:20" aria-hidden="true">
+              <span class="p-feature-index">02</span>
+              <span class="p-icon-tile" data-tone="success">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </span>
+            </div>
+            <div class="p-tilt-layer p-tilt-copy" style="--pu-depth:8">
+              <div class="p-card-top">
+                <span class="p-chip" data-i18n="feature2.tag">Tracking</span>
+                <span class="p-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <h3 class="p-card-title" data-i18n="feature2.title">Rank tracking</h3>
+              <p class="p-card-desc" data-i18n="feature2.desc">Know exactly where your app sits for every keyword, on each store.</p>
+              <ul class="p-points">
+                <li data-i18n="feature2.p1">Position in the top 50 per store</li>
+                <li data-i18n="feature2.p2">Daily snapshots with trend arrows &amp; charts</li>
+                <li data-i18n="feature2.p3">History kept locally for 180 days</li>
+              </ul>
+            </div>
+            <div class="p-card-foot"><span data-i18n="feature2.foot">180 days of history</span><span class="p-card-foot-mark" aria-hidden="true">↑ ↓</span></div>
+          </div>
+        </article>
+
+        <article class="p-tilt reveal" data-tilt data-tone="warning">
+          <div class="p-tilt-card">
+            <span class="p-tilt-glare" aria-hidden="true"></span>
+            <div class="p-tilt-layer p-tilt-art" style="--pu-depth:20" aria-hidden="true">
+              <span class="p-feature-index">03</span>
+              <span class="p-icon-tile" data-tone="warning">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+            </div>
+            <div class="p-tilt-layer p-tilt-copy" style="--pu-depth:8">
+              <div class="p-card-top">
+                <span class="p-chip" data-i18n="feature3.tag">Markets</span>
+                <span class="p-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <h3 class="p-card-title" data-i18n="feature3.title">All countries at once</h3>
+              <p class="p-card-desc" data-i18n="feature3.desc">Run one keyword in all 20 storefronts and find your best markets.</p>
+              <ul class="p-points">
+                <li data-i18n="feature3.p1">One row per country, best opportunity first</li>
+                <li data-i18n="feature3.p2">&ldquo;Top market&rdquo; badges on the winners</li>
+                <li data-i18n="feature3.p3">Reviews from every App Store storefront</li>
+              </ul>
+            </div>
+            <div class="p-card-foot"><span data-i18n="feature3.foot">20 storefronts</span><span class="p-card-foot-mark" aria-hidden="true">20 ×</span></div>
+          </div>
+        </article>
+
+        <article class="p-tilt reveal" data-tilt data-tone="info">
+          <div class="p-tilt-card">
+            <span class="p-tilt-glare" aria-hidden="true"></span>
+            <div class="p-tilt-layer p-tilt-art" style="--pu-depth:20" aria-hidden="true">
+              <span class="p-feature-index">04</span>
+              <span class="p-icon-tile" data-tone="info">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+            </div>
+            <div class="p-tilt-layer p-tilt-copy" style="--pu-depth:8">
+              <div class="p-card-top">
+                <span class="p-chip" data-i18n="feature4.tag">Reviews</span>
+                <span class="p-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <h3 class="p-card-title" data-i18n="feature4.title">Reviews from both stores</h3>
+              <p class="p-card-desc" data-i18n="feature4.desc">Google Play and App Store reviews in one table, with a store column.</p>
+              <ul class="p-points">
+                <li data-i18n="feature4.p1">Instant word &amp; star filters, highlighted matches</li>
+                <li data-i18n="feature4.p2">Compare up to 5 apps with Ctrl/&#8984;-click</li>
+                <li data-i18n="feature4.p3">Step through reviews with &larr; / &rarr;</li>
+              </ul>
+            </div>
+            <div class="p-card-foot"><span data-i18n="feature4.foot">Two stores, one table</span><span class="p-card-foot-mark" aria-hidden="true">★★★★★</span></div>
+          </div>
+        </article>
+
+        <article class="p-tilt reveal" data-tilt data-tone="purple">
+          <div class="p-tilt-card">
+            <span class="p-tilt-glare" aria-hidden="true"></span>
+            <div class="p-tilt-layer p-tilt-art" style="--pu-depth:20" aria-hidden="true">
+              <span class="p-feature-index">05</span>
+              <span class="p-icon-tile" data-tone="purple">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              </span>
+            </div>
+            <div class="p-tilt-layer p-tilt-copy" style="--pu-depth:8">
+              <div class="p-card-top">
+                <span class="p-chip" data-i18n="feature5.tag">Data</span>
+                <span class="p-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <h3 class="p-card-title" data-i18n="feature5.title">Full-data explorer</h3>
+              <p class="p-card-desc" data-i18n="feature5.desc">Every reachable review across stores and languages, in one place.</p>
+              <ul class="p-points">
+                <li data-i18n="feature5.p1">Live progress for each store &amp; language</li>
+                <li data-i18n="feature5.p2">Filter by rating, store or language; search &amp; sort</li>
+                <li data-i18n="feature5.p3">What users complain about vs. love</li>
+              </ul>
+            </div>
+            <div class="p-card-foot"><span data-i18n="feature5.foot">Every reachable review</span><span class="p-card-foot-mark" aria-hidden="true">∞</span></div>
+          </div>
+        </article>
+
+        <article class="p-tilt reveal" data-tilt data-tone="destructive">
+          <div class="p-tilt-card">
+            <span class="p-tilt-glare" aria-hidden="true"></span>
+            <div class="p-tilt-layer p-tilt-art" style="--pu-depth:20" aria-hidden="true">
+              <span class="p-feature-index">06</span>
+              <span class="p-icon-tile" data-tone="destructive">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+            </div>
+            <div class="p-tilt-layer p-tilt-copy" style="--pu-depth:8">
+              <div class="p-card-top">
+                <span class="p-chip" data-i18n="feature6.tag">Export</span>
+                <span class="p-arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <h3 class="p-card-title" data-i18n="feature6.title">Export anything</h3>
+              <p class="p-card-desc" data-i18n="feature6.desc">Press Ctrl/&#8984;+E to export exactly what you are looking at.</p>
+              <ul class="p-points">
+                <li data-i18n="feature6.p1">CSV for keywords, reviews &amp; full data</li>
+                <li data-i18n="feature6.p2">JSON for full-data results</li>
+                <li data-i18n="feature6.p3">Excel-ready UTF-8, formula-injection safe</li>
+              </ul>
+            </div>
+            <div class="p-card-foot"><span data-i18n="feature6.foot">CSV &amp; JSON</span><span class="p-card-foot-mark" aria-hidden="true">.csv</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="p-also reveal">
+        <span class="p-also-title" data-i18n="also.title">Also included</span>
+        <ul class="p-chips" aria-label="Also included">
+          <li class="p-chip" data-i18n="chip.tour">Guided tour &amp; help tooltips</li>
+          <li class="p-chip" data-i18n="chip.folders">Folders &amp; drag-and-drop</li>
+          <li class="p-chip" data-i18n="chip.theme">Light / dark / system theme</li>
+          <li class="p-chip" data-i18n="chip.shortcuts">Keyboard shortcuts</li>
+          <li class="p-chip" data-i18n="chip.undo">Undo for deletes</li>
+          <li class="p-chip" data-i18n="chip.a11y">Screen-reader labels</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══ TOUR ═══ -->
+    <section class="p-section p-section-alt" id="tour" aria-labelledby="tourTitle">
+      <div class="p-section-head reveal">
+        <span class="p-label" data-i18n="tour.label">See it in action</span>
+        <h2 class="p-title" id="tourTitle" data-i18n="tour.title">A quick look inside</h2>
+        <p class="p-desc" data-i18n="tour.desc">Real screens from OwlASO, filled with demo data.</p>
+      </div>
+
+      <div class="p-frame p-frame-default reveal">
+        <div class="p-frame-header">
+          <div>
+            <p class="p-frame-title" data-i18n="nav.screens">Screens</p>
+            <p class="p-frame-desc" data-i18n="tour.desc">Real screens from OwlASO, filled with demo data.</p>
+          </div>
+          <div class="p-frame-action"><span class="p-live"><span class="p-live-dot" aria-hidden="true"></span><span data-i18n="tour.live">Live screenshot</span></span></div>
+        </div>
+        <div class="p-frame-panel p-tour-panel">
+          <div class="shots" data-tabs>
+            <div class="shot-tabs" role="tablist" aria-label="App screens">
+              <span class="shot-tab-indicator" aria-hidden="true"></span>
+              <button type="button" class="shot-tab" role="tab" id="tab-keywords" aria-controls="panel-keywords" aria-selected="true" tabindex="0" data-i18n="tab.keywords">Keywords</button>
+              <button type="button" class="shot-tab" role="tab" id="tab-keyword-detail" aria-controls="panel-keyword-detail" aria-selected="false" tabindex="-1" data-i18n="tab.keywordDetail">Keyword details</button>
+              <button type="button" class="shot-tab" role="tab" id="tab-all-countries" aria-controls="panel-all-countries" aria-selected="false" tabindex="-1" data-i18n="tab.allCountries">All countries</button>
+              <button type="button" class="shot-tab" role="tab" id="tab-reviews-filter" aria-controls="panel-reviews-filter" aria-selected="false" tabindex="-1" data-i18n="tab.reviews">Reviews</button>
+              <button type="button" class="shot-tab" role="tab" id="tab-full-data" aria-controls="panel-full-data" aria-selected="false" tabindex="-1" data-i18n="tab.fullData">Full data</button>
+              <button type="button" class="shot-tab" role="tab" id="tab-guided-tour" aria-controls="panel-guided-tour" aria-selected="false" tabindex="-1" data-i18n="tab.guidedTour">Guided tour</button>
+            </div>
+            <div class="shot-panel active" role="tabpanel" id="panel-keywords" aria-labelledby="tab-keywords">
+              <p class="shot-caption" data-i18n-html="shot.keywords.cap">Score a keyword and 5 similar ones at once. <strong>Position</strong> shows where your app ranks on each store, with the daily change.</p>
+              <figure class="app-window shot-window">
+                <div class="app-titlebar" aria-hidden="true">
+                  <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                  <span class="app-title">OwlASO — Keywords</span>
+                </div>
+                <img class="app-shot shot-dark" src="/screenshots/keywords-dark.png" alt="Keywords tab: "habit tracker" and 5 similar keywords with popularity, difficulty, per-store position and ranking apps (dark theme)" data-i18n-alt="shot.keywords.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
+                <img class="app-shot shot-light" src="/screenshots/keywords-light.png" alt="Keywords tab: "habit tracker" and 5 similar keywords with popularity, difficulty, per-store position and ranking apps" data-i18n-alt="shot.keywords.img.light" width="1920" height="1200" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="shot-panel" role="tabpanel" id="panel-keyword-detail" aria-labelledby="tab-keyword-detail">
+              <p class="shot-caption" data-i18n="shot.keywordDetail.cap">Open any keyword for all its numbers, trend charts, your app&rsquo;s best rank over time and the keywords the top apps also rank for.</p>
+              <figure class="app-window shot-window">
+                <div class="app-titlebar" aria-hidden="true">
+                  <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                  <span class="app-title">OwlASO — Keyword details</span>
+                </div>
+                <img class="app-shot shot-dark" src="/screenshots/keyword-detail-dark.png" alt="Keyword details for "habit tracker": popularity 78, difficulty 64, opportunity 28, store ranks, 30-day trend charts and competitor keywords (dark theme)" data-i18n-alt="shot.keywordDetail.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
+                <img class="app-shot shot-light" src="/screenshots/keyword-detail-light.png" alt="Keyword details for "habit tracker": popularity 78, difficulty 64, opportunity 28, store ranks, 30-day trend charts and competitor keywords" data-i18n-alt="shot.keywordDetail.img.light" width="1920" height="1200" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="shot-panel" role="tabpanel" id="panel-all-countries" aria-labelledby="tab-all-countries">
+              <p class="shot-caption" data-i18n="shot.allCountries.cap">Run one keyword in all 20 storefronts. Rows are sorted by opportunity, so your best markets come first.</p>
+              <figure class="app-window shot-window">
+                <div class="app-titlebar" aria-hidden="true">
+                  <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                  <span class="app-title">OwlASO — All countries</span>
+                </div>
+                <img class="app-shot shot-dark" src="/screenshots/all-countries-dark.png" alt="All countries view: "habit tracker" analyzed per country with Brazil, Turkey and Indonesia marked as top markets (dark theme)" data-i18n-alt="shot.allCountries.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
+                <img class="app-shot shot-light" src="/screenshots/all-countries-light.png" alt="All countries view: "habit tracker" analyzed per country with Brazil, Turkey and Indonesia marked as top markets" data-i18n-alt="shot.allCountries.img.light" width="1920" height="1200" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="shot-panel" role="tabpanel" id="panel-reviews-filter" aria-labelledby="tab-reviews-filter">
+              <p class="shot-caption" data-i18n="shot.reviews.cap">Both stores in one table. Type a word to filter instantly &mdash; matches are highlighted and the store is on every row.</p>
+              <figure class="app-window shot-window">
+                <div class="app-titlebar" aria-hidden="true">
+                  <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                  <span class="app-title">OwlASO — Reviews</span>
+                </div>
+                <img class="app-shot shot-dark" src="/screenshots/reviews-filter-dark.png" alt="Reviews filtered by the word "sync": 26 matches from Google Play and the App Store with the word highlighted (dark theme)" data-i18n-alt="shot.reviews.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
+                <img class="app-shot shot-light" src="/screenshots/reviews-filter-light.png" alt="Reviews filtered by the word "sync": 26 matches from Google Play and the App Store with the word highlighted" data-i18n-alt="shot.reviews.img.light" width="1920" height="1200" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="shot-panel" role="tabpanel" id="panel-full-data" aria-labelledby="tab-full-data">
+              <p class="shot-caption" data-i18n="shot.fullData.cap">Every reachable review in one explorer: rating, store and language facets, search, sorting, and what users complain about.</p>
+              <figure class="app-window shot-window">
+                <div class="app-titlebar" aria-hidden="true">
+                  <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                  <span class="app-title">OwlASO — Full data</span>
+                </div>
+                <img class="app-shot shot-dark" src="/screenshots/full-data-dark.png" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list (dark theme)" data-i18n-alt="shot.fullData.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
+                <img class="app-shot shot-light" src="/screenshots/full-data-light.png" alt="Full data explorer: 3,000 reviews from 8 sources with rating, store and language breakdowns next to the review list" data-i18n-alt="shot.fullData.img.light" width="1920" height="1200" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="shot-panel" role="tabpanel" id="panel-guided-tour" aria-labelledby="tab-guided-tour">
+              <p class="shot-caption" data-i18n-html="shot.guidedTour.cap">New here? A one-minute guided tour walks you through every part of the app. Press <kbd>?</kbd> any time to replay it.</p>
+              <figure class="app-window shot-window">
+                <div class="app-titlebar" aria-hidden="true">
+                  <div class="app-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                  <span class="app-title">OwlASO — Guided tour</span>
+                </div>
+                <img class="app-shot shot-dark" src="/screenshots/guided-tour-dark.png" alt="Guided tour step 6 of 11, "Read the scores", highlighting the keyword table columns (dark theme)" data-i18n-alt="shot.guidedTour.img.dark" width="1920" height="1200" loading="lazy" decoding="async">
+                <img class="app-shot shot-light" src="/screenshots/guided-tour-light.png" alt="Guided tour step 6 of 11, "Read the scores", highlighting the keyword table columns" data-i18n-alt="shot.guidedTour.img.light" width="1920" height="1200" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SCORES ═══ -->
+    <section class="p-section" id="scores" aria-labelledby="scoresTitle">
+      <div class="p-section-head p-section-head-split reveal">
+        <div>
+          <span class="p-label" data-i18n="scores.label">Transparent scores</span>
+          <h2 class="p-title" id="scoresTitle" data-i18n="scores.title">No black-box numbers</h2>
+          <p class="p-desc" data-i18n="scores.desc">Every score is computed from public store data with a formula you can read — and check in the source.</p>
+        </div>
+        <span class="p-pill p-pill-lg" data-tone="warning" data-i18n="scores.example">Example · “habit tracker”</span>
+      </div>
+
+      <div class="p-score-grid">
+        <article class="p-score-card reveal">
+          <div class="p-score-head">
+            <h3 data-i18n="pop.head">Popularity</h3>
+            <span class="p-score-range" data-i18n="pop.range">0&ndash;100</span>
+          </div>
+          <p data-i18n="pop.desc">How much demand a keyword shows, judged by the apps that rank for it.</p>
+          <div class="p-meter" data-meter data-meter-value="78" data-meter-color="primary" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78" aria-label="Popularity" data-i18n-aria-label="pop.head"></div>
+          <div class="p-meter-scale"><span>0</span><span>100</span></div>
+          <ul class="weights">
+            <li><b>40</b><span><i class="swatch" style="background:#5e6ad2"></i><span data-i18n="pop.w1">Rating volume of ranking apps (log scale)</span></span></li>
+            <li><b>22</b><span><i class="swatch" style="background:#727ce0"></i><span data-i18n="pop.w2">Breadth of results</span></span></li>
+            <li><b>20</b><span><i class="swatch" style="background:#8c93e6"></i><span data-i18n="pop.w3">Average star rating</span></span></li>
+            <li><b>18</b><span><i class="swatch" style="background:#a6adec"></i><span data-i18n="pop.w4">Share of apps running ads</span></span></li>
+          </ul>
+        </article>
+
+        <article class="p-score-card reveal">
+          <div class="p-score-head">
+            <h3 data-i18n="diff.head">Difficulty</h3>
+            <span class="p-score-range" data-i18n="diff.range">0&ndash;100</span>
+          </div>
+          <p data-i18n="diff.desc">How hard it is to break into the results for this keyword.</p>
+          <div class="p-meter" data-meter data-meter-value="64" data-meter-color="warning" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" aria-label="Difficulty" data-i18n-aria-label="diff.head"></div>
+          <div class="p-meter-scale"><span>0</span><span>100</span></div>
+          <ul class="weights">
+            <li><b>40</b><span><i class="swatch" style="background:#e5bb3f"></i><span data-i18n="diff.w1">Share of &ldquo;authority&rdquo; apps (&ge;&nbsp;50K ratings)</span></span></li>
+            <li><b>25</b><span><i class="swatch" style="background:#edc959"></i><span data-i18n="diff.w2">Share of apps running ads</span></span></li>
+            <li><b>20</b><span><i class="swatch" style="background:#f2d47d"></i><span data-i18n="diff.w3">Breadth of results</span></span></li>
+            <li><b>15</b><span><i class="swatch" style="background:#f8e1a6"></i><span data-i18n="diff.w4">Share of apps rated &ge;&nbsp;4&#9733;</span></span></li>
+          </ul>
+        </article>
+
+        <article class="p-score-card reveal">
+          <div class="p-score-head">
+            <h3 data-i18n="opp.head">Opportunity</h3>
+            <span class="p-score-range" data-i18n="opp.range">0&ndash;100</span>
+          </div>
+          <p data-i18n="opp.desc">High demand you can realistically compete for. Sort by this first.</p>
+          <div class="p-meter" data-meter data-meter-value="28" data-meter-color="success" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="28" aria-label="Opportunity" data-i18n-aria-label="opp.head"></div>
+          <div class="p-meter-scale"><span>0</span><span>100</span></div>
+          <div class="p-formula" data-i18n-html="opp.formula">opportunity = popularity<br>&nbsp;&nbsp;&times; (100 &minus; difficulty) / 100</div>
+          <ul class="weights">
+            <li><b>56</b><span data-i18n-html="opp.e1">popularity 80, difficulty 30 &mdash; go for it</span></li>
+            <li><b>18</b><span data-i18n-html="opp.e2">popularity 20, difficulty 10 &mdash; small niche</span></li>
+            <li><b>8</b><span data-i18n-html="opp.e3">popularity 80, difficulty 90 &mdash; crowded</span></li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="p-note reveal" data-i18n-html="metrics.note">
+        These are free, public-data estimates &mdash; not Apple Search Ads&rsquo; first-party popularity. Use them to compare keywords with each other.
+        <a href="./docs/#metrics">Full methodology &rarr;</a>
+      </p>
+    </section>
+
+    <!-- ═══ TRY THE LOGIC ═══ -->
+    <section class="p-section p-try-section" aria-labelledby="tryTitle">
+      <div class="p-try-frame reveal">
+        <div class="p-section-head p-try-head">
+          <span class="p-label" data-i18n="try.label">Try the logic</span>
+          <h2 class="p-title" id="tryTitle" data-i18n="try.title">Type a keyword. See what OwlASO sees.</h2>
+          <p class="p-desc" data-i18n="try.desc">A tiny preview of the scoring model — popularity, difficulty and the opportunity they add up to. The real app runs this across both stores and 20 storefronts.</p>
         </div>
 
-        <p class="metrics-note reveal" data-i18n-html="metrics.note">
-          These are free, public-data estimates &mdash; not Apple Search Ads&rsquo; first-party popularity. Use them to compare keywords with each other.
-          <a href="./docs/#metrics">Full methodology &rarr;</a>
-        </p>
-      </section>
-    </div>
+        <div class="p-dock" data-dock>
+          <div class="p-dock-surface" data-dock-surface>
+            <button type="button" class="p-dock-trigger" data-dock-trigger aria-expanded="false" aria-label="Try a keyword">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span data-i18n="try.trigger">Try a keyword</span>
+            </button>
+            <div class="p-dock-panel" data-dock-panel inert>
+              <form class="p-dock-form" data-dock-form role="search">
+                <input class="p-dock-input" data-dock-input type="text" name="keyword" maxlength="64" autocomplete="off" spellcheck="false" aria-label="Keyword" placeholder="Try “habit tracker”…" data-i18n-placeholder="try.placeholder">
+                <button class="p-dock-submit" type="submit" aria-label="Score keyword" data-i18n-aria-label="try.submit">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                </button>
+              </form>
+              <div class="p-dock-results" data-dock-results role="list" aria-label="Keyword scores" aria-live="polite"></div>
+            </div>
+          </div>
+          <p class="p-dock-hint"><span data-i18n="try.hint">Press Enter to score</span><span class="p-dock-sep" aria-hidden="true">·</span><span data-i18n="try.legend">P popularity · D difficulty · O opportunity</span></p>
+        </div>
+      </div>
+    </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="section section-narrow" id="how" aria-labelledby="howTitle">
-      <div class="section-label" data-i18n="how.label">How it works</div>
-      <h2 class="section-title" id="howTitle" data-i18n="how.title">Up and running in 3 steps</h2>
-      <p class="section-desc" data-i18n="how.desc">From install to your first insight in about a minute.</p>
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section class="p-section p-section-alt" id="how" aria-labelledby="howTitle">
+      <div class="p-section-head p-section-head-split reveal">
+        <div>
+          <span class="p-label" data-i18n="how.label">How it works</span>
+          <h2 class="p-title" id="howTitle" data-i18n="how.title">Up and running in 3 steps</h2>
+          <p class="p-desc" data-i18n="how.desc">From install to your first insight in about a minute.</p>
+        </div>
+        <span class="p-pill p-pill-lg" data-tone="info" data-i18n="how.time">About a minute</span>
+      </div>
 
-      <ol class="steps">
-        <li class="step reveal">
-          <div class="step-number" aria-hidden="true">1</div>
+      <ol class="p-steps">
+        <li class="p-step reveal">
+          <div class="p-step-top"><span class="p-step-num">01</span><span class="p-step-line" aria-hidden="true"></span></div>
           <h3 data-i18n="step1.title">Add your apps</h3>
           <p data-i18n-html="step1.desc">Click <strong>+</strong> (or press <kbd>A</kbd>) and search by name, package (<code>com.spotify.music</code>) or App Store id. Apps on both stores merge into one entry.</p>
+          <div class="p-step-foot"><span class="p-step-dot" aria-hidden="true"></span><span>Google Play + App Store</span></div>
         </li>
-        <li class="step reveal">
-          <div class="step-number" aria-hidden="true">2</div>
+        <li class="p-step reveal">
+          <div class="p-step-top"><span class="p-step-num">02</span><span class="p-step-line" aria-hidden="true"></span></div>
           <h3 data-i18n="step2.title">Analyze keywords</h3>
           <p data-i18n-html="step2.desc">Type a keyword and press <kbd>Enter</kbd>. You get scores for it and 5 similar keywords, plus your app&rsquo;s position on each store.</p>
+          <div class="p-step-foot"><span class="p-step-dot" aria-hidden="true"></span><span data-i18n="try.legend">P popularity · D difficulty · O opportunity</span></div>
         </li>
-        <li class="step reveal">
-          <div class="step-number" aria-hidden="true">3</div>
+        <li class="p-step reveal">
+          <div class="p-step-top"><span class="p-step-num">03</span><span class="p-step-line" aria-hidden="true"></span></div>
           <h3 data-i18n="step3.title">Read &amp; export reviews</h3>
           <p data-i18n-html="step3.desc">Switch to <strong>Reviews</strong>, filter by words and stars, compare apps, then press <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd>+<kbd>E</kbd> to export.</p>
+          <div class="p-step-foot"><span class="p-step-dot" aria-hidden="true"></span><span data-i18n="feature6.foot">CSV &amp; JSON</span></div>
         </li>
       </ol>
+      <p class="p-steps-note reveal" data-i18n="how.footer">No account, no setup wizard. Open the app and start.</p>
     </section>
 
-    <!-- INSTALL -->
-    <div class="section-alt">
-      <section class="section" id="install" aria-labelledby="installTitle">
-        <div class="section-label" data-i18n="install.label">Install</div>
-        <h2 class="section-title" id="installTitle" data-i18n="install.title">Get OwlASO</h2>
-        <p class="section-desc" data-i18n="install.desc">A Windows installer is ready to go. On macOS and Linux, run it from source in four commands.</p>
+    <!-- ═══ INSTALL ═══ -->
+    <section class="p-section" id="install" aria-labelledby="installTitle">
+      <div class="p-section-head reveal">
+        <span class="p-label" data-i18n="install.label">Install</span>
+        <h2 class="p-title" id="installTitle" data-i18n="install.title">Get OwlASO</h2>
+        <p class="p-desc" data-i18n="install.desc">A Windows installer is ready to go. On macOS and Linux, run it from source in four commands.</p>
+      </div>
 
-        <div class="install-grid">
-          <article class="install-card reveal">
-            <div class="install-card-head">
-              <span class="install-os-icon" aria-hidden="true">
+      <div class="p-install-grid">
+        <article class="p-install-card p-frame p-frame-band reveal">
+          <div class="p-frame-header">
+            <div class="p-install-head">
+              <span class="p-os-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
               </span>
               <div>
-                <h3 data-i18n="win.title">Windows</h3>
-                <div class="sub" data-i18n="win.sub">Installer &middot; x64 &middot; latest: v1.6.0-beta.1</div>
+                <h3 class="p-frame-title" data-i18n="win.title">Windows</h3>
+                <p class="p-frame-desc" data-i18n="win.sub">Installer · x64 · latest: v1.6.0-beta.1</p>
               </div>
             </div>
-            <ol class="install-steps">
+            <div class="p-frame-action"><span class="p-pill" data-tone="success" data-i18n="install.windows.badge">Recommended</span></div>
+          </div>
+          <div class="p-frame-panel p-install-body">
+            <ol class="p-install-steps">
               <li data-i18n="win.li1">Open the latest release on GitHub.</li>
               <li data-i18n-html="win.li2">Download <code>OwlASO.Setup.&lt;version&gt;.exe</code>.</li>
-              <li data-i18n="win.li3">Run it &mdash; you get desktop &amp; Start-menu shortcuts.</li>
+              <li data-i18n-html="win.li3">Run it &mdash; you get desktop &amp; Start-menu shortcuts.</li>
             </ol>
-            <a href="https://github.com/owlaso/owlaso/releases/latest" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/owlaso/owlaso/releases/latest" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               <span data-i18n="win.btn">Download from GitHub</span>
             </a>
             <p data-i18n-html="win.p1">Rather not install? The release also ships a portable <code>.zip</code> you can unpack and run.</p>
             <p data-i18n="win.p2">All countries, the full-data explorer and the guided tour arrived after this beta. To use them now, run OwlASO from source.</p>
-            <p class="install-note" data-i18n-html="win.note"><strong>SmartScreen warning?</strong> If Windows shows &ldquo;Windows protected your PC&rdquo;, choose <em>More info &rarr; Run anyway</em> &mdash; or build it yourself from source.</p>
-          </article>
+            <div class="p-alert" data-tone="warning">
+              <span class="p-alert-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              <p class="p-alert-desc" data-i18n-html="win.note"><strong>SmartScreen warning?</strong> If Windows shows &ldquo;Windows protected your PC&rdquo;, choose <em>More info &rarr; Run anyway</em> &mdash; or build it yourself from source.</p>
+            </div>
+          </div>
+        </article>
 
-          <article class="install-card reveal">
-            <div class="install-card-head">
-              <span class="install-os-icon" aria-hidden="true">
+        <article class="p-install-card p-frame p-frame-band reveal">
+          <div class="p-frame-header">
+            <div class="p-install-head">
+              <span class="p-os-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
               </span>
               <div>
-                <h3 data-i18n="src.title">macOS, Linux &amp; from source</h3>
-                <div class="sub" data-i18n="src.sub">Any OS &middot; needs Node.js 22.12+ and git</div>
+                <h3 class="p-frame-title" data-i18n="src.title">macOS, Linux &amp; from source</h3>
+                <p class="p-frame-desc" data-i18n="src.sub">Any OS · needs Node.js 22.12+ and git</p>
               </div>
             </div>
+            <div class="p-frame-action"><span class="p-pill" data-tone="info" data-i18n="install.source.badge">Any OS</span></div>
+          </div>
+          <div class="p-frame-panel p-install-body">
             <div class="code-block">
               <div class="code-block-head"><span data-i18n="src.terminal">Terminal</span></div>
 <pre><code><span class="p">$ </span>git clone https://github.com/owlaso/owlaso.git
@@ -533,67 +862,82 @@
 <span class="p">$ </span>npm install
 <span class="p">$ </span>npm run electron   <span class="c"># desktop app</span></code></pre>
             </div>
+            <button type="button" class="p-copy-install" data-copy-install>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="install.copy">Copy install command</span>
+            </button>
             <p data-i18n-html="src.p1">Prefer the browser? Run <code>npm start</code> and open <code>http://localhost:3000</code>. Want an installer? <code>npm run dist:mac</code> builds a DMG, <code>npm run dist:linux</code> an AppImage.</p>
-            <p class="install-note" data-i18n-html="src.note"><a href="./docs/#install">Full install guide &rarr;</a> &nbsp;Covers requirements, web mode and building installers.</p>
-          </article>
-        </div>
-      </section>
-    </div>
-
-    <!-- PRIVACY -->
-    <section class="section section-narrow" id="privacy" aria-labelledby="privacyTitle">
-      <div class="section-label" data-i18n="privacy.label">Private by design</div>
-      <h2 class="section-title" id="privacyTitle" data-i18n="privacy.title">Your research stays on your machine</h2>
-      <p class="section-desc" data-i18n="privacy.desc">No cloud, no sign-up, no OwlASO server in the middle. The app talks straight to the public store endpoints.</p>
-
-      <ul class="privacy-grid">
-        <li class="privacy-item reveal">
-          <div class="feature-icon" style="--icon-bg:var(--green-soft);--icon-color:var(--green)" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="22" y2="13"/><line x1="22" y1="8" x2="17" y2="13"/></svg>
+            <p class="p-note p-note-inline" data-i18n-html="src.note"><a href="./docs/#install">Full install guide &rarr;</a> &nbsp;Covers requirements, web mode and building installers.</p>
           </div>
-          <div>
-            <h3 data-i18n="priv1.title">No account, no telemetry</h3>
-            <p data-i18n="priv1.desc">Tracked apps, folders and keyword history are stored on your device. There&rsquo;s no analytics and no OwlASO server.</p>
-          </div>
-        </li>
-        <li class="privacy-item reveal">
-          <div class="feature-icon" style="--icon-bg:var(--blue-soft);--icon-color:var(--blue)" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="priv2.title">Local-only API</h3>
-            <p data-i18n-html="priv2.desc">Web mode binds to <code>127.0.0.1</code> and rejects foreign <code>Host</code> headers and cross-site requests (DNS-rebinding &amp; CSRF protection).</p>
-          </div>
-        </li>
-        <li class="privacy-item reveal">
-          <div class="feature-icon" style="--icon-bg:var(--purple-soft);--icon-color:var(--purple)" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="priv3.title">Hardened desktop app</h3>
-            <p data-i18n-html="priv3.desc">Sandboxed renderer with context isolation, a strict CSP, <code>http(s)</code>-only external links, and every permission request denied.</p>
-          </div>
-        </li>
-        <li class="privacy-item reveal">
-          <div class="feature-icon" style="--icon-bg:var(--amber-soft);--icon-color:var(--amber)" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="priv4.title">Safe exports</h3>
-            <p data-i18n-html="priv4.desc">Review text that starts with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code> is neutralised, so a review can&rsquo;t run as a spreadsheet formula.</p>
-          </div>
-        </li>
-      </ul>
+        </article>
+      </div>
     </section>
 
-    <!-- FAQ -->
-    <div class="section-alt">
-      <section class="section" id="faq" aria-labelledby="faqTitle">
-        <div class="section-label" data-i18n="faq.label">FAQ</div>
-        <h2 class="section-title" id="faqTitle" data-i18n="faq.title">Questions, answered</h2>
-        <p class="section-desc" data-i18n-html="faq.desc">Short answers here &mdash; the <a href="./docs/">docs</a> go deeper.</p>
+    <!-- ═══ PRIVACY ═══ -->
+    <section class="p-section p-section-alt" id="privacy" aria-labelledby="privacyTitle">
+      <div class="p-section-head reveal">
+        <span class="p-label" data-i18n="privacy.label">Private by design</span>
+        <h2 class="p-title" id="privacyTitle" data-i18n="privacy.title">Your research stays on your machine</h2>
+        <p class="p-desc" data-i18n="privacy.desc">No cloud, no sign-up, no OwlASO server in the middle. The app talks straight to the public store endpoints.</p>
+      </div>
 
-        <div class="faq-list">
+      <div class="p-privacy-strip reveal">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="privacy.noTelemetry">No telemetry</span></span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span data-i18n="privacy.localOnly">127.0.0.1</span></span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-i18n="privacy.onDevice">On-device</span></span>
+      </div>
+
+      <div class="p-frame p-frame-default p-privacy-frame reveal">
+        <div class="p-frame-panel">
+          <div class="p-frame-row">
+            <div class="p-frame-media"><span class="p-icon-tile" data-tone="success"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="22" y2="13"/><line x1="22" y1="8" x2="17" y2="13"/></svg></span></div>
+            <div class="p-frame-content">
+              <p class="p-frame-row-title" data-i18n="priv1.title">No account, no telemetry</p>
+              <p class="p-frame-desc" data-i18n-html="priv1.desc">Tracked apps, folders and keyword history are stored on your device. There&rsquo;s no analytics and no OwlASO server.</p>
+            </div>
+            <div class="p-frame-actions"><span class="p-pill" data-tone="success" data-i18n="priv1.badge">Local</span></div>
+          </div>
+          <div class="p-frame-row">
+            <div class="p-frame-media"><span class="p-icon-tile" data-tone="info"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span></div>
+            <div class="p-frame-content">
+              <p class="p-frame-row-title" data-i18n="priv2.title">Local-only API</p>
+              <p class="p-frame-desc" data-i18n-html="priv2.desc">Web mode binds to <code>127.0.0.1</code> and rejects foreign <code>Host</code> headers and cross-site requests (DNS-rebinding &amp; CSRF protection).</p>
+            </div>
+            <div class="p-frame-actions"><span class="p-pill" data-tone="info" data-i18n="priv2.badge">Bound</span></div>
+          </div>
+          <div class="p-frame-row">
+            <div class="p-frame-media"><span class="p-icon-tile" data-tone="purple"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></div>
+            <div class="p-frame-content">
+              <p class="p-frame-row-title" data-i18n="priv3.title">Hardened desktop app</p>
+              <p class="p-frame-desc" data-i18n-html="priv3.desc">Sandboxed renderer with context isolation, a strict CSP, <code>http(s)</code>-only external links, and every permission request denied.</p>
+            </div>
+            <div class="p-frame-actions"><span class="p-pill" data-tone="purple" data-i18n="priv3.badge">Hardened</span></div>
+          </div>
+          <div class="p-frame-row">
+            <div class="p-frame-media"><span class="p-icon-tile" data-tone="warning"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg></span></div>
+            <div class="p-frame-content">
+              <p class="p-frame-row-title" data-i18n="priv4.title">Safe exports</p>
+              <p class="p-frame-desc" data-i18n-html="priv4.desc">Review text that starts with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code> is neutralised, so a review can&rsquo;t run as a spreadsheet formula.</p>
+            </div>
+            <div class="p-frame-actions"><span class="p-pill" data-tone="warning" data-i18n="priv4.badge">Neutralised</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="p-section" id="faq" aria-labelledby="faqTitle">
+      <div class="p-section-head p-section-head-split reveal">
+        <div>
+          <span class="p-label" data-i18n="faq.label">FAQ</span>
+          <h2 class="p-title" id="faqTitle" data-i18n="faq.title">Questions, answered</h2>
+          <p class="p-desc" data-i18n-html="faq.desc">Short answers here &mdash; the <a href="./docs/">docs</a> go deeper.</p>
+        </div>
+        <span class="p-pill p-pill-lg" data-tone="info" data-i18n="faq.answers">7 answers</span>
+      </div>
+
+      <div class="p-faq-layout">
+        <div class="faq-list reveal">
           <details class="faq-item">
             <summary data-i18n="faq.q1">Is OwlASO really free?</summary>
             <div class="faq-answer" data-i18n-html="faq.a1"><p>Yes. It&rsquo;s open source under the MIT license &mdash; no paid tier, no seats, no sign-up.</p></div>
@@ -626,20 +970,43 @@
             <div class="faq-answer" data-i18n-html="faq.a7"><p>Normal use is fine. OwlASO caches results, merges duplicate requests and backs off when a store says &ldquo;slow down&rdquo; (it honours <code>Retry-After</code>). Hammering the stores with huge batches can still get you throttled for a while.</p></div>
           </details>
         </div>
-      </section>
-    </div>
 
-    <!-- CTA -->
-    <section class="cta-section" aria-labelledby="ctaTitle">
-      <div class="cta-box">
-        <h2 id="ctaTitle" data-i18n="cta.title">Find your next keyword today</h2>
-        <p data-i18n="cta.subtitle">Free, open source and private by design.</p>
-        <div class="cta-buttons">
-          <a href="#install" class="btn btn-white" data-i18n="cta.get">Get OwlASO</a>
-          <a href="https://github.com/owlaso/owlaso" class="btn btn-ghost-white" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
-            <span data-i18n="cta.star">Star on GitHub</span>
-          </a>
+        <aside class="p-faq-aside p-frame p-frame-band reveal">
+          <div class="p-frame-header">
+            <div>
+              <p class="p-frame-title" data-i18n="faq.aside.title">Need the longer version?</p>
+            </div>
+            <div class="p-frame-action"><span class="p-icon-tile p-icon-tile-sm" data-tone="info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span></div>
+          </div>
+          <div class="p-frame-panel p-faq-aside-body">
+            <p data-i18n="faq.aside.desc">The docs cover the scoring formulas, every export, the HTTP API and how to build your own installer.</p>
+            <a class="btn btn-secondary" href="./docs/" data-i18n="faq.aside.link">Open the documentation</a>
+            <span class="p-faq-aside-meta">owlaso.github.io/docs</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="p-cta-section" aria-labelledby="ctaTitle">
+      <div class="p-cta reveal">
+        <div class="p-cta-grid" aria-hidden="true"></div>
+        <div class="p-cta-copy">
+          <span class="p-cta-badge" data-i18n="cta.badge">Free forever</span>
+          <h2 id="ctaTitle" data-i18n="cta.title">Find your next keyword today</h2>
+          <p data-i18n="cta.subtitle">Free, open source and private by design.</p>
+          <div class="p-cta-buttons">
+            <a href="#install" class="btn btn-white" data-i18n="cta.get">Get OwlASO</a>
+            <a href="https://github.com/owlaso/owlaso" class="btn btn-ghost-white" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
+              <span data-i18n="cta.star">Star on GitHub</span>
+            </a>
+          </div>
+        </div>
+        <div class="p-cta-price" aria-hidden="true">
+          <span class="p-cta-price-label" data-i18n="cta.badge">Free forever</span>
+          <span class="p-cta-price-number"><span data-roll="0" data-roll-prefix="$">$0</span></span>
+          <span class="p-cta-price-note" data-i18n="cta.priceNote">No seats. No trials. No upsell.</span>
         </div>
       </div>
     </section>
@@ -687,7 +1054,11 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 OwlASO &middot; <a href="https://github.com/owlaso/owlaso/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></span>
+      <div class="p-footer-meta">
+        <span>&copy; 2026 OwlASO &middot; <a href="https://github.com/owlaso/owlaso/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></span>
+        <span class="p-status"><span class="p-status-dot" aria-hidden="true"></span><span data-i18n="footer.status">Local-first</span></span>
+        <a href="#main" class="p-top-link"><span data-i18n="footer.top">Back to top</span> <span aria-hidden="true">&uarr;</span></a>
+      </div>
       <div class="footer-bottom-right">
         <span data-i18n="footer.bottom.right">Not affiliated with Apple or Google.</span>
         <div class="footer-badges">
@@ -699,6 +1070,20 @@
       </div>
     </div>
   </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner hidden" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie preferences">
+    <div class="cookie-inner">
+      <div class="cookie-content">
+        <h3 class="cookie-title" data-i18n="cookie.title">Cookie preferences</h3>
+        <p class="cookie-desc" data-i18n="cookie.desc">OwlASO respects your privacy. We use no analytics, no tracking cookies, and no third-party scripts. Your theme and language preferences are stored locally in your browser.</p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-primary" id="cookieAccept" data-i18n="cookie.accept">Got it</button>
+        <button type="button" class="btn btn-ghost" id="cookieManage" data-i18n="cookie.manage">Manage preferences</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>

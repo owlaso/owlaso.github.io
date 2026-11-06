@@ -5,7 +5,8 @@ const page = (path) => fileURLToPath(new URL(path, import.meta.url));
 
 export default defineConfig({
   root: '.',
-  base: './',
+  // Absolute asset URLs so 404.html works at any nested GitHub Pages path.
+  base: '/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -14,6 +15,7 @@ export default defineConfig({
         main: page('./index.html'),
         docs: page('./docs/index.html'),
         security: page('./security/index.html'),
+        notFound: page('./404.html'),
       },
     },
   },

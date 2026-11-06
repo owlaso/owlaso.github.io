@@ -2,14 +2,18 @@
    OwlASO — Landing Page Scripts
    ═══════════════════════════════════════════════ */
 
-import { initTheme, initNav, initCopyButtons } from './common.js';
+import { initTheme, initNav, initCopyButtons, initLangDropdown, initCookieConsent } from './common.js';
 import { initI18n } from './i18n.js';
 import { initStats } from './stats.js';
+import { initPanelUI } from './panelui.js';
 
 initTheme();
 initNav();
 initCopyButtons();
+initLangDropdown();
+initCookieConsent();
 initI18n();
+initPanelUI();
 initStats();
 
 // ─── Scroll Reveal (Intersection Observer) ───
@@ -81,14 +85,11 @@ document.querySelectorAll('[data-tabs]').forEach((container) => {
   }
 });
 
-// ─── Demo video: play overlay + chapters that follow playback ───
+// ─── Demo video: play overlay ───
 const demo = document.querySelector('[data-demo]');
 const video = demo?.querySelector('video');
 
 if (demo && video) {
-  const chapters = [...document.querySelectorAll('.demo-chapter')];
-  const starts = chapters.map((c) => Number(c.dataset.time));
-
   // Native controls stay for no-JS visitors; here they appear once playback starts.
   video.controls = false;
 
@@ -100,13 +101,6 @@ if (demo && video) {
     });
   };
 
-  const seek = (time) => {
-    // With preload="none" the start position must wait for metadata.
-    if (video.readyState >= 1) video.currentTime = time;
-    else video.addEventListener('loadedmetadata', () => { video.currentTime = time; }, { once: true });
-    play();
-  };
-
   demo.querySelector('[data-demo-play]')?.addEventListener('click', () => {
     play();
     video.focus();
@@ -115,24 +109,6 @@ if (demo && video) {
     demo.classList.add('started');
     video.controls = true;
   });
-
-  chapters.forEach((chapter, i) => chapter.addEventListener('click', () => seek(starts[i])));
-
-  const updateChapters = () => {
-    const t = video.currentTime;
-    const duration = video.duration || 94;
-    chapters.forEach((chapter, i) => {
-      const start = starts[i];
-      const end = starts[i + 1] ?? duration;
-      const active = t >= start && (t < end || (i === chapters.length - 1));
-      const progress = t >= end ? 1 : active ? (t - start) / (end - start) : 0;
-      chapter.style.setProperty('--progress', progress.toFixed(3));
-      if (active && video.currentTime > 0) chapter.setAttribute('aria-current', 'true');
-      else chapter.removeAttribute('aria-current');
-    });
-  };
-  video.addEventListener('timeupdate', updateChapters);
-  video.addEventListener('seeked', updateChapters);
 
   // Hero "Watch the demo" button: bring the player into view and start it.
   document.querySelectorAll('[data-demo-start]').forEach((btn) => {

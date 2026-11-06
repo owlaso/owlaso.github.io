@@ -5,9 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 9999",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 9999"
   },
   "devDependencies": {
     "vite": "^7.3.6"

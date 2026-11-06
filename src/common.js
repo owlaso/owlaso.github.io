@@ -1,15 +1,31 @@
-/* ═══════════════════════════════════════════════
+/* ══════════════════════════════════════════════
    OwlASO — Shared site scripts (landing page + docs)
    ═══════════════════════════════════════════════ */
 
 const root = document.documentElement;
 const THEME_KEY = 'theme';
+const LANG_KEY = 'lang';
 const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// ─── Theme ───
-// The inline <head> script applies the theme before first paint; this keeps it
-// in sync afterwards. Only an explicit toggle is persisted, so visitors who never
-// pick a theme keep following their OS setting.
+// Language metadata
+const LANGUAGES = [
+  { code: 'en', flag: '/flags/us.svg', name: 'English', native: 'English', ogLocale: 'en_US' },
+  { code: 'tr', flag: '/flags/tr.svg', name: 'Turkish', native: 'Türkçe', ogLocale: 'tr_TR' },
+  { code: 'es', flag: '/flags/es.svg', name: 'Spanish', native: 'Español', ogLocale: 'es_ES' },
+  { code: 'fr', flag: '/flags/fr.svg', name: 'French', native: 'Français', ogLocale: 'fr_FR' },
+  { code: 'de', flag: '/flags/de.svg', name: 'German', native: 'Deutsch', ogLocale: 'de_DE' },
+  { code: 'ja', flag: '/flags/jp.svg', name: 'Japanese', native: '日本語', ogLocale: 'ja_JP' },
+  { code: 'ko', flag: '/flags/kr.svg', name: 'Korean', native: '한국어', ogLocale: 'ko_KR' },
+  { code: 'pt', flag: '/flags/pt.svg', name: 'Portuguese', native: 'Português', ogLocale: 'pt_PT' },
+  { code: 'zh', flag: '/flags/cn.svg', name: 'Chinese', native: '中文', ogLocale: 'zh_CN' },
+  { code: 'ru', flag: '/flags/ru.svg', name: 'Russian', native: 'Русский', ogLocale: 'ru_RU' },
+  { code: 'it', flag: '/flags/it.svg', name: 'Italian', native: 'Italiano', ogLocale: 'it_IT' },
+];
+
+function getLangMeta(code) {
+  return LANGUAGES.find((l) => l.code === code) || LANGUAGES[0];
+}
+
 function storedTheme() {
   try {
     const value = localStorage.getItem(THEME_KEY);
@@ -43,6 +59,93 @@ export function initTheme() {
         // Storage blocked (private mode): the choice lasts for this page view.
       }
     });
+  });
+}
+
+// ─── Language dropdown ───
+function storedLang() {
+  try {
+    const value = localStorage.getItem(LANG_KEY);
+    return LANGUAGES.some((l) => l.code === value) ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function applyLang(lang) {
+  const meta = getLangMeta(lang);
+  root.setAttribute('lang', lang);
+  // Update the toggle button
+  const toggle = document.querySelector('[data-lang-toggle]');
+  if (toggle) {
+    const flagEl = toggle.querySelector('[data-lang-flag]');
+    const codeEl = toggle.querySelector('[data-lang-code]');
+    if (flagEl) {
+      if (flagEl.tagName === 'IMG') flagEl.src = meta.flag;
+      else flagEl.textContent = meta.flag;
+    }
+    if (codeEl) codeEl.textContent = meta.code;
+    toggle.setAttribute('aria-label', `Current language: ${meta.native}`);
+  }
+  // Update menu selection
+  document.querySelectorAll('[data-lang-menu] [role="option"]').forEach((opt) => {
+    const selected = opt.dataset.lang === lang;
+    opt.setAttribute('aria-selected', String(selected));
+  });
+  // Update og:locale
+  const og = document.querySelector('meta[property="og:locale"]');
+  const tw = document.querySelector('meta[name="twitter:locale"]');
+  if (og) og.setAttribute('content', meta.ogLocale);
+  if (tw) tw.setAttribute('content', meta.ogLocale);
+}
+
+export function initLangDropdown() {
+  const dropdown = document.querySelector('[data-lang-dropdown]');
+  if (!dropdown) return;
+
+  const toggle = dropdown.querySelector('[data-lang-toggle]');
+  const menu = dropdown.querySelector('[data-lang-menu]');
+  if (!toggle || !menu) return;
+
+  // Initialize with stored or default language
+  const initialLang = storedLang() || 'en';
+  applyLang(initialLang);
+
+  // Toggle menu
+  const setOpen = (open) => {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle.addEventListener('click', () => setOpen(menu.hidden));
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (menu.hidden) return;
+    if (!dropdown.contains(e.target)) setOpen(false);
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // Handle language selection
+  menu.addEventListener('click', (e) => {
+    const option = e.target.closest('[role="option"][data-lang]');
+    if (!option) return;
+    const lang = option.dataset.lang;
+    if (lang === initialLang) { setOpen(false); return; }
+    try { localStorage.setItem(LANG_KEY, lang); } catch {}
+    applyLang(lang);
+    setOpen(false);
+    // Dispatch event for i18n system
+    document.dispatchEvent(new CustomEvent('owlaso:langchange', { detail: { lang } }));
+    // Reload page to apply translations (simpler for static site)
+    location.reload();
   });
 }
 
@@ -124,5 +227,37 @@ export function initCopyButtons() {
     });
 
     head.append(btn);
+  });
+}
+
+// ─── Cookie consent (privacy-first: no analytics, no tracking cookies) ───
+const COOKIE_KEY = 'cookie-consent';
+
+export function initCookieConsent() {
+  const banner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('cookieAccept');
+  const manageBtn = document.getElementById('cookieManage');
+  if (!banner || !acceptBtn) return;
+
+  // If already consented, hide banner
+  if (localStorage.getItem(COOKIE_KEY) === 'accepted') {
+    banner.classList.add('hidden');
+    return;
+  }
+
+  // Show banner after a short delay
+  setTimeout(() => {
+    banner.classList.remove('hidden');
+  }, 500);
+
+  acceptBtn.addEventListener('click', () => {
+    localStorage.setItem(COOKIE_KEY, 'accepted');
+    banner.classList.add('hidden');
+  });
+
+  manageBtn.addEventListener('click', () => {
+    // For now, just accept - no complex preferences needed since we don't use cookies
+    localStorage.setItem(COOKIE_KEY, 'accepted');
+    banner.classList.add('hidden');
   });
 }
